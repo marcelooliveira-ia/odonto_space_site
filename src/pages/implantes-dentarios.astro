@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import PhotoPlaceholder from '../components/PhotoPlaceholder.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { SERVICES } from '../config/site';
+
+const msg = SERVICES.find((s) => s.slug === 'implantes-dentarios')!.whatsappMessage;
+const faqs = [
+  { q: 'Todo mundo pode fazer implante?', a: 'Não necessariamente. A indicação depende de uma avaliação clínica, da saúde geral e bucal e, quando necessário, de exames de imagem solicitados pelo profissional.' },
+  { q: 'O implante dói?', a: 'O procedimento é planejado para o seu conforto, mas a experiência varia de pessoa para pessoa. Na avaliação, o dentista explica como será o atendimento e tira suas dúvidas.' },
+  { q: 'Quanto tempo dura o tratamento?', a: 'O prazo depende do seu caso, da região a ser tratada e da resposta do organismo. O planejamento individual define as etapas e o tempo estimado.' },
+  { q: 'Como saber o valor?', a: 'O investimento depende do plano de tratamento definido na avaliação. Fale com a equipe pelo WhatsApp para agendar.' },
+];
+---
+
+<BaseLayout
+  title="Implantes Dentários em Bangu | ODONTO SPACE"
+  description="Implantes dentários em Bangu, Rio de Janeiro: avaliação e planejamento individual na ODONTO SPACE. Tire dúvidas e agende pelo WhatsApp."
+  path="/implantes-dentarios"
+  breadcrumb="Implantes dentários"
+  whatsappMessage={msg}
+>
+  <PageHero
+    eyebrow="Implantodontia"
+    title="Implantes dentários em Bangu"
+    lead="Substituir dentes ausentes com planejamento individual, para recuperar a função de mastigar e a confiança ao sorrir."
+  >
+    <div class="btn-row"><WhatsAppButton message={msg} context="implantes-hero" size="lg" label="Agendar avaliação de implante" /></div>
+  </PageHero>
+
+  <section class="section">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">O que é</p>
+        <h2>Uma solução para dentes ausentes</h2>
+        <p>
+          O implante dentário é uma estrutura colocada no osso da região onde falta o dente e que serve
+          de base para receber uma prótese. A indicação, o tipo de reabilitação e o número de implantes
+          são definidos pelo dentista após avaliar o seu caso.
+        </p>
+        <ul class="checklist">
+          <li><Icon name="check" size={20} /><span>Avaliação clínica e planejamento individual</span></li>
+          <li><Icon name="check" size={20} /><span>Explicação de cada etapa antes de começar</span></li>
+          <li><Icon name="check" size={20} /><span>Acompanhamento ao longo do tratamento</span></li>
+        </ul>
+      </div>
+      <PhotoPlaceholder slot="implantes-1" ratio="4/3" caption="Foto real do atendimento ou consultório" />
+    </div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="container">
+      <div class="section__head">
+        <p class="eyebrow">Como funciona</p>
+        <h2>Do primeiro contato ao sorriso restaurado</h2>
+        <p class="lead">As etapas exatas variam conforme cada paciente. De forma geral:</p>
+      </div>
+      <ol class="steps">
+        <li><h3>Avaliação inicial</h3><p>Conversa sobre o seu histórico e exame clínico da região.</p></li>
+        <li><h3>Planejamento</h3><p>O dentista define a indicação e solicita exames, quando necessário.</p></li>
+        <li><h3>Procedimento</h3><p>Realização conforme o plano de tratamento aprovado por você.</p></li>
+        <li><h3>Acompanhamento</h3><p>Retornos para acompanhar a evolução e a colocação da prótese.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+        <p class="eyebrow">Dúvidas frequentes</p>
+        <h2>Perguntas sobre implantes</h2>
+      </div>
+      <div class="faq">
+        {faqs.map((f) => (
+          <details><summary>{f.q}</summary><p>{f.a}</p></details>
+        ))}
+      </div>
+      <p class="notice" style="margin-top:2rem">
+        Conteúdo informativo. Somente um cirurgião-dentista pode indicar o tratamento adequado após avaliar você.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand title="Quer saber se o implante é indicado para você?" message={msg} context="implantes-final" />
+</BaseLayout>

@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import PhotoPlaceholder from '../components/PhotoPlaceholder.astro';
+import Icon from '../components/Icon.astro';
+import { SITE, MAPS_URL } from '../config/site';
+---
+
+<BaseLayout
+  title="Contato e Localização | ODONTO SPACE Bangu"
+  description="Fale com a ODONTO SPACE pelo WhatsApp (21) 99613-9234 e veja como chegar: Rua Francisco Real, 1910, sala 201, Bangu, Rio de Janeiro."
+  path="/contato-e-localizacao"
+  breadcrumb="Contato e localização"
+  includeBusinessSchema
+>
+  <PageHero
+    eyebrow="Contato"
+    title="Fale com a ODONTO SPACE"
+    lead="Agende sua avaliação ou tire dúvidas pelo WhatsApp. Estamos em Bangu, no Rio de Janeiro."
+  />
+
+  <section class="section">
+    <div class="container split split--top">
+      <div>
+        <ul class="contact-list">
+          <li>
+            <span class="card__icon"><Icon name="whatsapp" size={22} /></span>
+            <div>
+              <strong>WhatsApp</strong>
+              <a href={`https://wa.me/${SITE.whatsapp.e164}`} target="_blank" rel="noopener noreferrer" data-wa="contato-numero">{SITE.whatsapp.display}</a>
+            </div>
+          </li>
+          <li>
+            <span class="card__icon"><Icon name="pin" size={22} /></span>
+            <div>
+              <strong>Endereço</strong>
+              <address>
+                {SITE.address.street}<br />
+                {SITE.address.neighborhood} – {SITE.address.city}/{SITE.address.state}
+              </address>
+            </div>
+          </li>
+          {SITE.hours && (
+            <li>
+              <span class="card__icon"><Icon name="phone" size={22} /></span>
+              <div><strong>Horário de atendimento</strong>{SITE.hours}</div>
+            </li>
+          )}
+        </ul>
+        {!SITE.hours && (
+          <p class="notice" style="margin-top:1.5rem">Para saber os horários de atendimento e agendar, fale com a equipe pelo WhatsApp.</p>
+        )}
+        <div class="btn-row">
+          <WhatsAppButton context="contato-principal" size="lg" />
+          <a class="btn btn--ghost btn--lg" href={MAPS_URL} target="_blank" rel="noopener noreferrer">Como chegar</a>
+        </div>
+      </div>
+      <PhotoPlaceholder slot="contato-fachada" ratio="4/3" caption="Foto real da fachada ou da entrada" />
+    </div>
+  </section>
+</BaseLayout>

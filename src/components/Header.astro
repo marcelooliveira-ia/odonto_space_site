@@ -1,0 +1,60 @@
+---
+import Icon from './Icon.astro';
+import WhatsAppButton from './WhatsAppButton.astro';
+import { NAV, SITE } from '../config/site';
+
+interface Props {
+  currentPath: string;
+}
+const { currentPath } = Astro.props;
+const isActive = (href: string) => (href === '/' ? currentPath === '/' : currentPath.startsWith(href));
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="/" aria-label={`${SITE.name} – página inicial`}>
+      {
+        SITE.logoPath ? (
+          <img src={SITE.logoPath} alt={SITE.name} height="40" />
+        ) : (
+          <>
+            <span class="brand__mark" aria-hidden="true"><Icon name="tooth" size={22} /></span>
+            <span class="brand__name">ODONTO <strong>SPACE</strong></span>
+          </>
+        )
+      }
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menu">
+      <Icon name="menu" size={26} />
+    </button>
+
+    <nav id="menu-principal" class="nav" aria-label="Menu principal">
+      <ul>
+        {
+          NAV.map((item) => (
+            <li>
+              <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="nav__cta">
+        <WhatsAppButton label="WhatsApp" context="cabecalho" size="md" />
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script is:inline>
+  (function () {
+    var btn = document.querySelector('.nav-toggle');
+    var nav = document.getElementById('menu-principal');
+    if (!btn || !nav) return;
+    btn.addEventListener('click', function () {
+      var open = nav.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', String(open));
+      btn.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+    });
+  })();
+</script>

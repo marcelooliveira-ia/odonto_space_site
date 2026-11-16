@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import PhotoPlaceholder from '../components/PhotoPlaceholder.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { SITE } from '../config/site';
+
+// Quando a clínica confirmar nomes, CRO e especialidades, preencher aqui.
+// Enquanto estiver vazio, a página mostra apenas espaços reservados para as fotos.
+const team: { name: string; role: string; cro: string; photo?: string }[] = [];
+---
+
+<BaseLayout
+  title="A Clínica e Equipe | ODONTO SPACE em Bangu"
+  description="Conheça a ODONTO SPACE, clínica odontológica em Bangu, Rio de Janeiro: nossa forma de atender e a equipe responsável pelo seu cuidado."
+  path="/a-clinica-e-equipe"
+  breadcrumb="A clínica e equipe"
+>
+  <PageHero
+    eyebrow="A clínica"
+    title="Conheça a ODONTO SPACE"
+    lead="Uma clínica odontológica em Bangu, com atendimento acolhedor e profissional em diferentes especialidades."
+  />
+
+  <section class="section">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">Nossa forma de cuidar</p>
+        <h2>Odontologia com clareza e acolhimento</h2>
+        <p>
+          A ODONTO SPACE atende em Bangu, no Rio de Janeiro, com foco em um atendimento humano e acessível.
+          Nossas áreas de atuação incluem ortodontia, implantodontia, endodontia, prótese e clínica geral.
+        </p>
+        <ul class="checklist">
+          <li><Icon name="check" size={20} /><span>Avaliação individual antes de qualquer indicação</span></li>
+          <li><Icon name="check" size={20} /><span>Explicação das opções e das etapas de cada tratamento</span></li>
+          <li><Icon name="check" size={20} /><span>Contato direto com a equipe pelo WhatsApp</span></li>
+        </ul>
+      </div>
+      <PhotoPlaceholder slot="clinica-1" ratio="4/3" caption="Foto real do espaço da clínica" />
+    </div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="container">
+      <div class="section__head">
+        <p class="eyebrow">Ambiente</p>
+        <h2>Conheça o espaço</h2>
+      </div>
+      <div class="grid grid--3">
+        <PhotoPlaceholder slot="clinica-recepcao" ratio="4/3" caption="Foto real da recepção" />
+        <PhotoPlaceholder slot="clinica-consultorio" ratio="4/3" caption="Foto real do consultório" />
+        <PhotoPlaceholder slot="clinica-fachada" ratio="4/3" caption="Foto real da fachada" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+        <p class="eyebrow">Equipe</p>
+        <h2>Quem cuida do seu sorriso</h2>
+        {team.length === 0 && (
+          <p class="lead">Em breve, apresentaremos aqui os profissionais da ODONTO SPACE.</p>
+        )}
+      </div>
+      <div class="grid grid--3">
+        {team.length > 0
+          ? team.map((m) => (
+              <div class="card">
+                {m.photo ? <img src={m.photo} alt={m.name} loading="lazy" /> : <PhotoPlaceholder slot={`equipe-${m.name}`} ratio="3/4" caption="Foto do profissional" />}
+                <h3>{m.name}</h3>
+                <p>{m.role} · {m.cro}</p>
+              </div>
+            ))
+          : [1, 2, 3].map((n) => <PhotoPlaceholder slot={`equipe-${n}`} ratio="3/4" caption="Espaço reservado para foto da equipe" />)}
+      </div>
+      {SITE.technicalResponsible && (
+        <p class="small" style="margin-top:1.5rem">Responsável técnico: {SITE.technicalResponsible.name} – {SITE.technicalResponsible.cro}</p>
+      )}
+    </div>
+  </section>
+
+  <CtaBand context="clinica-final" />
+</BaseLayout>

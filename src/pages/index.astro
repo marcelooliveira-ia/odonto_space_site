@@ -1,0 +1,131 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import PhotoPlaceholder from '../components/PhotoPlaceholder.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { SERVICES, SITE, MAPS_URL } from '../config/site';
+
+const differentials = [
+  { icon: 'tooth', title: 'Especialidades em um só lugar', text: 'Implantodontia, prótese, ortodontia, endodontia e clínica geral na mesma clínica.' },
+  { icon: 'heart', title: 'Atendimento humano e acessível', text: 'Explicamos cada etapa com clareza, para você decidir com segurança e sem pressa.' },
+  { icon: 'pin', title: 'Localizada em Bangu', text: 'Na Rua Francisco Real, atendendo moradores de Bangu e bairros vizinhos.' },
+  { icon: 'whatsapp', title: 'Agendamento pelo WhatsApp', text: 'Converse direto com a equipe, tire dúvidas e combine o melhor momento para sua avaliação.' },
+] as const;
+---
+
+<BaseLayout
+  title="ODONTO SPACE | Dentista em Bangu, Rio de Janeiro"
+  description="Clínica odontológica em Bangu, Rio de Janeiro: implantes, próteses, ortodontia e Invisalign, endodontia e clínica geral. Agende sua avaliação pelo WhatsApp."
+  path="/"
+  includeBusinessSchema
+>
+  <section class="hero">
+    <div class="container hero__inner">
+      <div>
+        <p class="eyebrow eyebrow--light">Clínica odontológica em Bangu</p>
+        <h1>Cuidado com o seu sorriso, <em>com acolhimento</em> e clareza.</h1>
+        <p class="hero__lead">
+          A ODONTO SPACE reúne implantes, próteses, ortodontia, Invisalign, endodontia e clínica geral
+          em Bangu, no Rio de Janeiro. Agende uma avaliação e conheça o melhor caminho para o seu caso.
+        </p>
+        <div class="btn-row">
+          <WhatsAppButton context="home-hero" size="lg" />
+          <a class="btn btn--outline-light btn--lg" href="#servicos">Conheça os serviços</a>
+        </div>
+        <ul class="hero__badges">
+          <li><Icon name="pin" size={16} /> Rua Francisco Real, 1910 – Bangu</li>
+          <li><Icon name="whatsapp" size={16} /> {SITE.whatsapp.display}</li>
+        </ul>
+      </div>
+      <PhotoPlaceholder slot="home-hero" ratio="4/3" caption="Foto real da clínica ou da equipe" />
+    </div>
+  </section>
+
+  <section class="section" id="diferenciais">
+    <div class="container">
+      <div class="section__head">
+        <p class="eyebrow">Por que a ODONTO SPACE</p>
+        <h2>Odontologia pensada para você se sentir bem-vindo</h2>
+      </div>
+      <div class="grid grid--3">
+        {differentials.map((d) => (
+          <div class="card">
+            <span class="card__icon"><Icon name={d.icon} size={24} /></span>
+            <h3>{d.title}</h3>
+            <p>{d.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint" id="servicos">
+    <div class="container">
+      <div class="section__head">
+        <p class="eyebrow">Serviços</p>
+        <h2>Tratamentos para cada necessidade</h2>
+        <p class="lead">Toda indicação começa por uma avaliação profissional. Conheça as áreas em que atuamos.</p>
+      </div>
+      <div class="grid grid--services">
+        {SERVICES.map((s) =>
+          s.slug ? (
+            <a class="card card--link" href={`/${s.slug}`}>
+              <span class="card__icon"><Icon name="tooth" size={24} /></span>
+              <h3>{s.title}</h3>
+              <p>{s.short}</p>
+              <span class="card__more">Saiba mais <Icon name="arrow" size={16} /></span>
+            </a>
+          ) : (
+            <div class="card">
+              <span class="card__icon"><Icon name="tooth" size={24} /></span>
+              <h3>{s.title}</h3>
+              <p>{s.short}</p>
+            </div>
+          ),
+        )}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split">
+      <PhotoPlaceholder slot="home-clinica" ratio="4/3" caption="Foto real do ambiente da clínica" />
+      <div>
+        <p class="eyebrow">A clínica</p>
+        <h2>Um espaço dedicado ao seu cuidado</h2>
+        <p>
+          Na ODONTO SPACE, o atendimento é conduzido com atenção às necessidades de cada paciente,
+          do primeiro contato à finalização do tratamento.
+        </p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href="/a-clinica-e-equipe">Conheça a clínica e a equipe</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--navy" id="localizacao">
+    <div class="container split split--top">
+      <div>
+        <p class="eyebrow eyebrow--light">Localização</p>
+        <h2>Venha nos visitar em Bangu</h2>
+        <address>
+          <p>
+            <strong>ODONTO SPACE</strong><br />
+            {SITE.address.street}<br />
+            {SITE.address.neighborhood} – {SITE.address.city}/{SITE.address.state}
+          </p>
+          <p>WhatsApp: <a href={`https://wa.me/${SITE.whatsapp.e164}`} target="_blank" rel="noopener noreferrer" style="color:var(--turquoise-400)">{SITE.whatsapp.display}</a></p>
+        </address>
+        <div class="btn-row">
+          <a class="btn btn--outline-light" href={MAPS_URL} target="_blank" rel="noopener noreferrer">Abrir no mapa</a>
+          <WhatsAppButton variant="light" context="home-localizacao" label="Falar no WhatsApp" />
+        </div>
+      </div>
+      <PhotoPlaceholder slot="home-fachada" ratio="16/9" caption="Foto real da fachada ou da entrada" />
+    </div>
+  </section>
+
+  <CtaBand context="home-final" />
+</BaseLayout>

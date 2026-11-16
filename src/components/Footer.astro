@@ -1,0 +1,46 @@
+---
+import { NAV, SITE, MAPS_URL } from '../config/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div>
+      <p class="site-footer__brand">ODONTO <strong>SPACE</strong></p>
+      <p class="muted-on-dark">{SITE.tagline}.</p>
+      {
+        SITE.technicalResponsible && (
+          <p class="muted-on-dark small">
+            Responsável técnico: {SITE.technicalResponsible.name} – {SITE.technicalResponsible.cro}
+          </p>
+        )
+      }
+    </div>
+
+    <nav aria-label="Rodapé">
+      <h2 class="site-footer__title">Navegação</h2>
+      <ul class="list-plain">
+        {NAV.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <div>
+      <h2 class="site-footer__title">Contato</h2>
+      <address class="list-plain">
+        <p>{SITE.address.street}<br />{SITE.address.neighborhood} – {SITE.address.city}/{SITE.address.state}</p>
+        <p>
+          WhatsApp:
+          <a href={`https://wa.me/${SITE.whatsapp.e164}`} target="_blank" rel="noopener noreferrer">{SITE.whatsapp.display}</a>
+        </p>
+        <p><a href={MAPS_URL} target="_blank" rel="noopener noreferrer">Ver no mapa</a></p>
+      </address>
+    </div>
+  </div>
+  <div class="container site-footer__legal">
+    <p>© {year} ODONTO SPACE. Todos os direitos reservados.</p>
+    <p class="small">
+      As informações deste site têm caráter educativo e não substituem a avaliação de um cirurgião-dentista.
+      Os resultados e a indicação de cada tratamento variam de acordo com cada paciente.
+    </p>
+  </div>
+</footer>

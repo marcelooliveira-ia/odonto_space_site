@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import PhotoPlaceholder from '../components/PhotoPlaceholder.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { SERVICES } from '../config/site';
+
+const msg = SERVICES.find((s) => s.slug === 'proteses-dentarias')!.whatsappMessage;
+const types = [
+  { title: 'Prótese total', text: 'Substitui todos os dentes de uma arcada, quando não há mais dentes naturais na região.' },
+  { title: 'Prótese parcial', text: 'Repõe alguns dentes ausentes, aproveitando os dentes que permanecem na boca.' },
+  { title: 'Prótese fixa', text: 'Coroas e pontes fixadas sobre dentes ou estruturas preparadas pelo dentista.' },
+  { title: 'Prótese sobre implante', text: 'Prótese apoiada em implantes dentários, conforme a avaliação do caso.' },
+];
+const faqs = [
+  { q: 'Qual prótese é a melhor para mim?', a: 'Depende de quantos dentes faltam, da saúde da gengiva e do osso, das suas necessidades e do seu orçamento. O dentista indica as opções após a avaliação.' },
+  { q: 'A prótese precisa de manutenção?', a: 'Sim. Higiene adequada e consultas de revisão ajudam a conservar a prótese e a saúde da boca. O dentista orienta o cuidado para cada tipo.' },
+  { q: 'Posso fazer prótese e implante juntos?', a: 'Em muitos casos, a prótese pode ser apoiada em implantes. A viabilidade é definida na avaliação clínica.' },
+];
+---
+
+<BaseLayout
+  title="Próteses Dentárias em Bangu | ODONTO SPACE"
+  description="Próteses dentárias em Bangu, Rio de Janeiro: totais, parciais, fixas e sobre implante. Avaliação na ODONTO SPACE e agendamento pelo WhatsApp."
+  path="/proteses-dentarias"
+  breadcrumb="Próteses dentárias"
+  whatsappMessage={msg}
+>
+  <PageHero
+    eyebrow="Prótese dentária"
+    title="Próteses dentárias em Bangu"
+    lead="Recupere a função mastigatória e a estética do sorriso com uma solução indicada para o seu caso."
+  >
+    <div class="btn-row"><WhatsAppButton message={msg} context="proteses-hero" size="lg" label="Agendar avaliação de prótese" /></div>
+  </PageHero>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+        <p class="eyebrow">Tipos de prótese</p>
+        <h2>Opções para diferentes situações</h2>
+        <p class="lead">A escolha do tipo ideal é feita pelo dentista, depois de avaliar a sua boca.</p>
+      </div>
+      <div class="grid grid--2">
+        {types.map((t) => (
+          <div class="card">
+            <span class="card__icon"><Icon name="tooth" size={24} /></span>
+            <h3>{t.title}</h3>
+            <p>{t.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="container split">
+      <PhotoPlaceholder slot="proteses-1" ratio="4/3" caption="Foto real do atendimento ou consultório" />
+      <div>
+        <p class="eyebrow">Como começar</p>
+        <h2>Uma avaliação para entender suas opções</h2>
+        <ul class="checklist">
+          <li><Icon name="check" size={20} /><span>Exame clínico e conversa sobre suas necessidades</span></li>
+          <li><Icon name="check" size={20} /><span>Apresentação das alternativas possíveis para o seu caso</span></li>
+          <li><Icon name="check" size={20} /><span>Plano de tratamento explicado antes de iniciar</span></li>
+        </ul>
+        <div class="btn-row"><WhatsAppButton message={msg} context="proteses-meio" /></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+        <p class="eyebrow">Dúvidas frequentes</p>
+        <h2>Perguntas sobre próteses</h2>
+      </div>
+      <div class="faq">
+        {faqs.map((f) => (
+          <details><summary>{f.q}</summary><p>{f.a}</p></details>
+        ))}
+      </div>
+      <p class="notice" style="margin-top:2rem">
+        Conteúdo informativo. Somente um cirurgião-dentista pode indicar o tratamento adequado após avaliar você.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand title="Vamos conversar sobre a prótese ideal para você?" message={msg} context="proteses-final" />
+</BaseLayout>

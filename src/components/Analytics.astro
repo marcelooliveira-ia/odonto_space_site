@@ -1,0 +1,49 @@
+---
+/**
+ * Preparação para GTM / GA4 / Google Ads com consentimento (LGPD).
+ *
+ * - Sem PUBLIC_GTM_ID: nada é carregado e nenhum banner aparece.
+ * - Com PUBLIC_GTM_ID: Consent Mode v2 inicia NEGADO; o GTM só é carregado
+ *   após o aceite explícito do visitante (armazenado em localStorage).
+ * - GA4 e Google Ads devem ser configurados DENTRO do GTM (tags com gatilhos
+ *   de consentimento), não aqui.
+ * - Eventos: clique em botões com [data-wa] gera "whatsapp_click" no dataLayer
+ *   (somente com consentimento).
+ */
+const gtmId = import.meta.env.PUBLIC_GTM_ID as string | undefined;
+---
+
+{
+  gtmId && (
+    <script is:inline define:vars={{ gtmId }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        analytics_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        wait_for_update: 500,
+      });
+      window.__odontoGtmId = gtmId;
+      window.__odontoLoadGtm = function () {
+        if (window.__odontoGtmLoaded) return;
+        window.__odontoGtmLoaded = true;
+        gtag('consent', 'update', {
+          ad_storage: 'granted',
+          analytics_storage: 'granted',
+          ad_user_data: 'granted',
+          ad_personalization: 'granted',
+        });
+        window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtm.js?id=' + encodeURIComponent(gtmId);
+        document.head.appendChild(s);
+      };
+      try {
+        if (localStorage.getItem('odonto-consent') === 'granted') window.__odontoLoadGtm();
+      } catch (e) {}
+    </script>
+  )
+}

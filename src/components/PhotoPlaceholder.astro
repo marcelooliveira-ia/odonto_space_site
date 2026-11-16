@@ -1,0 +1,17 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  /** Texto curto e neutro sobre o que entrará no espaço. */
+  caption?: string;
+  /** Arquivo sugerido para substituição (apenas documentação em data-attr). */
+  slot: string;
+  ratio?: '4/3' | '16/9' | '3/4' | '1/1';
+}
+const { caption = 'Espaço reservado para foto real', slot, ratio = '4/3' } = Astro.props;
+---
+
+<figure class="photo-slot" style={`aspect-ratio:${ratio}`} data-photo-slot={slot}>
+  <Icon name="camera" size={32} />
+  <figcaption>{caption}</figcaption>
+</figure>

@@ -1,0 +1,35 @@
+---
+const gtmId = import.meta.env.PUBLIC_GTM_ID as string | undefined;
+---
+
+{
+  gtmId && (
+    <div id="consent-banner" class="consent" role="dialog" aria-label="Preferências de cookies" hidden>
+      <p>
+        Usamos cookies de medição e publicidade para entender como o site é usado e melhorar nossos
+        anúncios. Você pode aceitar ou recusar; o site funciona normalmente nos dois casos.
+      </p>
+      <div class="consent__actions">
+        <button type="button" class="btn btn--ghost btn--sm" data-consent="denied">Recusar</button>
+        <button type="button" class="btn btn--primary btn--sm" data-consent="granted">Aceitar</button>
+      </div>
+    </div>
+    <script is:inline>
+      (function () {
+        var banner = document.getElementById('consent-banner');
+        if (!banner) return;
+        var saved = null;
+        try { saved = localStorage.getItem('odonto-consent'); } catch (e) {}
+        if (!saved) banner.hidden = false;
+        banner.addEventListener('click', function (e) {
+          var btn = e.target.closest('[data-consent]');
+          if (!btn) return;
+          var value = btn.getAttribute('data-consent');
+          try { localStorage.setItem('odonto-consent', value); } catch (err) {}
+          banner.hidden = true;
+          if (value === 'granted' && window.__odontoLoadGtm) window.__odontoLoadGtm();
+        });
+      })();
+    </script>
+  )
+}
