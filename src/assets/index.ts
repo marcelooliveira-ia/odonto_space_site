@@ -1,5 +1,5 @@
 // Fotografias reais da equipe (tratadas; substituir os arquivos em src/assets/team/ mantendo o nome).
-export { default as proprietario } from './team/proprietario.jpg';
+export { default as fotoMarceloSouza } from './team/dr-marcelo-souza.jpg';
 export { default as ortodontista } from './team/ortodontista.jpg';
 // Marca oficial (extraída do PDF vetorial; não alterar).
 export { default as logoPreto } from './brand/logo-preto.svg';

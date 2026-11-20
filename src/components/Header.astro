@@ -18,7 +18,7 @@ const isActive = (p: string) => (p === '/' ? currentPath === '/' : currentPath.s
       <ul>
         {NAV.map((item) => <li><a href={href(item.href)} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a></li>)}
       </ul>
-      <WhatsAppButton label="WhatsApp" context="cabecalho" variant="light" size="sm" />
+      <WhatsAppButton label="WhatsApp" context="cabecalho" size="sm" />
     </nav>
   </div>
 </header>

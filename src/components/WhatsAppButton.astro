@@ -7,20 +7,21 @@ interface Props {
   label?: string;
   /** Identifica o contexto do clique para medição (ex.: "implantes-hero"). */
   context?: string;
+  /** Mantido por compatibilidade: todos os botões de WhatsApp usam o mesmo verde. */
   variant?: 'primary' | 'light' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
 }
-const { message, label = 'Agendar avaliação pelo WhatsApp', context = 'geral', variant = 'primary', size = 'md' } =
-  Astro.props;
+const { message, label = 'Agendar avaliação pelo WhatsApp', context = 'geral', size = 'md' } = Astro.props;
+const iconSize = size === 'lg' ? 30 : size === 'sm' ? 22 : 26;
 ---
 
 <a
-  class:list={['btn', `btn--wa-${variant}`, size === 'lg' && 'btn--lg', size === 'sm' && 'btn--sm']}
+  class:list={['btn', 'btn--wa', size === 'lg' && 'btn--lg', size === 'sm' && 'btn--sm']}
   href={whatsappLink(message)}
   target="_blank"
   rel="noopener noreferrer"
   data-wa={context}
 >
-  <Icon name="whatsapp" size={20} />
+  <Icon name="whatsapp" size={iconSize} />
   <span>{label}</span>
 </a>

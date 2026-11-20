@@ -1,5 +1,6 @@
 ---
-import WhatsAppButton from './WhatsAppButton.astro';
+import WhatsAppCta from './WhatsAppCta.astro';
+import Icon from './Icon.astro';
 import Em from './Em.astro';
 import { NAV, SITE, MAPS_URL } from '../config/site';
 import { href } from '../utils/url';
@@ -16,13 +17,9 @@ const year = new Date().getFullYear();
         <h2 class="rv d1"><Em text="Vamos conversar sobre *o seu sorriso?*" /></h2>
       </div>
       <div class="rv d2">
-        <p class="label" style="margin:0">WhatsApp</p>
-        <a class="ph-num" href={`https://wa.me/${SITE.whatsapp.e164}`} target="_blank" rel="noopener noreferrer" data-wa="rodape-numero">{SITE.whatsapp.display}</a>
-        <address><p class="label" style="margin:1.2rem 0 0.2rem">Endereço</p>{SITE.address.street}<br />{SITE.address.neighborhood} – {SITE.address.city}/{SITE.address.state}</address>
-        <div class="btn-row" style="margin-top:0.4rem">
-          <WhatsAppButton variant="light" context="rodape" message={message} />
-          <a class="btn btn--line-light" href={MAPS_URL} target="_blank" rel="noopener noreferrer">Como chegar</a>
-        </div>
+        <WhatsAppCta context="rodape" message={message} />
+        <address><p class="label" style="margin:1.6rem 0 0.2rem">Endereço</p>{SITE.address.street}<br />{SITE.address.neighborhood} – {SITE.address.city}/{SITE.address.state}</address>
+        <p style="margin:1rem 0 0"><a class="link" href={MAPS_URL} target="_blank" rel="noopener noreferrer">Como chegar <Icon name="arrow" size={16} /></a></p>
       </div>
     </div>
   )}
