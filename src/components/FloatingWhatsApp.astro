@@ -17,12 +17,19 @@ const { message } = Astro.props;
   data-wa="flutuante"
   aria-label="Falar com a ODONTO SPACE no WhatsApp"
 >
-  <Icon name="whatsapp" size={30} />
+  <Icon name="whatsapp" size={28} />
 </a>
 
 <ConsentBanner />
 
 <script is:inline>
+  // O botão flutuante só aparece depois de rolar (não cobre o conteúdo da primeira tela).
+  (function () {
+    var f = document.querySelector('.wa-float');
+    if (!f) return;
+    function t() { f.classList.toggle('is-on', window.scrollY > 480); }
+    t(); window.addEventListener('scroll', t, { passive: true });
+  })();
   // Medição de cliques no WhatsApp: só registra se o visitante consentiu (LGPD).
   document.addEventListener('click', function (e) {
     var el = e.target.closest && e.target.closest('[data-wa]');

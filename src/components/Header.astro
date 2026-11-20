@@ -3,22 +3,22 @@ import Icon from './Icon.astro';
 import WhatsAppButton from './WhatsAppButton.astro';
 import { NAV, SITE } from '../config/site';
 import { href } from '../utils/url';
-import { logoBranco } from '../assets';
+import { logoPreto } from '../assets';
 interface Props { currentPath: string }
 const { currentPath } = Astro.props;
 const isActive = (p: string) => (p === '/' ? currentPath === '/' : currentPath.startsWith(p));
 ---
-<header class="hdr dark">
+<header class="hdr">
   <div class="wrap hdr__in">
     <a class="brand" href={href('/')} aria-label={`${SITE.name} – página inicial`}>
-      <img src={logoBranco.src} alt={SITE.name} width="40" height="50" />
+      <img src={logoPreto.src} alt={SITE.name} width="40" height="50" />
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menu"><Icon name="menu" size={26} /></button>
     <nav id="menu-principal" class="nav" aria-label="Menu principal">
       <ul>
         {NAV.map((item) => <li><a href={href(item.href)} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a></li>)}
       </ul>
-      <WhatsAppButton label="WhatsApp" context="cabecalho" variant="light" size="sm" />
+      <WhatsAppButton label="WhatsApp" context="cabecalho" variant="solid" size="sm" />
     </nav>
   </div>
 </header>

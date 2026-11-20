@@ -30,13 +30,13 @@ export const SITE = {
   technicalResponsible: null as { name: string; cro: string } | null, // responsável técnico + CRO
   geo: null as { lat: number; lng: number } | null,
   googleMapsUrl: null as string | null, // link do perfil no Google Maps, quando existir
-  // Proprietário (dados CONFIRMADOS: cirurgião-dentista clínico geral e proprietário; NÃO é implantodontista).
-  owner: {
-    title: 'Proprietário',
-    role: 'Cirurgião-dentista clínico geral',
-    name: 'Dr. Marcelo Souza' as string | null, // confirmado pelo responsável de marketing
+  // Cirurgião-dentista clínico geral (dados CONFIRMADOS pela clínica; NÃO é implantodontista).
+  generalDentist: {
+    title: 'Cirurgião-dentista',
+    role: 'Clínica geral',
+    name: 'Dr. Marcelo Souza' as string | null, // nome confirmado
     cro: null as string | null, // PENDENTE: CRO
-    photoAlt: 'Proprietário da ODONTO SPACE, cirurgião-dentista clínico geral, sorrindo diante de uma parede clara',
+    photoAlt: 'Dr. Marcelo Souza, cirurgião-dentista clínico geral, sorrindo diante de uma parede clara',
   },
   // Ortodontista (nome e CRO ainda não confirmados — o nome bordado no jaleco não é legível na foto).
   orthodontist: {
@@ -88,14 +88,14 @@ export const SERVICES: Service[] = [
   },
   {
     slug: null,
-    title: 'Endodontia',
-    short: 'Tratamento de canal e cuidado com a saúde interna do dente.',
-    whatsappMessage: 'Olá! Gostaria de informações sobre endodontia (tratamento de canal) na ODONTO SPACE.',
+    title: 'Estética do Sorriso',
+    short: 'Orientação sobre cuidados estéticos, como o clareamento dental, conforme a indicação do dentista após a avaliação.',
+    whatsappMessage: 'Olá! Gostaria de informações sobre estética do sorriso na ODONTO SPACE.',
   },
   {
     slug: null,
     title: 'Clínica geral',
-    short: 'Avaliação, prevenção e cuidados odontológicos para o dia a dia.',
+    short: 'Avaliação, prevenção e cuidados com a saúde bucal para o dia a dia.',
     whatsappMessage: 'Olá! Gostaria de agendar uma consulta de clínica geral na ODONTO SPACE.',
   },
 ];

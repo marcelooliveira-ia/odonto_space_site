@@ -1,72 +1,81 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHero from '../components/PageHero.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 import Photo from '../components/Photo.astro';
 import Icon from '../components/Icon.astro';
 import { SITE, SERVICES } from '../config/site';
 import { href } from '../utils/url';
-import { proprietario, ortodontista, genRecepcao, genInstrumentos, genConsultorio, genPacienteIA, genOrtoMaos } from '../assets';
+import { fotoMarceloSouza, ortodontista } from '../assets';
 
-const o = SITE.owner; const ort = SITE.orthodontist;
+const o = SITE.generalDentist; const ort = SITE.orthodontist;
 const msgGeral = SERVICES.find((s) => s.title === 'Clínica geral')!.whatsappMessage;
+// Ambientes reais (recepção, consultório, fachada): preencher quando as fotografias forem entregues.
+// A seção só aparece se houver itens; nenhuma estrutura é anunciada antes do material existir.
+const ambientes: { src: ImageMetadata; alt: string; title: string; text: string }[] = [];
 ---
 <BaseLayout title="A Clínica e Equipe | ODONTO SPACE em Bangu" description="Conheça a ODONTO SPACE, clínica odontológica em Bangu, Rio de Janeiro: nossa forma de atender e a equipe responsável pelo seu cuidado." path="/a-clinica-e-equipe" breadcrumb="A clínica e equipe">
-  <PageHero crumb="A clínica e equipe" label="A clínica" title="Conheça a *ODONTO SPACE*" lead="Uma clínica odontológica em Bangu, com atendimento acolhedor e profissional em diferentes especialidades.">
-    <WhatsAppButton slot="actions" context="clinica-hero" size="lg" variant="light" />
-    <Photo slot="media" src={genRecepcao} alt="Recepção clara e acolhedora de clínica odontológica" ratio="4 / 5" pos="30% 50%" eager illustrative sizes="(max-width: 900px) 80vw, 420px" />
-  </PageHero>
-
-  <section class="sec">
-    <div class="wrap split">
-      <div>
-        <p class="label rv">Nossa forma de cuidar</p>
-        <p class="man" data-man style="font-size:clamp(1.5rem,3vw,2.4rem)">Cuidar do sorriso vai além da estética. É entender cada caso, planejar o tratamento e buscar saúde, função, harmonia e confiança de forma individualizada.</p>
-        <p class="lead rv">A ODONTO SPACE atende em Bangu, no Rio de Janeiro, com foco em um atendimento humano e acessível. Nossas áreas de atuação incluem ortodontia, implantodontia, endodontia e prótese.</p>
-        <ul class="checks rv"><li><Icon name="check" size={18} /><span>Avaliação individual antes de qualquer indicação</span></li><li><Icon name="check" size={18} /><span>Explicação das opções e das etapas de cada tratamento</span></li><li><Icon name="check" size={18} /><span>Contato direto com a equipe pelo WhatsApp</span></li></ul>
+  <section class="cl-open">
+    <div class="wrap">
+      <nav class="crumb label fx-in" aria-label="Você está em"><a href={href('/')}>Início</a><span aria-hidden="true">/</span><span aria-current="page">A clínica e equipe</span></nav>
+      <span class="cl-pre fx-in">Conheça a</span>
+      <h1 class="cl-title"><span class="ln"><span>ODONTO SPACE</span></span></h1>
+      <div class="g12 cl-open__row fx-in">
+        <p class="lead">Uma clínica odontológica em Bangu, com atendimento acolhedor e profissional em diferentes especialidades.</p>
+        <div class="row"><WhatsAppButton context="clinica-hero" /></div>
       </div>
-      <Photo class="rv" src={genInstrumentos} alt="Instrumentos odontológicos esterilizados sobre uma bandeja" ratio="4 / 5" pos="50% 50%" illustrative zoom sizes="(max-width: 860px) 100vw, 46vw" />
     </div>
   </section>
 
-  <section class="sec sec--mist" id="equipe">
+  <section class="cl-man">
+    <div class="wrap g12">
+      <p class="label rv" style="grid-column:1/-1">Nossa forma de cuidar</p>
+      <p class="man" data-man>Cuidar do sorriso vai além da estética. É entender cada caso, planejar o tratamento e buscar saúde, função, harmonia e confiança de forma individualizada.</p>
+      <p class="lead cl-man__l rv">A ODONTO SPACE atende em Bangu, no Rio de Janeiro, com foco em um atendimento humano e acessível. Nossas áreas de atuação incluem implantes, próteses, ortodontia e Invisalign, estética do sorriso e clínica geral.</p>
+      <ul class="rv d1">
+        <li>Avaliação individual antes de qualquer indicação</li>
+        <li>Explicação das opções e das etapas de cada tratamento</li>
+        <li>Contato direto com a equipe pelo WhatsApp</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="cl-team" id="equipe">
     <div class="wrap">
-      <div class="sec-top"><div class="rv"><p class="label">Equipe</p><h2>Quem cuida do <em>seu sorriso</em></h2></div></div>
-      <article class="feature">
-        <figure class="pc rv"><Photo src={proprietario} alt={o.photoAlt} pos="50% 14%" eager widths={[480, 800, 1000]} sizes="(max-width: 860px) 90vw, 440px" /></figure>
-        <div>
-          <p class="label rv">{o.title} da ODONTO SPACE</p>
-          <h2 class="rv d1">{o.name}</h2>
-          <p class="role rv d1">{o.role}</p>
-          <p class="lead rv d2">Cirurgião-dentista clínico geral e proprietário da ODONTO SPACE, realiza diversos tipos de procedimentos odontológicos. Se você não sabe por onde começar, a avaliação com o clínico geral ajuda a entender o seu caso e a definir os próximos passos.</p>
-          {o.cro && <p class="small">{o.cro}</p>}
-          <div class="btn-row"><WhatsAppButton message={msgGeral} context="clinica-clinico-geral" label="Agendar consulta de clínica geral" /></div>
+      <div class="cl-team__head"><p class="label rv">Equipe</p><h2 class="rv d1">Quem cuida do seu sorriso.</h2></div>
+
+      <article class="g12 cl-a">
+        <h3 class="cl-a__name rv">{o.name}</h3>
+        <div class="cl-a__txt">
+          <p class="label rv">{o.title} · {o.role}</p>
+          {o.cro && <p class="small rv">{o.cro}</p>}
+          <p class="lead rv d1">Cirurgião-dentista clínico geral, realiza diversos tipos de procedimentos odontológicos. Se você não sabe por onde começar, a avaliação com o clínico geral ajuda a entender o seu caso e a definir os próximos passos.</p>
+          <div class="row rv d2"><WhatsAppButton message={msgGeral} context="clinica-clinico-geral" label="Agendar consulta de clínica geral" /></div>
         </div>
+        <Photo class="cl-a__img rv" src={fotoMarceloSouza} alt={o.photoAlt} ratio="4 / 5" pos="50% 14%" cap="" eager widths={[480, 800, 1000]} sizes="(max-width: 860px) 78vw, 46vw" />
       </article>
-      <article class="feature feature--rev">
-        <figure class="pc rv"><Photo src={ortodontista} alt={ort.photoAlt} pos="50% 14%" widths={[400, 520, 800]} sizes="(max-width: 860px) 80vw, 400px" /></figure>
-        <div>
-          <p class="label rv">Ortodontia</p>
-          <h2 class="rv d1">Ortodontista</h2>
-          <p class="role rv d1">da ODONTO SPACE</p>
-          <p class="lead rv d2">Responsável pelo atendimento de ortodontia na clínica. Na avaliação, analisa o seu caso e explica as opções de tratamento.</p>
-          {ort.cro && <p class="small">{ort.cro}</p>}
-          <div class="btn-row"><a class="link" href={href('/ortodontia-invisalign')}>Conheça a ortodontia <Icon name="arrow" size={16} /></a></div>
+
+      <article class="g12 cl-b">
+        <Photo class="cl-b__img rv" src={ortodontista} alt={ort.photoAlt} ratio="4 / 5" pos="50% 14%" cap="" widths={[400, 520, 720]} sizes="(max-width: 860px) 70vw, 32vw" />
+        <div class="cl-b__txt">
+          <p class="label rv">Ortodontista · ODONTO SPACE</p>
+          <h3 class="cl-b__name rv d1">{ort.name ?? 'Ortodontia'}</h3>
+          {ort.cro && <p class="small rv d1">{ort.cro}</p>}
+          <p class="lead rv d2">Responsável pelo atendimento de ortodontia na clínica. Na avaliação, analisa o seu caso e explica as opções de tratamento, com aparelho ortodôntico ou alinhadores Invisalign.</p>
+          <div class="row rv d3"><a class="link" href={href('/ortodontia-invisalign')}>Conheça a ortodontia e o Invisalign <Icon name="arrow" size={16} /></a></div>
         </div>
       </article>
       {SITE.technicalResponsible && <p class="small" style="margin-top:2rem">Responsável técnico: {SITE.technicalResponsible.name} – {SITE.technicalResponsible.cro}</p>}
     </div>
   </section>
 
-  <section class="sec">
-    <div class="wrap">
-      <div class="sec-top"><div class="rv"><p class="label">Atendimento</p><h2>Cuidado em <em>cada etapa</em></h2></div></div>
-      <div class="gal">
-        <Photo class="rv" src={genConsultorio} alt="Consultório odontológico claro e moderno" pos="45% 50%" illustrative zoom sizes="(max-width: 700px) 50vw, 33vw" />
-        <Photo class="rv d1" src={genPacienteIA} alt="Mulher sorrindo em um consultório odontológico moderno (imagem gerada por IA)" pos="50% 30%" illustrative ai zoom sizes="(max-width: 700px) 50vw, 33vw" />
-        <Photo class="rv d2" src={genOrtoMaos} alt="Mãos enluvadas encaixando um alinhador transparente em um modelo dentário" pos="50% 50%" illustrative zoom sizes="(max-width: 700px) 100vw, 33vw" />
+  {ambientes.length > 0 && (
+    <section class="cl-env">
+      <div class="wrap">
+        <div class="cl-team__head"><p class="label rv">Ambientes</p><h2 class="rv d1">Onde cuidamos de você.</h2></div>
+        <div class="cl-env__grid">
+          {ambientes.map((a, i) => <Photo class="rv" src={a.src} alt={a.alt} cap="" n={String(i + 1).padStart(2, '0')}><b>{a.title}</b>{a.text}</Photo>)}
+        </div>
       </div>
-      <p class="soon">As fotografias reais da recepção, do consultório e da fachada da ODONTO SPACE serão incluídas nesta seção. As imagens acima foram geradas por IA, são ilustrativas e não mostram a clínica nem seus profissionais.</p>
-    </div>
-  </section>
+    </section>
+  )}
 </BaseLayout>

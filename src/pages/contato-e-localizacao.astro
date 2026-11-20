@@ -1,40 +1,39 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHero from '../components/PageHero.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
-import Photo from '../components/Photo.astro';
 import Icon from '../components/Icon.astro';
 import { SITE, MAPS_URL } from '../config/site';
-import { genRecepcao, genConsultorio } from '../assets';
+import { href } from '../utils/url';
 ---
-<BaseLayout title="Contato e Localização | ODONTO SPACE Bangu" description="Fale com a ODONTO SPACE pelo WhatsApp (21) 99613-9234 e veja como chegar: Rua Francisco Real, 1910, sala 201, Bangu, Rio de Janeiro." path="/contato-e-localizacao" breadcrumb="Contato e localização" includeBusinessSchema hideCta>
-  <PageHero crumb="Contato e localização" label="Contato" title="Fale com a *ODONTO SPACE*" lead="Agende sua avaliação ou tire dúvidas pelo WhatsApp. Estamos em Bangu, no Rio de Janeiro.">
-    <WhatsAppButton slot="actions" context="contato-hero" size="lg" variant="light" />
-    <Photo slot="media" src={genRecepcao} alt="Recepção clara e acolhedora de clínica odontológica" ratio="4 / 5" pos="22% 50%" eager illustrative sizes="(max-width: 900px) 80vw, 420px" />
-  </PageHero>
-
-  <section class="sec">
+<BaseLayout title="Contato e Localização | ODONTO SPACE Bangu" description="Fale com a ODONTO SPACE pelo WhatsApp (21) 99613-9234 e veja como chegar: Rua Francisco Real, 1910, sala 201, Bangu, Rio de Janeiro." path="/contato-e-localizacao" breadcrumb="Contato e localização" includeBusinessSchema>
+  <section class="ct-open">
     <div class="wrap">
-      <p class="label rv">WhatsApp</p>
-      <a class="bignum rv d1" href={`https://wa.me/${SITE.whatsapp.e164}`} target="_blank" rel="noopener noreferrer" data-wa="contato-numero">{SITE.whatsapp.display}</a>
-      <p class="lead rv d2">Fale direto com a equipe, tire dúvidas e combine o melhor momento para a sua avaliação.</p>
-      <div class="btn-row rv d3"><WhatsAppButton context="contato-principal" size="lg" /><a class="link" href={MAPS_URL} target="_blank" rel="noopener noreferrer">Como chegar <Icon name="arrow" size={16} /></a></div>
-      <dl class="facts-list rv">
-        <div><dt>Região atendida</dt><dd>Bangu e bairros próximos da Zona Oeste</dd></div>
-        <div><dt>Horários</dt><dd>{SITE.hours ?? 'Consulte os horários de atendimento pelo WhatsApp.'}</dd></div>
-        <div><dt>Agendamento</dt><dd>Avaliação marcada pelo WhatsApp</dd></div>
-        <div><dt>Endereço</dt><dd>{SITE.address.street}, {SITE.address.neighborhood}</dd></div>
-      </dl>
+      <nav class="crumb label fx-in" aria-label="Você está em"><a href={href('/')}>Início</a><span aria-hidden="true">/</span><span aria-current="page">Contato e localização</span></nav>
+      <h1 class="label fx-in">Contato · fale com a ODONTO SPACE</h1>
+      <a class="ct-num" href={`https://wa.me/${SITE.whatsapp.e164}`} target="_blank" rel="noopener noreferrer" data-wa="contato-numero" aria-label={`WhatsApp ${SITE.whatsapp.display}`}><span class="ct-num__ico"><Icon name="whatsapp" size={44} /></span><span>{SITE.whatsapp.display}</span></a>
+      <div class="g12 ct-open__row fx-in">
+        <p class="lead">Fale direto com a equipe, tire dúvidas e combine o melhor momento para a sua avaliação.</p>
+        <div class="row"><WhatsAppButton context="contato-principal" variant="solid" size="lg" label="Chamar no WhatsApp" /><a class="link" href={MAPS_URL} target="_blank" rel="noopener noreferrer">Como chegar <Icon name="arrow" size={16} /></a></div>
+      </div>
     </div>
   </section>
 
-  <section class="sec sec--mist">
-    <div class="wrap loc">
-      <div class="panel dark rv">
-        <div><p class="label">Endereço</p><h2>Rua Francisco Real, <em>1910</em></h2><address>Sala 201<br />{SITE.address.neighborhood} – {SITE.address.city}/{SITE.address.state}</address></div>
-        <div class="btn-row" style="margin:0"><a class="btn btn--line-light" href={MAPS_URL} target="_blank" rel="noopener noreferrer">Abrir no mapa</a><WhatsAppButton variant="light" context="contato-endereco" label="Falar no WhatsApp" /></div>
+  <section class="ct-where">
+    <div class="ct-where__a">
+      <div>
+        <p class="label rv">Endereço</p>
+        <h2 class="rv d1">Rua Francisco Real, 1910</h2>
+        <address class="rv d2">Sala 201<br />{SITE.address.neighborhood} – {SITE.address.city}/{SITE.address.state}</address>
       </div>
-      <Photo class="rv d1" src={genConsultorio} alt="Consultório odontológico claro e moderno" pos="45% 50%" illustrative zoom sizes="(max-width: 860px) 100vw, 50vw" />
+      <p class="rv d3" style="margin:0"><a class="link" href={MAPS_URL} target="_blank" rel="noopener noreferrer">Abrir no mapa <Icon name="arrow" size={16} /></a></p>
+    </div>
+    <div class="ct-where__b">
+      <p class="label rv" style="margin-bottom:1.4rem">Atendimento</p>
+      <dl class="ct-info rv d1">
+        <div><dt>Região</dt><dd>Bangu e bairros próximos da Zona Oeste</dd></div>
+        <div><dt>Horários</dt><dd>{SITE.hours ?? 'Consulte os horários de atendimento pelo WhatsApp.'}</dd></div>
+        <div><dt>Agendamento</dt><dd>Avaliação marcada pelo WhatsApp</dd></div>
+      </dl>
     </div>
   </section>
 </BaseLayout>
