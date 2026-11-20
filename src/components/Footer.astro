@@ -1,32 +1,21 @@
 ---
-import WhatsAppCta from './WhatsAppCta.astro';
 import Icon from './Icon.astro';
-import Em from './Em.astro';
 import { NAV, SITE, MAPS_URL } from '../config/site';
 import { href } from '../utils/url';
-import { logoBranco } from '../assets';
-interface Props { message?: string; hideCta?: boolean }
-const { message, hideCta = false } = Astro.props;
+import { logoPreto } from '../assets';
 const year = new Date().getFullYear();
 ---
-<footer class="end dark">
-  {!hideCta && (
-    <div class="wrap top">
-      <div>
-        <p class="label rv">Agende sua avaliação</p>
-        <h2 class="rv d1"><Em text="Vamos conversar sobre *o seu sorriso?*" /></h2>
-      </div>
-      <div class="rv d2">
-        <WhatsAppCta context="rodape" message={message} />
-        <address><p class="label" style="margin:1.6rem 0 0.2rem">Endereço</p>{SITE.address.street}<br />{SITE.address.neighborhood} – {SITE.address.city}/{SITE.address.state}</address>
-        <p style="margin:1rem 0 0"><a class="link" href={MAPS_URL} target="_blank" rel="noopener noreferrer">Como chegar <Icon name="arrow" size={16} /></a></p>
-      </div>
-    </div>
-  )}
-  <div class="wrap bot">
-    <a href={href('/')} aria-label="ODONTO SPACE – página inicial"><img src={logoBranco.src} alt="ODONTO SPACE" width="73" height="92" /></a>
-    <div>
-      <nav aria-label="Rodapé"><ul>{NAV.map((item) => <li><a href={href(item.href)}>{item.label}</a></li>)}</ul></nav>
+<footer class="end">
+  <div class="wrap end__in">
+    <a class="end__brand" href={href('/')} aria-label="ODONTO SPACE – página inicial"><img src={logoPreto.src} alt="ODONTO SPACE" width="73" height="92" /></a>
+    <nav class="end__nav" aria-label="Rodapé"><ul>{NAV.map((item) => <li><a href={href(item.href)}>{item.label}</a></li>)}</ul></nav>
+    <address class="end__addr">
+      <span class="label">Endereço</span>
+      {SITE.address.street}<br />{SITE.address.neighborhood} – {SITE.address.city}/{SITE.address.state}<br />
+      <a class="link" href={MAPS_URL} target="_blank" rel="noopener noreferrer">Como chegar <Icon name="arrow" size={14} /></a>
+    </address>
+    <p class="end__wa"><span class="label">WhatsApp</span><a href={`https://wa.me/${SITE.whatsapp.e164}`} target="_blank" rel="noopener noreferrer" data-wa="rodape-numero">{SITE.whatsapp.display}</a></p>
+    <div class="end__legal">
       {SITE.technicalResponsible && <p>Responsável técnico: {SITE.technicalResponsible.name} – {SITE.technicalResponsible.cro}</p>}
       <p>© {year} ODONTO SPACE · {SITE.address.street}, {SITE.address.neighborhood} – {SITE.address.city}/{SITE.address.state}</p>
       <p>As informações deste site têm caráter educativo e não substituem a avaliação de um cirurgião-dentista. Os resultados e a indicação de cada tratamento variam de acordo com cada paciente. As imagens são ilustrativas (geradas por IA) e não mostram a clínica.</p>

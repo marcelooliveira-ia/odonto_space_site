@@ -15,16 +15,16 @@ Geradas em 2026-11-20 no **Magnific** (modelo Google Nano Banana 2.1, `imagen-na
 
 | Arquivo | ID Magnific | Descrição | Onde aparece |
 |---|---|---|---|
-| `consultorio-moderno.jpg` | BhN7RDyoQR | Consultório claro, sem pessoas | Início (abertura); Contato (faixa vertical, outro recorte) |
-| `clinica-recepcao.jpg` | jUoMhU4LD0 | Recepção acolhedora, sem pessoas | Início (faixa de ambiente) |
-| `clinica-instrumentos.jpg` | s7IpaJYl8e | Bandeja de instrumentos esterilizados | Início (nossa forma de cuidar) |
-| `paciente-sorriso-ia.jpg` | bxMnXjf5Y2 | Mulher sorrindo (pessoa fictícia gerada por IA; etiqueta "gerada por IA") | Início (Estética do Sorriso) |
+| `consultorio-moderno.jpg` | BhN7RDyoQR | Consultório claro, sem pessoas | Início (abertura e detalhe) |
+| `clinica-recepcao.jpg` | jUoMhU4LD0 | Recepção acolhedora, sem pessoas | Início (três momentos) |
+| `clinica-instrumentos.jpg` | s7IpaJYl8e | Bandeja de instrumentos esterilizados | Início (três momentos) |
+| `paciente-sorriso-ia.jpg` | bxMnXjf5Y2 | Mulher sorrindo (pessoa fictícia gerada por IA) | **Reservada: não está em uso** |
+| `implante-coroa.jpg` | p8ygNTQehw | Implante de titânio e coroa (macro) | Implantes (o que é); Início (prévia de serviço) |
 | `implante-maos-modelo.jpg` | Xm9w3DcBfo | Mãos com modelo de arcada e implante | Implantes (abertura) |
-| `implante-coroa.jpg` | p8ygNTQehw | Implante de titânio e coroa (macro) | Implantes (o que é) |
 | `implante-radiografia.jpg` | aFG6cq9fSh | Radiografia panorâmica em monitor, sem texto legível | Implantes (como funciona) |
-| `protese-coroas-ponte.jpg` | O6EtHwjynm | Coroas e ponte de cerâmica | Próteses (abertura) |
+| `protese-coroas-ponte.jpg` | O6EtHwjynm | Coroas e ponte de cerâmica | Próteses (abertura); Início (prévia) |
 | `protese-laboratorio-maos.jpg` | ksecoKr16B | Técnico finalizando prótese (só mãos) | Próteses (tipos) |
-| `invisalign-alinhadores.jpg` | hu29nmTvqL | Alinhadores transparentes em estojo | Ortodontia e Invisalign (abertura) |
+| `invisalign-alinhadores.jpg` | hu29nmTvqL | Alinhadores transparentes em estojo | Ortodontia e Invisalign (abertura); Início (prévia) |
 | `ortodontia-maos-alinhador.jpg` | xSBVmgDjfW | Mãos encaixando alinhador em modelo | Ortodontia e Invisalign (primeiro passo) |
 
 Mapa completo e limitações em `docs/INVENTARIO-IMAGENS.md`.

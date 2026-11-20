@@ -1,9 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Em from '../components/Em.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 import Photo from '../components/Photo.astro';
-import Icon from '../components/Icon.astro';
 import { SERVICES } from '../config/site';
 import { href } from '../utils/url';
 import { genProteseCoroas, genProteseLab } from '../assets';
@@ -22,51 +20,47 @@ const faqs = [
 ];
 ---
 <BaseLayout title="Próteses Dentárias em Bangu | ODONTO SPACE" description="Próteses dentárias em Bangu, Rio de Janeiro: totais, parciais, fixas e sobre implante. Avaliação na ODONTO SPACE e agendamento pelo WhatsApp." path="/proteses-dentarias" breadcrumb="Próteses dentárias" whatsappMessage={msg}>
-  <section class="hl fx">
+  <div class="wrap pr-crumb"><nav class="crumb label" style="margin:0" aria-label="Você está em"><a href={href('/')}>Início</a><span aria-hidden="true">/</span><span aria-current="page">Próteses dentárias</span></nav></div>
+  <Photo class="pr-pano" src={genProteseCoroas} alt="Coroas e ponte de cerâmica ao lado de um modelo de gesso" ratio="21 / 9" pos="50% 58%" eager n="01" widths={[800, 1200, 1600, 2000]} sizes="100vw" />
+  <div class="wrap g12 pr-head">
+    <h1 class="pr-title fx-in">Próteses <em>dentárias em Bangu</em></h1>
+    <div class="pr-head__side fx-in">
+      <p class="label">Prótese dentária</p>
+      <p class="lead">Recupere a função mastigatória e a estética do sorriso com uma solução indicada para o seu caso.</p>
+      <div class="row" style="margin-top:1rem"><WhatsAppButton message={msg} context="proteses-hero" label="Agendar avaliação de prótese" /></div>
+    </div>
+  </div>
+
+  <section class="pr-types">
     <div class="wrap g12">
-      <div class="hl__txt">
-        <nav class="crumb label" aria-label="Você está em"><a href={href('/')}>Início</a><span aria-hidden="true">/</span><span aria-current="page">Próteses dentárias</span></nav>
-        <p class="label">Prótese dentária</p>
-        <h1><Em text="Próteses *dentárias* em Bangu" /></h1>
-        <p class="lead">Recupere a função mastigatória e a estética do sorriso com uma solução indicada para o seu caso.</p>
-        <div class="btn-row"><WhatsAppButton message={msg} context="proteses-hero" size="lg" label="Agendar avaliação de prótese" /></div>
+      <div class="pr-types__list">
+        <span class="label pr-types__label rv">Tipos de prótese · a escolha é do dentista, após avaliar a sua boca</span>
+        {types.map((t, i) => <div class="pr-type rv"><span>{String(i + 1).padStart(2, '0')}</span><div><h3>{t.title}</h3><p>{t.text}</p></div></div>)}
       </div>
-      <figure class="hl__img"><Photo src={genProteseCoroas} alt="Coroas e ponte de cerâmica ao lado de um modelo de gesso" ratio="16 / 11" pos="50% 58%" eager illustrative widths={[800, 1200, 1600]} sizes="(max-width: 860px) 100vw, 56vw" /></figure>
+      <Photo class="pr-types__img rv d1" src={genProteseLab} alt="Técnico finalizando uma prótese dentária em laboratório" ratio="4 / 5" pos="50% 45%" n="02" sizes="(max-width: 860px) 72vw, 30vw" />
     </div>
   </section>
 
-  <section class="tipos-sec after-hl">
+  <section class="pr-start on-ice">
     <div class="wrap g12">
-      <figure class="tipos__img rv"><Photo src={genProteseLab} alt="Técnico finalizando uma prótese dentária em laboratório" ratio="4 / 5" pos="50% 45%" illustrative sizes="(max-width: 860px) 78vw, 40vw" /></figure>
-      <div class="tipos__txt">
-        <p class="label rv">Tipos de prótese</p>
-        <h2 class="rv d1"><Em text="Opções para *diferentes situações*" /></h2>
-        <p class="lead rv d2">A escolha do tipo ideal é feita pelo dentista, depois de avaliar a sua boca.</p>
-        <div class="spec rv d3" style="margin-top:1.6rem">{types.map((t) => <div class="spec__row"><h3>{t.title}</h3><p>{t.text}</p></div>)}</div>
-      </div>
-    </div>
-  </section>
-
-  <section class="start-sec dark">
-    <div class="wrap g12">
-      <div style="display:contents">
-        <h2 class="rv"><Em text="Uma avaliação para entender *suas opções*" /></h2>
-        <div class="start-sec__list rv d1">
-          <ul class="checks">
-            <li><Icon name="check" size={18} /><span>Exame clínico e conversa sobre suas necessidades</span></li>
-            <li><Icon name="check" size={18} /><span>Alternativas possíveis para o seu caso</span></li>
-            <li><Icon name="check" size={18} /><span>Plano de tratamento explicado antes de iniciar</span></li>
-          </ul>
-          <div class="btn-row" style="margin-top:1.6rem"><WhatsAppButton message={msg} context="proteses-meio" /></div>
-        </div>
+      <h2 class="rv">Uma avaliação para entender suas opções.</h2>
+      <div class="pr-start__side rv d1">
+        <ul>
+          <li>Exame clínico e conversa sobre suas necessidades</li>
+          <li>Alternativas possíveis para o seu caso</li>
+          <li>Plano de tratamento explicado antes de iniciar</li>
+        </ul>
+        <WhatsAppButton message={msg} context="proteses-meio" variant="solid" />
       </div>
     </div>
   </section>
 
-  <section class="sec">
-    <div class="wrap faqgrid">
-      <div><p class="label">Dúvidas frequentes</p><h2>Perguntas sobre <em>próteses</em></h2><p class="notice">Conteúdo informativo. Somente um cirurgião-dentista pode indicar o tratamento adequado após avaliar você.</p></div>
-      <div class="faq">{faqs.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}</div>
+  <section class="pr-faq">
+    <div class="wrap">
+      <p class="label rv">Dúvidas frequentes</p>
+      <h2 class="rv d1">Perguntas sobre próteses.</h2>
+      <div class="faq rv">{faqs.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}</div>
+      <p class="note">Conteúdo informativo. Somente um cirurgião-dentista pode indicar o tratamento adequado após avaliar você.</p>
     </div>
   </section>
 </BaseLayout>

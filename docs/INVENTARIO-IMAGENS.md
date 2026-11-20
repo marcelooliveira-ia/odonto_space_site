@@ -1,29 +1,32 @@
 # Inventário de imagens — controle interno
 
-Gerado do site real (build local, 1440 px) em 2026-11-20. Regra: cada seção de destaque tem imagem própria; a mesma foto só se repete com justificativa.
+Gerado do site real (build local, 1440 px) em 2026-11-20, redesign v6. Regra: cada seção de destaque tem imagem própria; a mesma foto só se repete com justificativa. Detalhes de classificação em `docs/DIRECAO-DE-ARTE.md` (Fase 7).
 
-| Arquivo | Página | Seção | Função visual | Tamanho exibido (1440 px) | Outras ocorrências |
-|---|---|---|---|---|---|
-| `consultorio-moderno` | Início | Abertura | Foto de fundo, tela cheia | 1440×939 | Contato |
-| `clinica-instrumentos` | Início | Nossa forma de cuidar | Foto vertical que sangra à direita | 480×600 | nenhuma |
-| `clinica-recepcao` | Início | Faixa de ambiente | Panorâmica, tela cheia | 1440×680 | nenhuma |
-| `paciente-sorriso-ia` | Início | Estética do Sorriso | Foto vertical que sobrepõe a faixa | 590×738 | nenhuma |
-| `implante-maos-modelo` | Implantes | Abertura | Foto à direita, borda esquerda dissolvida | 835×700 | nenhuma |
-| `implante-coroa` | Implantes | O que é | Foto vertical ao lado do texto | 510×638 | nenhuma |
-| `implante-radiografia` | Implantes | Como funciona | Fundo panorâmico das etapas | 1440×703 | nenhuma |
-| `protese-coroas-ponte` | Próteses | Abertura | Foto atravessando a divisa da seção | 700×481 | nenhuma |
-| `protese-laboratorio-maos` | Próteses | Tipos de prótese | Foto vertical fixa ao lado da lista | 590×738 | nenhuma |
-| `invisalign-alinhadores` | Ortodontia e Invisalign | Abertura | Faixa panorâmica sobre a divisa | 1440×549 | nenhuma |
-| `ortodontia-maos-alinhador` | Ortodontia e Invisalign | Primeiro passo | Foto horizontal sangrando à direita | 810×540 | nenhuma |
-| `dr-marcelo-souza` (real) | Clínica e equipe | Equipe | Retrato, sangra à esquerda | 590×738 | nenhuma |
-| `ortodontista` (real) | Clínica e equipe | Equipe | Retrato menor, deslocado | 400×500 | nenhuma |
-| `consultorio-moderno` | Contato | Abertura | Faixa vertical (recorte da lateral direita) | 432×684 | Início |
+| Arquivo | Página | Seção | Função visual | Outras ocorrências |
+|---|---|---|---|---|
+| `consultorio-moderno` | Início | Abertura | Foto ao lado do título (5:4, lado esquerdo da imagem) | Início, "três momentos" (recorte de detalhe, lado direito, sem sobreposição) |
+| `clinica-recepcao` | Início | Três momentos (1) | Foto larga 16:9 | nenhuma |
+| `consultorio-moderno` (recorte) | Início | Três momentos (2) | Detalhe arquitetônico vertical 2:3 | ver acima |
+| `clinica-instrumentos` | Início | Três momentos (3) | Foto 5:4 deslocada | nenhuma |
+| `implante-coroa` | Início | Painel de serviços | Prévia na interação (hover/foco; acordeão no celular) | Implantes (O que é) |
+| `protese-coroas-ponte` | Início | Painel de serviços | Prévia na interação | Próteses (abertura) |
+| `invisalign-alinhadores` | Início | Painel de serviços | Prévia na interação | Ortodontia (abertura) |
+| `implante-maos-modelo` | Implantes | Abertura | Foto à esquerda sangrando | nenhuma |
+| `implante-coroa` | Implantes | O que é | Foto vertical pequena | Início (prévia) |
+| `implante-radiografia` | Implantes | Como funciona | Panorama 21:9 | nenhuma |
+| `protese-coroas-ponte` | Próteses | Abertura | Panorama 21:9 no topo | Início (prévia) |
+| `protese-laboratorio-maos` | Próteses | Tipos | Foto vertical fixa ao lado da lista | nenhuma |
+| `invisalign-alinhadores` | Ortodontia e Invisalign | Abertura | Foto clara de tela cheia | Início (prévia) |
+| `ortodontia-maos-alinhador` | Ortodontia e Invisalign | Primeiro passo | Foto 2:1 | nenhuma |
+| `dr-marcelo-souza` (real) | Clínica e equipe | Equipe | Retrato grande | nenhuma |
+| `ortodontista` (real) | Clínica e equipe | Equipe | Retrato menor, deslocado | nenhuma |
+| (nenhuma imagem) | Contato | — | Composição tipográfica | — |
 
-**Distintas: 13 arquivos em 14 usos. Única repetição:** `consultorio-moderno` (Início e Contato), com recortes diferentes (cadeira e janela na Início; armário, monitor e banqueta no Contato). Justificativa: é a única imagem de ambiente que combina com a função "localização"; as demais ou são de tratamento ou já ocupam uma seção de destaque.
+**12 arquivos em uso** (10 ilustrativos + 2 retratos reais). Reutilizações, todas justificadas: o consultório aparece em duas regiões sem sobreposição na própria Início; os três serviços com foto aparecem como prévia na Início por exigência da interação. `paciente-sorriso-ia` está **reservada** (fora do site).
 
 ## Limitações por falta de imagens
-- A **Clínica e equipe** não tem foto de ambiente própria: usa só os dois retratos reais (as 11 imagens aprovadas já estão distribuídas). A abertura é tipográfica.
-- **Estética do Sorriso** e **Clínica geral** não têm foto de tratamento próprio; a Estética usa a pessoa fictícia gerada por IA (etiqueta visível) e a Clínica geral não tem imagem.
-- **Ortodontia** tem 2 imagens (alinhadores e mãos com modelo); falta uma imagem de aparelho fixo.
-- A seção "Como é a avaliação" e os FAQs são tipográficos por falta de imagem.
+- Clínica e equipe: só os dois retratos; sem ambientes reais (seção reservada no código, exibida quando houver fotografias).
+- Estética do Sorriso e Clínica geral: sem imagem própria (composição tipográfica).
+- Ortodontia: faltam imagens de aparelho fixo.
+- Contato: sem foto nem mapa.
 - Fotos reais da clínica (fachada, recepção, consultório) resolvem todas essas lacunas.

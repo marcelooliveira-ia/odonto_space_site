@@ -1,6 +1,11 @@
 ---
 import { Image } from 'astro:assets';
-/** Foto otimizada (WebP responsivo, lazy). `illustrative` = imagem de banco, marcada como ilustrativa. */
+/**
+ * Fotografia com legenda editorial ("Fig. 01 · Imagem ilustrativa").
+ * - `bg`: imagem de fundo de uma seção (sem legenda; a seção imprime a própria).
+ * - `cap`: texto da legenda ('' omite). Imagens geradas por IA devem manter o aviso.
+ * Slot padrão: texto editorial dentro da legenda (título + descrição).
+ */
 interface Props {
   src: ImageMetadata;
   alt: string;
@@ -9,15 +14,25 @@ interface Props {
   ratio?: string;
   pos?: string;
   eager?: boolean;
-  illustrative?: boolean;
-  ai?: boolean;
-  zoom?: boolean;
-  par?: boolean;
+  bg?: boolean;
+  cap?: string;
+  n?: string;
   class?: string;
 }
-const { src, alt, sizes = '(max-width: 900px) 100vw, 50vw', widths = [480, 800, 1200, 1600], ratio, pos = '50% 50%', eager = false, illustrative = false, ai = false, zoom = false, par = false, class: cls } = Astro.props;
+const { src, alt, sizes = '(max-width: 900px) 100vw, 50vw', widths = [480, 800, 1200, 1600], ratio, pos = '50% 50%', eager = false, bg = false, cap = 'Imagem ilustrativa', n, class: cls } = Astro.props;
+const hasSlot = Astro.slots.has('default');
+const imgProps = { widths: widths.filter((w) => w <= src.width), sizes, format: 'webp' as const, quality: 80, loading: (eager ? 'eager' : 'lazy') as 'eager' | 'lazy', decoding: 'async' as const, style: `object-position:${pos}` };
 ---
-<figure class:list={['ph', zoom && 'ph--zoom', par && 'par', cls]} style={ratio ? `--ar:${ratio}` : undefined} data-par={par ? '0.05' : undefined}>
-  <Image src={src} alt={alt} widths={widths.filter((w) => w <= src.width)} sizes={sizes} format="webp" quality={78} loading={eager ? 'eager' : 'lazy'} decoding="async" style={`object-position:${pos}`} />
-  {illustrative && <span class="ph__tag">{ai ? 'Imagem ilustrativa · gerada por IA' : 'Imagem ilustrativa'}</span>}
-</figure>
+{bg ? (
+  <div class:list={['ph', 'ph--bg', cls]}><Image src={src} alt={alt} {...imgProps} /></div>
+) : (
+  <figure class:list={['fg', cls]}>
+    <div class="ph" style={ratio ? `--ar:${ratio}` : undefined}><Image src={src} alt={alt} {...imgProps} /></div>
+    {(cap || hasSlot || n) && (
+      <figcaption class="fig">
+        {hasSlot && <span class="fig__body"><slot /></span>}
+        {(n || cap) && <span class="fig__tag">{n && <b>Fig. {n}</b>}{n && cap ? ' · ' : ''}{cap}</span>}
+      </figcaption>
+    )}
+  </figure>
+)}

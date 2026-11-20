@@ -20,15 +20,15 @@ Registro para retomar o projeto em nova sessão. Estado verificado em 2026-11-20
 
 `/` (Início), `/implantes-dentarios`, `/proteses-dentarias`, `/ortodontia-invisalign`, `/a-clinica-e-equipe`, `/contato-e-localizacao`, `/404`, `/robots.txt`, `/sitemap-index.xml`.
 
-Serviços na home (lista editorial, `SERVICES` em `src/config/site.ts`): Implantes dentários, Próteses dentárias, Ortodontia e Invisalign (Invisalign sempre dentro de Ortodontia), **Estética do Sorriso** e Clínica geral. Estética do Sorriso e Clínica geral não têm página própria: o link abre o WhatsApp com mensagem pronta. Endodontia **não** é mais apresentada como serviço.
+Serviços na home (índice tipográfico com painel de imagem compartilhado, `SERVICES` em `src/config/site.ts`): Implantes dentários, Próteses dentárias, Ortodontia e Invisalign (Invisalign sempre dentro de Ortodontia), **Estética do Sorriso** e Clínica geral. Estética do Sorriso e Clínica geral não têm página própria: o link abre o WhatsApp com mensagem pronta. Endodontia **não** é mais apresentada como serviço.
 
 ## 3. Componentes e dados
 
 - `src/config/site.ts`: fonte única (endereço, WhatsApp, serviços, `generalDentist`, `orthodontist`). Campos pendentes ficam `null` e não são exibidos.
-- `WhatsAppButton` (botão verde, ícone 22/26/30 px, altura mínima 48 px), `WhatsAppCta` (ícone grande + número + botão; usado no rodapé, na localização da home e no endereço do contato), `FloatingWhatsApp` (pílula verde "Fale pelo WhatsApp" no desktop; círculo de 64 px no celular). Todos apontam para `https://wa.me/5521996139234` (com `?text=` nos botões com mensagem).
+- `WhatsAppButton` (variantes `link`, `solid`, `light`; cores da paleta; altura mínima 44–48 px), `FloatingWhatsApp` (círculo ardósia que aparece após rolar). Rodapé enxuto, sem bloco de chamada: cada página fecha com composição própria. Todos apontam para `https://wa.me/5521996139234` (com `?text=` nos botões com mensagem).
 - `PageHero` foi removido; cada página monta a própria abertura.
-- `Photo` (prop `illustrative` mostra "Imagem ilustrativa"; `ai` mostra "Imagem ilustrativa · gerada por IA"), `Header`, `Footer`, `Motion`, `Analytics` + `ConsentBanner` (GTM com Consent Mode v2, **inativos** sem `PUBLIC_GTM_ID`).
-- `src/styles/global.css`: todo o CSS. Linguagem editorial v5: fotos grandes em proporção natural que sangram até a borda (`.bleed-l/-r`), sem molduras, arcos ou folhas; listas com linhas finas no lugar de cartões; uma abertura diferente por página (`.hx` imersiva, `.hs` foto com borda dissolvida, `.hl` claro com foto sobre a divisa, `.hn` centralizada com faixa panorâmica, `.ht` tipográfica, `.hk` claro com faixa vertical).
+- `Photo` (legenda editorial "Fig. NN · Imagem ilustrativa"; `bg` para fundo de seção; slot para título/descrição), `Header`, `Footer`, `Motion`, `Analytics` + `ConsentBanner` (GTM com Consent Mode v2, **inativos** sem `PUBLIC_GTM_ID`).
+- `src/styles/global.css`: todo o CSS. v6 "Espaço e luz": cada página tem a própria família de classes (`hm-` início, `im-` implantes, `pr-` próteses, `or-` ortodontia, `cl-` clínica, `ct-` contato). Processo, referências e decisões em `docs/DIRECAO-DE-ARTE.md`. Resumo v5 (histórico): fotos grandes em proporção natural que sangram até a borda (`.bleed-l/-r`), sem molduras, arcos ou folhas; listas com linhas finas no lugar de cartões; uma abertura diferente por página (`.hx` imersiva, `.hs` foto com borda dissolvida, `.hl` claro com foto sobre a divisa, `.hn` centralizada com faixa panorâmica, `.ht` tipográfica, `.hk` claro com faixa vertical).
 
 ## 4. Imagens
 
@@ -37,7 +37,7 @@ Serviços na home (lista editorial, `SERVICES` em `src/config/site.ts`): Implant
   - `dr-marcelo-souza.jpg`: Dr. Marcelo Souza, cirurgião-dentista clínico geral (nome confirmado; **não** é implantodontista). É uma foto substituta (o original nunca chegou ao disco).
   - `ortodontista.jpg`: ortodontista (nome e CRO não confirmados; baixa resolução).
   - Para trocar: substituir o arquivo mantendo o nome (4:5, mínimo 1000 px).
-- A imagem `paciente-sorriso-ia.jpg` mostra uma **pessoa fictícia gerada por IA**; sempre com a etiqueta "gerada por IA"; nunca como paciente, depoimento ou integrante da equipe.
+- `paciente-sorriso-ia.jpg` mostra uma **pessoa fictícia gerada por IA** e está **reservada (fora do site)**; nunca usar como paciente, depoimento ou integrante da equipe.
 - Não gerar novas imagens sem autorização (custo: 65 créditos cada).
 
 ## 5. Pendências que dependem da clínica
