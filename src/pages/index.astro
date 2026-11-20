@@ -1,27 +1,21 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
-import WhatsAppCta from '../components/WhatsAppCta.astro';
 import Photo from '../components/Photo.astro';
 import Icon from '../components/Icon.astro';
-import { SERVICES, SITE, MAPS_URL } from '../config/site';
+import Em from '../components/Em.astro';
+import { SERVICES, SITE } from '../config/site';
 import { href } from '../utils/url';
 import { whatsappLink } from '../utils/whatsapp';
-import { genRecepcao, genConsultorio, genInvisalign, genRadiografia, genPacienteIA, genImplanteCoroa, genProteseCoroas, genOrtoMaos, genInstrumentos } from '../assets';
+import { genConsultorio, genInstrumentos, genRecepcao, genPacienteIA } from '../assets';
 
-const svcImg: Record<string, { src: ImageMetadata; pos: string; alt: string; ai?: boolean }> = {
-  'Implantes dentários': { src: genImplanteCoroa, pos: '50% 50%', alt: 'Implante dentário de titânio ao lado de uma coroa de cerâmica' },
-  'Próteses dentárias': { src: genProteseCoroas, pos: '50% 60%', alt: 'Coroas e ponte de cerâmica ao lado de um modelo de gesso' },
-  'Ortodontia e Invisalign': { src: genOrtoMaos, pos: '50% 50%', alt: 'Mãos enluvadas encaixando um alinhador transparente em um modelo dentário' },
-  'Estética do Sorriso': { src: genPacienteIA, pos: '50% 28%', alt: 'Mulher sorrindo em um consultório moderno (imagem gerada por IA)', ai: true },
-  'Clínica geral': { src: genInstrumentos, pos: '50% 50%', alt: 'Instrumentos odontológicos esterilizados sobre uma bandeja' },
-};
 const pillars = [
   { t: 'Tratamento individualizado', d: 'Cada paciente tem necessidades diferentes. O tratamento parte do seu caso.' },
   { t: 'Planejamento antes do procedimento', d: 'Avaliamos, explicamos as opções e definimos as etapas com você.' },
   { t: 'Prevenção e acompanhamento', d: 'Consultas periódicas ajudam a manter a saúde bucal e identificar alterações cedo.' },
   { t: 'Atendimento humanizado', d: 'Acolhimento, segurança e atenção em cada etapa, sem pressa.' },
 ];
+const svcUrl = (s: (typeof SERVICES)[number]) => s.slug ? href(`/${s.slug}`) : s.title === 'Estética do Sorriso' ? '#estetica' : whatsappLink(s.whatsappMessage);
 ---
 <BaseLayout
   title="ODONTO SPACE | Dentista em Bangu, Rio de Janeiro"
@@ -29,75 +23,82 @@ const pillars = [
   path="/"
   includeBusinessSchema
 >
-  <section class="hero hero--home dark">
-    <span class="arc a" aria-hidden="true"></span><span class="arc b" aria-hidden="true"></span>
-    <div class="wrap">
-      <div>
-        <p class="label">Clínica odontológica · Bangu, Rio de Janeiro</p>
-        <h1><span class="ln"><span>Cuidar do sorriso</span></span><span class="ln"><span><em>vai além</em> da</span></span><span class="ln"><span>estética.</span></span></h1>
-        <p class="lead">Na ODONTO SPACE, cada tratamento parte de uma avaliação: entendemos o seu caso, planejamos as etapas e buscamos saúde, função, harmonia e confiança de forma individualizada.</p>
-        <div class="btn-row">
-          <WhatsAppButton context="home-hero" size="lg" />
-          <a class="link" href="#servicos">Conheça os serviços <Icon name="arrow" size={16} /></a>
-        </div>
-      </div>
-      <div class="stage">
-        <Photo class="ph1 ph--arch" src={genConsultorio} alt="Consultório odontológico claro e moderno, com luz natural" ratio="auto" pos="40% 50%" eager illustrative widths={[480, 800, 1000, 1400]} sizes="(max-width: 900px) 70vw, 400px" />
-        <Photo class="ph2" src={genInvisalign} alt="Alinhadores transparentes em um estojo branco" ratio="1 / 1" pos="45% 55%" eager widths={[240, 400]} sizes="170px" />
+  <section class="hx dark fx">
+    <Photo src={genConsultorio} alt="Consultório odontológico claro e moderno, com luz natural" ratio="auto" pos="38% 50%" eager widths={[800, 1200, 1600, 2000]} sizes="100vw" />
+    <span class="ph__tag ph__tag--sec">Imagem ilustrativa</span>
+    <div class="wrap hx__in">
+      <p class="label">Clínica odontológica · Bangu, Rio de Janeiro</p>
+      <h1><span class="ln"><span>Cuidar do sorriso</span></span><span class="ln"><span><em>vai além</em> da</span></span><span class="ln"><span>estética.</span></span></h1>
+      <p class="lead">Na ODONTO SPACE, cada tratamento parte de uma avaliação: entendemos o seu caso, planejamos as etapas e buscamos saúde, função, harmonia e confiança de forma individualizada.</p>
+      <div class="btn-row">
+        <WhatsAppButton context="home-hero" size="lg" />
+        <a class="link" href="#servicos">Conheça os serviços <Icon name="arrow" size={16} /></a>
       </div>
     </div>
     <div class="facts"><div class="wrap"><div><em>Endereço</em>{SITE.address.street} · {SITE.address.neighborhood}</div><div><em>WhatsApp</em>{SITE.whatsapp.display}</div><div><em>Agendamento</em>Avaliação marcada pelo WhatsApp</div></div></div>
   </section>
 
-  <section class="sec">
-    <div class="wrap split split--img-left">
-      <div class="split__img rv sp-media">
-        <Photo class="ph--arch" src={genRecepcao} alt="Recepção clara e acolhedora de clínica odontológica" ratio="4 / 5" pos="28% 50%" illustrative zoom sizes="(max-width: 860px) 100vw, 46vw" />
-      </div>
-      <div>
+  <section class="cuidar">
+    <div class="wrap g12">
+      <div class="cuidar__txt">
         <p class="label rv">Nossa forma de cuidar</p>
-        <p class="man" data-man>É entender cada caso, planejar o tratamento e buscar saúde, função, harmonia e confiança de forma individualizada.</p>
+        <p class="man" data-man>Cuidar do sorriso é entender cada caso, planejar o tratamento e buscar saúde, função, harmonia e confiança de forma individualizada.</p>
         <div class="pil">
           {pillars.map((p, i) => <div class={`rv d${i % 3}`}><h3>{p.t}</h3><p>{p.d}</p></div>)}
         </div>
-        <p class="rv" style="margin:2rem 0 0"><a class="link" href={href('/a-clinica-e-equipe')}>Conheça a clínica e a equipe <Icon name="arrow" size={16} /></a></p>
+        <p class="rv" style="margin:2.2rem 0 0"><a class="link" href={href('/a-clinica-e-equipe')}>Conheça a clínica e a equipe <Icon name="arrow" size={16} /></a></p>
       </div>
+      <figure class="cuidar__img rv">
+        <Photo src={genInstrumentos} alt="Instrumentos odontológicos esterilizados sobre uma bandeja" ratio="4 / 5" pos="50% 50%" illustrative sizes="(max-width: 860px) 76vw, 32vw" />
+      </figure>
     </div>
   </section>
 
-  <section class="sec sec--mist" id="servicos">
-    <div class="wrap">
-      <div class="sec-top"><div class="rv"><p class="label">Serviços</p><h2>Tratamentos para <em>cada necessidade</em></h2></div><p class="lead rv d1">Toda indicação começa por uma avaliação profissional. Conheça as áreas em que atuamos.</p></div>
-      <div class="svc">
+  <section class="idx-sec" id="servicos">
+    <div class="wrap idx-grid">
+      <div class="idx-head">
+        <p class="label rv">Serviços</p>
+        <h2 class="rv d1">Tratamentos para <em>cada necessidade</em></h2>
+        <p class="lead rv d2">Toda indicação começa por uma avaliação profissional. Conheça as áreas em que atuamos.</p>
+      </div>
+      <ol class="idx">
         {SERVICES.map((s, i) => {
-          const im = svcImg[s.title];
-          const url = s.slug ? href(`/${s.slug}`) : whatsappLink(s.whatsappMessage);
+          const ext = !s.slug && s.title !== 'Estética do Sorriso';
           return (
-            <a class="svc__row rv" href={url} {...(s.slug ? {} : { target: '_blank', rel: 'noopener noreferrer', 'data-wa': `home-servico-${i}` })}>
-              <div class="svc__txt">
-                <span class="label">{String(i + 1).padStart(2, '0')}</span>
-                <h3>{s.title}</h3>
-                <p>{s.short}</p>
-                <span class="go">{s.slug ? 'Saiba mais' : 'Falar com a equipe'} <Icon name="arrow" size={16} /></span>
-              </div>
-              <Photo class="svc__img" src={im.src} alt={im.alt} pos={im.pos} illustrative={!!im.ai} ai={im.ai} zoom sizes="(max-width: 860px) 100vw, 46vw" />
-            </a>
+            <li class="rv"><a class="idx__row" href={svcUrl(s)} {...(ext ? { target: '_blank', rel: 'noopener noreferrer', 'data-wa': `home-servico-${i}` } : {})}>
+              <span class="idx__n">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{s.title}</h3>
+              <p>{s.short}</p>
+              <span class="idx__go"><Icon name="arrow" size={26} /></span>
+            </a></li>
           );
         })}
-      </div>
-      <p class="small rv" style="margin:1.6rem 0 0;color:var(--mute)">Imagens ilustrativas geradas por IA, usadas até a inclusão das fotografias reais da clínica.</p>
+      </ol>
     </div>
   </section>
 
-  <section class="banner dark">
-    <Photo src={genRadiografia} alt="Radiografia panorâmica exibida em um monitor no consultório" pos="60% 45%" sizes="100vw" widths={[800, 1200, 1600, 2000]} illustrative={false} />
+  <section class="band dark">
+    <Photo src={genRecepcao} alt="Recepção clara e acolhedora de clínica odontológica" ratio="auto" pos="50% 55%" sizes="100vw" widths={[800, 1200, 1600, 2000]} />
+    <span class="ph__tag ph__tag--sec">Imagem ilustrativa</span>
     <div class="wrap rv">
-      <div>
-        <p class="label">Planejamento antes do procedimento</p>
-        <h2>Entender o seu caso vem antes de qualquer tratamento.</h2>
-        <p>Na avaliação, explicamos as opções e as etapas com clareza, para você decidir com segurança.</p>
-        <div class="btn-row" style="margin-top:1.2rem"><WhatsAppButton context="home-banner" label="Agendar avaliação" /></div>
+      <p class="label">Planejamento antes do procedimento</p>
+      <h2>Entender o seu caso vem antes de qualquer tratamento.</h2>
+      <p>Na avaliação, explicamos as opções e as etapas com clareza, para você decidir com segurança.</p>
+      <div class="btn-row" style="margin-top:1.2rem"><WhatsAppButton context="home-banner" label="Agendar avaliação" /></div>
+    </div>
+  </section>
+
+  <section class="est" id="estetica">
+    <div class="wrap g12">
+      <div class="est__txt">
+        <p class="label rv">Estética do Sorriso</p>
+        <h2 class="rv d1">Um sorriso em harmonia com <em>o seu rosto e a sua saúde.</em></h2>
+        <p class="lead rv d2">A estética do sorriso pode incluir cuidados como o clareamento dental. A indicação, as opções e os limites de cada procedimento são definidos pelo dentista após avaliar o seu caso, sem promessa de resultado.</p>
+        <div class="btn-row rv d3"><WhatsAppButton context="home-estetica" message={SERVICES.find((s) => s.title === 'Estética do Sorriso')!.whatsappMessage} label="Conversar sobre estética do sorriso" /></div>
       </div>
+      <figure class="est__img rv">
+        <Photo src={genPacienteIA} alt="Mulher sorrindo em um consultório moderno (imagem gerada por IA)" ratio="4 / 5" pos="50% 28%" illustrative ai sizes="(max-width: 860px) 80vw, 38vw" />
+      </figure>
     </div>
   </section>
 
@@ -110,21 +111,6 @@ const pillars = [
         <li class="rv d2"><span class="label">Etapa 3</span><h3>Plano explicado</h3><p>Apresentamos as opções e as etapas antes de começar.</p></li>
         <li class="rv d3"><span class="label">Etapa 4</span><h3>Acompanhamento</h3><p>Retornos para acompanhar a evolução do tratamento.</p></li>
       </ol>
-    </div>
-  </section>
-
-  <section class="sec" id="localizacao">
-    <div class="wrap loc">
-      <div class="panel dark rv">
-        <div>
-          <p class="label">Localização</p>
-          <h2>Venha nos visitar em <em>Bangu</em></h2>
-          <address><strong>ODONTO SPACE</strong><br />{SITE.address.street}<br />{SITE.address.neighborhood} – {SITE.address.city}/{SITE.address.state}</address>
-          <p style="margin:1rem 0 0"><a class="link" href={MAPS_URL} target="_blank" rel="noopener noreferrer">Como chegar <Icon name="arrow" size={16} /></a></p>
-        </div>
-        <WhatsAppCta context="home-localizacao" label="Falar no WhatsApp" />
-      </div>
-      <Photo class="rv d1" src={genConsultorio} alt="Consultório odontológico claro e moderno" pos="75% 50%" illustrative zoom sizes="(max-width: 860px) 100vw, 50vw" />
     </div>
   </section>
 </BaseLayout>

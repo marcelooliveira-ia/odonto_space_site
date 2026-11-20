@@ -1,11 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHero from '../components/PageHero.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 import Photo from '../components/Photo.astro';
 import Icon from '../components/Icon.astro';
 import Em from '../components/Em.astro';
 import { SERVICES } from '../config/site';
+import { href } from '../utils/url';
 import { genImplanteMaos, genImplanteCoroa, genRadiografia } from '../assets';
 
 const msg = SERVICES.find((s) => s.slug === 'implantes-dentarios')!.whatsappMessage;
@@ -23,35 +23,44 @@ const faqs = [
 ];
 ---
 <BaseLayout title="Implantes Dentários em Bangu | ODONTO SPACE" description="Implantes dentários em Bangu, Rio de Janeiro: avaliação e planejamento individual na ODONTO SPACE. Tire dúvidas e agende pelo WhatsApp." path="/implantes-dentarios" breadcrumb="Implantes dentários" whatsappMessage={msg}>
-  <PageHero crumb="Implantes dentários" label="Implantodontia" title="Implantes *dentários* em Bangu" lead="Substituir dentes ausentes com planejamento individual, para recuperar a função de mastigar e a confiança ao sorrir.">
-    <WhatsAppButton slot="actions" message={msg} context="implantes-hero" size="lg" label="Agendar avaliação de implante" />
-    <Photo slot="media" src={genImplanteMaos} alt="Mãos enluvadas segurando um modelo transparente de arcada com implante e coroa" ratio="4 / 3" eager illustrative sizes="(max-width: 900px) 100vw, 480px" />
-  </PageHero>
+  <section class="hs dark fx">
+    <div class="wrap">
+      <div class="hs__txt">
+        <nav class="crumb label" aria-label="Você está em"><a href={href('/')}>Início</a><span aria-hidden="true">/</span><span aria-current="page">Implantes dentários</span></nav>
+        <p class="label">Implantodontia</p>
+        <h1><Em text="Implantes *dentários* em Bangu" /></h1>
+        <p class="lead">Substituir dentes ausentes com planejamento individual, para recuperar a função de mastigar e a confiança ao sorrir.</p>
+        <div class="btn-row"><WhatsAppButton message={msg} context="implantes-hero" size="lg" label="Agendar avaliação de implante" /></div>
+      </div>
+    </div>
+    <span class="ph__tag ph__tag--sec">Imagem ilustrativa</span>
+    <figure class="hs__img"><Photo src={genImplanteMaos} alt="Mãos enluvadas segurando um modelo transparente de arcada com implante e coroa" ratio="auto" pos="55% 50%" eager widths={[800, 1200, 1600]} sizes="(max-width: 860px) 100vw, 58vw" /></figure>
+  </section>
 
-  <section class="sec">
-    <div class="wrap split">
-      <div>
-        <p class="label rv">O que é</p>
-        <h2 class="rv d1">Uma solução para <em>dentes ausentes</em></h2>
-        <p class="lead rv d2">O implante dentário é uma estrutura colocada no osso da região onde falta o dente e que serve de base para receber uma prótese. A indicação, o tipo de reabilitação e o número de implantes são definidos pelo dentista após avaliar o seu caso.</p>
-        <ul class="checks rv d3">
+  <section class="oq">
+    <div class="wrap g12">
+      <h2 class="rv"><Em text="O implante é uma solução para *dentes ausentes.*" /></h2>
+      <figure class="oq__img rv"><Photo src={genImplanteCoroa} alt="Implante dentário de titânio ao lado de uma coroa de cerâmica" ratio="4 / 5" pos="50% 50%" illustrative sizes="(max-width: 860px) 70vw, 30vw" /></figure>
+      <div class="oq__txt">
+        <p class="lead rv">O implante dentário é uma estrutura colocada no osso da região onde falta o dente e que serve de base para receber uma prótese. A indicação, o tipo de reabilitação e o número de implantes são definidos pelo dentista após avaliar o seu caso.</p>
+        <ul class="checks rv d1">
           <li><Icon name="check" size={18} /><span>Avaliação clínica e planejamento individual</span></li>
           <li><Icon name="check" size={18} /><span>Explicação de cada etapa antes de começar</span></li>
           <li><Icon name="check" size={18} /><span>Acompanhamento ao longo do tratamento</span></li>
         </ul>
       </div>
-      <Photo class="rv ph--arch" src={genImplanteCoroa} alt="Implante dentário de titânio ao lado de uma coroa de cerâmica" ratio="4 / 5" pos="50% 50%" illustrative zoom sizes="(max-width: 860px) 100vw, 46vw" />
     </div>
   </section>
 
-  <section class="sec sec--mist sec--light">
+  <section class="pano dark">
+    <Photo src={genRadiografia} alt="Radiografia panorâmica exibida em um monitor no consultório" ratio="auto" pos="70% 45%" sizes="100vw" widths={[800, 1200, 1600, 2000]} />
+    <span class="ph__tag ph__tag--sec">Imagem ilustrativa</span>
     <div class="wrap">
       <div class="sec-top"><div class="rv"><p class="label">Como funciona</p><h2>Do primeiro contato ao <em>sorriso restaurado</em></h2></div><p class="lead rv d1">As etapas exatas variam conforme cada paciente. De forma geral:</p></div>
-      <Photo class="rv" src={genRadiografia} alt="Radiografia panorâmica exibida em um monitor no consultório" ratio="21 / 9" pos="55% 42%" illustrative sizes="100vw" widths={[800, 1200, 1600, 2000]} />
-      <ol class="stp" data-stp style="margin-top:2.6rem">
+      <ol class="stp" data-stp>
         {steps.map((s, i) => <li class={`rv d${i}`}><span class="label">Etapa {i + 1}</span><h3>{s.t}</h3><p>{s.d}</p></li>)}
       </ol>
-      <p class="soon">Exames de imagem, como radiografias, podem ser solicitados pelo dentista conforme a necessidade de cada caso.</p>
+      <p class="soon" style="color:#d3e3e8">Exames de imagem, como radiografias, podem ser solicitados pelo dentista conforme a necessidade de cada caso.</p>
     </div>
   </section>
 

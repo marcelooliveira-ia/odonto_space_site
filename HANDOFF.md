@@ -26,8 +26,9 @@ Serviços na home (lista editorial, `SERVICES` em `src/config/site.ts`): Implant
 
 - `src/config/site.ts`: fonte única (endereço, WhatsApp, serviços, `generalDentist`, `orthodontist`). Campos pendentes ficam `null` e não são exibidos.
 - `WhatsAppButton` (botão verde, ícone 22/26/30 px, altura mínima 48 px), `WhatsAppCta` (ícone grande + número + botão; usado no rodapé, na localização da home e no endereço do contato), `FloatingWhatsApp` (pílula verde "Fale pelo WhatsApp" no desktop; círculo de 64 px no celular). Todos apontam para `https://wa.me/5521996139234` (com `?text=` nos botões com mensagem).
-- `Photo` (prop `illustrative` mostra "Imagem ilustrativa"; `ai` mostra "Imagem ilustrativa · gerada por IA"), `PageHero`, `Header`, `Footer`, `Motion`, `Analytics` + `ConsentBanner` (GTM com Consent Mode v2, **inativos** sem `PUBLIC_GTM_ID`).
-- `src/styles/global.css`: todo o CSS. Direção editorial: poucas caixas, sem sombras decorativas, formas geométricas discretas (arco `.ph--arch`, folha `.ph--leaf`, círculos finos), listas com linhas finas, mosaico assimétrico.
+- `PageHero` foi removido; cada página monta a própria abertura.
+- `Photo` (prop `illustrative` mostra "Imagem ilustrativa"; `ai` mostra "Imagem ilustrativa · gerada por IA"), `Header`, `Footer`, `Motion`, `Analytics` + `ConsentBanner` (GTM com Consent Mode v2, **inativos** sem `PUBLIC_GTM_ID`).
+- `src/styles/global.css`: todo o CSS. Linguagem editorial v5: fotos grandes em proporção natural que sangram até a borda (`.bleed-l/-r`), sem molduras, arcos ou folhas; listas com linhas finas no lugar de cartões; uma abertura diferente por página (`.hx` imersiva, `.hs` foto com borda dissolvida, `.hl` claro com foto sobre a divisa, `.hn` centralizada com faixa panorâmica, `.ht` tipográfica, `.hk` claro com faixa vertical).
 
 ## 4. Imagens
 
@@ -49,11 +50,15 @@ Serviços na home (lista editorial, `SERVICES` em `src/config/site.ts`): Implant
 - Domínio final e decisão entre GitHub Pages e Vercel; Política de Privacidade antes de ativar `PUBLIC_GTM_ID`, GA4 e Google Ads.
 - Páginas próprias de Estética do Sorriso e Clínica geral (se aprovadas).
 
-## 6. Testes já executados (2026-11-20)
+## 6. Publicação: como confirmar de verdade
+
+O `success` do GitHub Actions só prova que o deploy rodou. O build grava `<meta name="build-commit">` (use `PUBLIC_BUILD_COMMIT=$(git rev-parse --short HEAD) npm run build`). Depois do push no `gh-pages`, rode `scripts/verificar-publicacao.sh`: ele compara o marcador do endereço público com `dist/`. O Pages usa cache de até 10 minutos (`cache-control: max-age=600`), então uma consulta feita logo após o deploy, ou um navegador com cache, pode mostrar a versão anterior.
+
+## 7. Testes já executados (2026-11-20)
 
 Build de produção (7 páginas); 1440, 768 e 390 px nas 6 páginas (sem rolagem horizontal, sem imagem quebrada, sem erro de console); links internos; WhatsApp (`wa.me/5521996139234`); menu móvel; axe (WCAG A/AA). Não testados: Lighthouse, Safari/Firefox, navegação por teclado manual.
 
-## 7. Observações
+## 8. Observações
 
 - Dados pessoais e documentos do cliente (contrato, autorização de imagem) **não** devem entrar no repositório público.
 - Contexto de marca e instruções do cliente estão no Drive de Marcelo (pastas "CLINICA ODONTOLOGICA ODONTO SPACE" e "ODONTO SPACE").

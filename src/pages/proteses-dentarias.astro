@@ -1,11 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHero from '../components/PageHero.astro';
+import Em from '../components/Em.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 import Photo from '../components/Photo.astro';
 import Icon from '../components/Icon.astro';
 import { SERVICES } from '../config/site';
-import { genProteseCoroas, genProteseLab, genConsultorio } from '../assets';
+import { href } from '../utils/url';
+import { genProteseCoroas, genProteseLab } from '../assets';
 
 const msg = SERVICES.find((s) => s.slug === 'proteses-dentarias')!.whatsappMessage;
 const types = [
@@ -21,35 +22,43 @@ const faqs = [
 ];
 ---
 <BaseLayout title="Próteses Dentárias em Bangu | ODONTO SPACE" description="Próteses dentárias em Bangu, Rio de Janeiro: totais, parciais, fixas e sobre implante. Avaliação na ODONTO SPACE e agendamento pelo WhatsApp." path="/proteses-dentarias" breadcrumb="Próteses dentárias" whatsappMessage={msg}>
-  <PageHero crumb="Próteses dentárias" label="Prótese dentária" title="Próteses *dentárias* em Bangu" lead="Recupere a função mastigatória e a estética do sorriso com uma solução indicada para o seu caso.">
-    <WhatsAppButton slot="actions" message={msg} context="proteses-hero" size="lg" label="Agendar avaliação de prótese" />
-    <Photo slot="media" src={genProteseCoroas} alt="Coroas e ponte de cerâmica ao lado de um modelo de gesso" ratio="5 / 4" pos="50% 60%" eager illustrative sizes="(max-width: 900px) 100vw, 480px" />
-  </PageHero>
+  <section class="hl fx">
+    <div class="wrap g12">
+      <div class="hl__txt">
+        <nav class="crumb label" aria-label="Você está em"><a href={href('/')}>Início</a><span aria-hidden="true">/</span><span aria-current="page">Próteses dentárias</span></nav>
+        <p class="label">Prótese dentária</p>
+        <h1><Em text="Próteses *dentárias* em Bangu" /></h1>
+        <p class="lead">Recupere a função mastigatória e a estética do sorriso com uma solução indicada para o seu caso.</p>
+        <div class="btn-row"><WhatsAppButton message={msg} context="proteses-hero" size="lg" label="Agendar avaliação de prótese" /></div>
+      </div>
+      <figure class="hl__img"><Photo src={genProteseCoroas} alt="Coroas e ponte de cerâmica ao lado de um modelo de gesso" ratio="16 / 11" pos="50% 58%" eager illustrative widths={[800, 1200, 1600]} sizes="(max-width: 860px) 100vw, 56vw" /></figure>
+    </div>
+  </section>
 
-  <section class="sec">
-    <div class="wrap split split--img-left">
-      <Photo class="split__img rv ph--leaf" src={genProteseLab} alt="Técnico finalizando uma prótese dentária em laboratório" ratio="4 / 5" pos="50% 45%" illustrative zoom sizes="(max-width: 860px) 100vw, 46vw" />
-      <div>
+  <section class="tipos-sec after-hl">
+    <div class="wrap g12">
+      <figure class="tipos__img rv"><Photo src={genProteseLab} alt="Técnico finalizando uma prótese dentária em laboratório" ratio="4 / 5" pos="50% 45%" illustrative sizes="(max-width: 860px) 78vw, 40vw" /></figure>
+      <div class="tipos__txt">
         <p class="label rv">Tipos de prótese</p>
-        <h2 class="rv d1" style="margin:0.8rem 0 1rem">Opções para <em>diferentes situações</em></h2>
+        <h2 class="rv d1"><Em text="Opções para *diferentes situações*" /></h2>
         <p class="lead rv d2">A escolha do tipo ideal é feita pelo dentista, depois de avaliar a sua boca.</p>
         <div class="spec rv d3" style="margin-top:1.6rem">{types.map((t) => <div class="spec__row"><h3>{t.title}</h3><p>{t.text}</p></div>)}</div>
       </div>
     </div>
   </section>
 
-  <section class="banner dark">
-    <Photo src={genConsultorio} alt="Consultório odontológico claro e moderno" pos="50% 50%" sizes="100vw" widths={[800, 1200, 1600, 2000]} illustrative />
-    <div class="wrap rv">
-      <div>
-        <p class="label">Como começar</p>
-        <h2>Uma avaliação para entender <em>suas opções</em></h2>
-        <ul class="checks" style="border-color:rgb(255 255 255 / .4);max-width:30em">
-          <li style="border-color:rgb(255 255 255 / .2)"><Icon name="check" size={18} /><span>Exame clínico e conversa sobre suas necessidades</span></li>
-          <li style="border-color:rgb(255 255 255 / .2)"><Icon name="check" size={18} /><span>Alternativas possíveis para o seu caso</span></li>
-          <li style="border-color:rgb(255 255 255 / .2)"><Icon name="check" size={18} /><span>Plano de tratamento explicado antes de iniciar</span></li>
-        </ul>
-        <div class="btn-row" style="margin-top:1.4rem"><WhatsAppButton message={msg} context="proteses-meio" /></div>
+  <section class="start-sec dark">
+    <div class="wrap g12">
+      <div style="display:contents">
+        <h2 class="rv"><Em text="Uma avaliação para entender *suas opções*" /></h2>
+        <div class="start-sec__list rv d1">
+          <ul class="checks">
+            <li><Icon name="check" size={18} /><span>Exame clínico e conversa sobre suas necessidades</span></li>
+            <li><Icon name="check" size={18} /><span>Alternativas possíveis para o seu caso</span></li>
+            <li><Icon name="check" size={18} /><span>Plano de tratamento explicado antes de iniciar</span></li>
+          </ul>
+          <div class="btn-row" style="margin-top:1.6rem"><WhatsAppButton message={msg} context="proteses-meio" /></div>
+        </div>
       </div>
     </div>
   </section>

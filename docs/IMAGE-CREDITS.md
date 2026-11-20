@@ -15,17 +15,19 @@ Geradas em 2026-11-20 no **Magnific** (modelo Google Nano Banana 2.1, `imagen-na
 
 | Arquivo | ID Magnific | Descrição | Onde aparece |
 |---|---|---|---|
-| `consultorio-moderno.jpg` | BhN7RDyoQR | Consultório claro, sem pessoas | Início (topo e localização), Clínica (mosaico), Contato |
-| `clinica-recepcao.jpg` | jUoMhU4LD0 | Recepção acolhedora, sem pessoas | Início (nossa forma de cuidar), Clínica (topo), Contato (topo) |
-| `clinica-instrumentos.jpg` | s7IpaJYl8e | Bandeja de instrumentos esterilizados | Início (Clínica geral), Clínica (texto) |
-| `paciente-sorriso-ia.jpg` | bxMnXjf5Y2 | Mulher sorrindo (pessoa fictícia gerada por IA; etiqueta "gerada por IA") | Início (Estética do Sorriso), Clínica (mosaico), Ortodontia (banner) |
-| `implante-coroa.jpg` | p8ygNTQehw | Implante de titânio e coroa (macro) | Início (Implantes), Implantes |
-| `implante-maos-modelo.jpg` | Xm9w3DcBfo | Mãos com modelo de arcada e implante | Implantes (topo) |
-| `implante-radiografia.jpg` | aFG6cq9fSh | Radiografia panorâmica em monitor, sem texto legível | Início (faixa), Implantes |
-| `protese-coroas-ponte.jpg` | O6EtHwjynm | Coroas e ponte de cerâmica | Início (Próteses), Próteses (topo) |
-| `protese-laboratorio-maos.jpg` | ksecoKr16B | Técnico finalizando prótese (só mãos) | Próteses |
-| `invisalign-alinhadores.jpg` | hu29nmTvqL | Alinhadores transparentes em estojo | Início (topo, detalhe circular), Ortodontia |
-| `ortodontia-maos-alinhador.jpg` | xSBVmgDjfW | Mãos encaixando alinhador em modelo | Início (Ortodontia e Invisalign), Ortodontia (topo), Clínica (mosaico) |
+| `consultorio-moderno.jpg` | BhN7RDyoQR | Consultório claro, sem pessoas | Início (abertura); Contato (faixa vertical, outro recorte) |
+| `clinica-recepcao.jpg` | jUoMhU4LD0 | Recepção acolhedora, sem pessoas | Início (faixa de ambiente) |
+| `clinica-instrumentos.jpg` | s7IpaJYl8e | Bandeja de instrumentos esterilizados | Início (nossa forma de cuidar) |
+| `paciente-sorriso-ia.jpg` | bxMnXjf5Y2 | Mulher sorrindo (pessoa fictícia gerada por IA; etiqueta "gerada por IA") | Início (Estética do Sorriso) |
+| `implante-maos-modelo.jpg` | Xm9w3DcBfo | Mãos com modelo de arcada e implante | Implantes (abertura) |
+| `implante-coroa.jpg` | p8ygNTQehw | Implante de titânio e coroa (macro) | Implantes (o que é) |
+| `implante-radiografia.jpg` | aFG6cq9fSh | Radiografia panorâmica em monitor, sem texto legível | Implantes (como funciona) |
+| `protese-coroas-ponte.jpg` | O6EtHwjynm | Coroas e ponte de cerâmica | Próteses (abertura) |
+| `protese-laboratorio-maos.jpg` | ksecoKr16B | Técnico finalizando prótese (só mãos) | Próteses (tipos) |
+| `invisalign-alinhadores.jpg` | hu29nmTvqL | Alinhadores transparentes em estojo | Ortodontia e Invisalign (abertura) |
+| `ortodontia-maos-alinhador.jpg` | xSBVmgDjfW | Mãos encaixando alinhador em modelo | Ortodontia e Invisalign (primeiro passo) |
+
+Mapa completo e limitações em `docs/INVENTARIO-IMAGENS.md`.
 
 As antigas imagens de banco (Pexels, já usadas em postagens) foram **removidas** do site. O histórico do git as preserva.
 
