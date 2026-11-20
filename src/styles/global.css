@@ -148,7 +148,7 @@ address { font-style: normal; }
 
 /* manifesto + pilares */
 .man { font-weight: 600; font-size: clamp(1.35rem, 2.6vw, 2.1rem); line-height: 1.25; letter-spacing: -0.02em; margin: 0.8rem 0 2rem; }
-.man span { color: #b4c4ca; transition: color 0.5s; } .man span.on { color: var(--deep); }
+.man span { color: #7d939b; transition: color 0.5s; } .man span.on { color: var(--deep); }
 .pil { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem 2rem; border-top: 1px solid var(--deep); padding-top: 1.3rem; }
 .pil h3 { font-size: 1.05rem; margin-bottom: 0.35rem; } .pil p { margin: 0; color: var(--mute); font-size: 0.92rem; line-height: 1.55; }
 @media (max-width: 560px) { .pil { grid-template-columns: minmax(0, 1fr); } }
@@ -247,7 +247,7 @@ address { font-style: normal; }
 .end h2 { color: #fff; font-weight: 700; font-size: clamp(2rem, 5vw, 4rem); line-height: 1.05; letter-spacing: -0.03em; margin-top: 1rem; }
 .end .ph-num { font-weight: 600; font-size: clamp(1.4rem, 2.4vw, 1.9rem); color: #fff; text-decoration: none; }
 .end address { margin: 0.2rem 0 1.4rem; }
-.end .wrap.bot { display: flex; justify-content: space-between; gap: 1.5rem 3rem; flex-wrap: wrap; align-items: center; padding-block: 2rem; font-size: 0.8rem; color: #9fb6bd; }
+.end .wrap.bot { display: flex; justify-content: space-between; gap: 1.5rem 3rem; flex-wrap: wrap; align-items: center; padding-block: 2rem; font-size: 0.8rem; color: #b3c6cc; }
 .end .bot img { height: 92px; width: auto; } .end .bot p { margin: 0; max-width: 46em; }
 .end nav ul { display: flex; flex-wrap: wrap; gap: 0.6rem 1.6rem; list-style: none; padding: 0; margin: 0 0 1rem; } .end nav a { color: #fff; text-decoration: none; font-weight: 500; font-size: 0.9rem; } .end nav a:hover { text-decoration: underline; }
 @media (max-width: 860px) { .end .wrap.top { grid-template-columns: minmax(0, 1fr); } }
@@ -272,3 +272,14 @@ address { font-style: normal; }
 }
 
 @media (max-width: 460px) { .btn { white-space: normal; height: auto; min-height: 3.2rem; padding-block: 0.7rem; text-align: center; } }
+
+/* Fichas da equipe: cartões de mesma proporção, sem vazios */
+.feature { background: #fff; border-radius: 28px; padding: clamp(1rem, 2.4vw, 1.75rem); box-shadow: 0 18px 50px -28px rgba(47,74,84,.35); grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(1.5rem, 5vw, 4.5rem); }
+.feature--rev { grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); }
+.feature + .feature { margin-top: clamp(1.5rem, 3vw, 2.25rem); }
+.feature .pc .ph { border-radius: 20px; overflow: hidden; }
+.feature > div:not(.pc) { padding: clamp(0.5rem, 2vw, 2rem); }
+.feature .lead { max-width: 52ch; }
+@media (max-width: 860px) { .feature, .feature--rev { grid-template-columns: minmax(0, 1fr); } .feature .pc { max-width: none; } }
+.team { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 940px; margin-inline: auto; }
+.pc.b { margin-top: 0; }

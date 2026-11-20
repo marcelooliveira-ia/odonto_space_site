@@ -6,7 +6,7 @@ import Photo from '../components/Photo.astro';
 import Icon from '../components/Icon.astro';
 import { SITE, SERVICES } from '../config/site';
 import { href } from '../utils/url';
-import { proprietario, ortodontista, consultorioClaro, consultorioTablet, explicandoModelo, dentistaPaciente } from '../assets';
+import { proprietario, ortodontista, genRecepcao, genInstrumentos, genConsultorio, genPacienteIA, genOrtoMaos } from '../assets';
 
 const o = SITE.owner; const ort = SITE.orthodontist;
 const msgGeral = SERVICES.find((s) => s.title === 'Clínica geral')!.whatsappMessage;
@@ -14,7 +14,7 @@ const msgGeral = SERVICES.find((s) => s.title === 'Clínica geral')!.whatsappMes
 <BaseLayout title="A Clínica e Equipe | ODONTO SPACE em Bangu" description="Conheça a ODONTO SPACE, clínica odontológica em Bangu, Rio de Janeiro: nossa forma de atender e a equipe responsável pelo seu cuidado." path="/a-clinica-e-equipe" breadcrumb="A clínica e equipe">
   <PageHero crumb="A clínica e equipe" label="A clínica" title="Conheça a *ODONTO SPACE*" lead="Uma clínica odontológica em Bangu, com atendimento acolhedor e profissional em diferentes especialidades.">
     <WhatsAppButton slot="actions" context="clinica-hero" size="lg" variant="light" />
-    <Photo slot="media" src={consultorioClaro} alt="Profissional atendendo paciente em consultório claro" ratio="4 / 5" pos="50% 40%" eager illustrative sizes="(max-width: 900px) 80vw, 420px" />
+    <Photo slot="media" src={genRecepcao} alt="Recepção clara e acolhedora de clínica odontológica" ratio="4 / 5" pos="30% 50%" eager illustrative sizes="(max-width: 900px) 80vw, 420px" />
   </PageHero>
 
   <section class="sec">
@@ -25,7 +25,7 @@ const msgGeral = SERVICES.find((s) => s.title === 'Clínica geral')!.whatsappMes
         <p class="lead rv">A ODONTO SPACE atende em Bangu, no Rio de Janeiro, com foco em um atendimento humano e acessível. Nossas áreas de atuação incluem ortodontia, implantodontia, endodontia e prótese.</p>
         <ul class="checks rv"><li><Icon name="check" size={18} /><span>Avaliação individual antes de qualquer indicação</span></li><li><Icon name="check" size={18} /><span>Explicação das opções e das etapas de cada tratamento</span></li><li><Icon name="check" size={18} /><span>Contato direto com a equipe pelo WhatsApp</span></li></ul>
       </div>
-      <Photo class="rv" src={consultorioTablet} alt="Profissional mostrando informações em um tablet a uma paciente" ratio="4 / 5" pos="62% 40%" illustrative zoom sizes="(max-width: 860px) 100vw, 46vw" />
+      <Photo class="rv" src={genInstrumentos} alt="Instrumentos odontológicos esterilizados sobre uma bandeja" ratio="4 / 5" pos="50% 50%" illustrative zoom sizes="(max-width: 860px) 100vw, 46vw" />
     </div>
   </section>
 
@@ -62,11 +62,11 @@ const msgGeral = SERVICES.find((s) => s.title === 'Clínica geral')!.whatsappMes
     <div class="wrap">
       <div class="sec-top"><div class="rv"><p class="label">Atendimento</p><h2>Cuidado em <em>cada etapa</em></h2></div></div>
       <div class="gal">
-        <Photo class="rv" src={explicandoModelo} alt="Profissional explicando um tratamento com modelo dentário" pos="56% 50%" illustrative zoom sizes="(max-width: 700px) 50vw, 33vw" />
-        <Photo class="rv d1" src={dentistaPaciente} alt="Profissional e paciente sorrindo no consultório" pos="50% 30%" illustrative zoom sizes="(max-width: 700px) 50vw, 33vw" />
-        <Photo class="rv d2" src={consultorioClaro} alt="Atendimento em consultório claro" pos="50% 40%" illustrative zoom sizes="(max-width: 700px) 100vw, 33vw" />
+        <Photo class="rv" src={genConsultorio} alt="Consultório odontológico claro e moderno" pos="45% 50%" illustrative zoom sizes="(max-width: 700px) 50vw, 33vw" />
+        <Photo class="rv d1" src={genPacienteIA} alt="Mulher sorrindo em um consultório odontológico moderno (imagem gerada por IA)" pos="50% 30%" illustrative ai zoom sizes="(max-width: 700px) 50vw, 33vw" />
+        <Photo class="rv d2" src={genOrtoMaos} alt="Mãos enluvadas encaixando um alinhador transparente em um modelo dentário" pos="50% 50%" illustrative zoom sizes="(max-width: 700px) 100vw, 33vw" />
       </div>
-      <p class="soon">As fotografias reais da recepção, do consultório e da fachada da ODONTO SPACE serão incluídas nesta seção. As imagens acima são de banco e ilustrativas.</p>
+      <p class="soon">As fotografias reais da recepção, do consultório e da fachada da ODONTO SPACE serão incluídas nesta seção. As imagens acima foram geradas por IA, são ilustrativas e não mostram a clínica nem seus profissionais.</p>
     </div>
   </section>
 </BaseLayout>

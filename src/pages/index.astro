@@ -6,14 +6,14 @@ import Icon from '../components/Icon.astro';
 import Em from '../components/Em.astro';
 import { SERVICES, SITE, MAPS_URL } from '../config/site';
 import { href } from '../utils/url';
-import { proprietario, ortodontista, pacienteSorrindo, implanteModelo, proteseLab, modeloMaos, consultaAvaliacao, consultorioClaro, consultorioTablet, sorrisoNatural } from '../assets';
+import { proprietario, ortodontista, genPacienteIA, genImplanteCoroa, genProteseCoroas, genOrtoMaos, genInstrumentos, genConsultorio, genRecepcao } from '../assets';
 
 const cardImg: Record<string, { src: ImageMetadata; pos: string; alt: string }> = {
-  'Implantes dentários': { src: implanteModelo, pos: '50% 50%', alt: 'Modelo anatômico de implante dentário' },
-  'Próteses dentárias': { src: proteseLab, pos: '50% 55%', alt: 'Prótese dentária sobre modelo de gesso em laboratório' },
-  'Ortodontia e Invisalign': { src: modeloMaos, pos: '50% 50%', alt: 'Mãos de profissional segurando um modelo dentário' },
-  'Endodontia': { src: consultaAvaliacao, pos: '72% 42%', alt: 'Profissional realizando avaliação odontológica em paciente' },
-  'Clínica geral': { src: consultorioClaro, pos: '50% 34%', alt: 'Profissional atendendo paciente em consultório claro' },
+  'Implantes dentários': { src: genImplanteCoroa, pos: '50% 50%', alt: 'Implante dentário de titânio ao lado de uma coroa de cerâmica' },
+  'Próteses dentárias': { src: genProteseCoroas, pos: '50% 60%', alt: 'Coroas e ponte de cerâmica ao lado de um modelo de gesso' },
+  'Ortodontia e Invisalign': { src: genOrtoMaos, pos: '50% 50%', alt: 'Mãos enluvadas encaixando um alinhador transparente em um modelo dentário' },
+  'Endodontia': { src: genInstrumentos, pos: '50% 50%', alt: 'Instrumentos odontológicos esterilizados sobre uma bandeja' },
+  'Clínica geral': { src: genConsultorio, pos: '45% 50%', alt: 'Consultório odontológico claro e moderno' },
 };
 const pillars = [
   { t: 'Tratamento individualizado', d: 'Cada paciente tem necessidades diferentes. O tratamento parte do seu caso.' },
@@ -51,7 +51,7 @@ const pillars = [
 
   <section class="sec">
     <div class="wrap split split--img-left">
-      <Photo class="split__img rv" src={pacienteSorrindo} alt="Paciente sorrindo em consultório odontológico moderno, segurando um espelho" ratio="4 / 5" pos="42% 50%" illustrative zoom sizes="(max-width: 860px) 100vw, 46vw" />
+      <Photo class="split__img rv" src={genPacienteIA} alt="Mulher sorrindo em um consultório odontológico moderno (imagem gerada por IA)" ratio="4 / 5" pos="50% 30%" illustrative ai zoom sizes="(max-width: 860px) 100vw, 46vw" />
       <div>
         <p class="label rv">Nossa forma de cuidar</p>
         <p class="man" data-man>É entender cada caso, planejar o tratamento e buscar saúde, função, harmonia e confiança de forma individualizada.</p>
@@ -80,12 +80,12 @@ const pillars = [
           return s.slug ? <a class={cls} href={href(`/${s.slug}`)}>{inner}</a> : <div class={cls}>{inner}</div>;
         })}
       </div>
-      <p class="small rv" style="margin:1.4rem 0 0;color:var(--mute)">Fotografias de banco, ilustrativas, usadas até a inclusão das imagens reais da clínica.</p>
+      <p class="small rv" style="margin:1.4rem 0 0;color:var(--mute)">Imagens ilustrativas geradas por IA, usadas até a inclusão das fotografias reais da clínica.</p>
     </div>
   </section>
 
   <section class="banner dark">
-    <Photo src={consultorioTablet} alt="Profissional mostrando informações em um tablet a uma paciente no consultório" pos="50% 40%" sizes="100vw" widths={[800, 1200, 1600, 2000]} illustrative={false} />
+    <Photo src={genConsultorio} alt="Consultório odontológico moderno com luz natural" pos="50% 50%" sizes="100vw" widths={[800, 1200, 1600, 2000]} illustrative={false} />
     <div class="wrap rv">
       <div>
         <p class="label">Planejamento antes do procedimento</p>
@@ -101,7 +101,7 @@ const pillars = [
       <div class="sec-top"><div class="rv"><p class="label">Equipe</p><h2>Quem cuida do <em>seu sorriso</em></h2></div><a class="link rv d1" href={href('/a-clinica-e-equipe')}>Conheça a clínica e a equipe <Icon name="arrow" size={16} /></a></div>
       <div class="team">
         <figure class="pc rv"><Photo src={proprietario} alt={SITE.owner.photoAlt} pos="50% 14%" widths={[480, 800, 1000]} sizes="(max-width: 700px) 100vw, 560px" zoom /><figcaption><b>{SITE.owner.name}</b><span>{SITE.owner.title} · {SITE.owner.role}</span></figcaption></figure>
-        <figure class="pc b rv d2"><Photo src={ortodontista} alt={SITE.orthodontist.photoAlt} pos="50% 14%" widths={[400, 520, 800]} sizes="(max-width: 700px) 80vw, 420px" zoom /><figcaption><b>Ortodontista</b><span>Ortodontia · nome e CRO em breve</span></figcaption></figure>
+        <figure class="pc b rv d2"><Photo src={ortodontista} alt={SITE.orthodontist.photoAlt} pos="50% 14%" widths={[400, 520, 800]} sizes="(max-width: 700px) 80vw, 420px" zoom /><figcaption><b>Ortodontista</b><span>Ortodontia · ODONTO SPACE</span></figcaption></figure>
       </div>
     </div>
   </section>
@@ -131,7 +131,7 @@ const pillars = [
           <a class="btn btn--line-light" href={MAPS_URL} target="_blank" rel="noopener noreferrer">Abrir no mapa</a>
         </div>
       </div>
-      <Photo class="rv d1" src={sorrisoNatural} alt="Paciente sorrindo, em retrato" pos="50% 30%" illustrative zoom sizes="(max-width: 860px) 100vw, 50vw" />
+      <Photo class="rv d1" src={genRecepcao} alt="Recepção clara e acolhedora de clínica odontológica" pos="50% 50%" illustrative zoom sizes="(max-width: 860px) 100vw, 50vw" />
     </div>
   </section>
 </BaseLayout>
