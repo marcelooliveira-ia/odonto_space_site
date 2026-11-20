@@ -1,17 +1,19 @@
 ---
-interface Props {
-  eyebrow?: string;
-  title: string;
-  lead: string;
-}
-const { eyebrow, title, lead } = Astro.props;
+import Em from './Em.astro';
+import { href } from '../utils/url';
+interface Props { crumb: string; label: string; title: string; lead: string }
+const { crumb, label, title, lead } = Astro.props;
 ---
-
-<section class="page-hero">
-  <div class="container">
-    {eyebrow && <p class="eyebrow eyebrow--light">{eyebrow}</p>}
-    <h1>{title}</h1>
-    <p class="page-hero__lead">{lead}</p>
-    <slot />
+<section class="hero dark">
+  <span class="arc a" aria-hidden="true"></span><span class="arc b" aria-hidden="true"></span>
+  <div class="wrap">
+    <div>
+      <nav class="crumb label" aria-label="Você está em"><a href={href('/')}>Início</a><span aria-hidden="true">/</span><span aria-current="page">{crumb}</span></nav>
+      <p class="label">{label}</p>
+      <h1><Em text={title} /></h1>
+      <p class="lead">{lead}</p>
+      <div class="btn-row"><slot name="actions" /></div>
+    </div>
+    <div class="hero__media"><slot name="media" /></div>
   </div>
 </section>

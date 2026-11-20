@@ -1,86 +1,72 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
-import PhotoPlaceholder from '../components/PhotoPlaceholder.astro';
-import CtaBand from '../components/CtaBand.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import Photo from '../components/Photo.astro';
 import Icon from '../components/Icon.astro';
-import { SITE } from '../config/site';
+import { SITE, SERVICES } from '../config/site';
+import { href } from '../utils/url';
+import { proprietario, ortodontista, consultorioClaro, consultorioTablet, explicandoModelo, dentistaPaciente } from '../assets';
 
-// Quando a clínica confirmar nomes, CRO e especialidades, preencher aqui.
-// Enquanto estiver vazio, a página mostra apenas espaços reservados para as fotos.
-const team: { name: string; role: string; cro: string; photo?: string }[] = [];
+const o = SITE.owner; const ort = SITE.orthodontist;
+const msgGeral = SERVICES.find((s) => s.title === 'Clínica geral')!.whatsappMessage;
 ---
+<BaseLayout title="A Clínica e Equipe | ODONTO SPACE em Bangu" description="Conheça a ODONTO SPACE, clínica odontológica em Bangu, Rio de Janeiro: nossa forma de atender e a equipe responsável pelo seu cuidado." path="/a-clinica-e-equipe" breadcrumb="A clínica e equipe">
+  <PageHero crumb="A clínica e equipe" label="A clínica" title="Conheça a *ODONTO SPACE*" lead="Uma clínica odontológica em Bangu, com atendimento acolhedor e profissional em diferentes especialidades.">
+    <WhatsAppButton slot="actions" context="clinica-hero" size="lg" variant="light" />
+    <Photo slot="media" src={consultorioClaro} alt="Profissional atendendo paciente em consultório claro" ratio="4 / 5" pos="50% 40%" eager illustrative sizes="(max-width: 900px) 80vw, 420px" />
+  </PageHero>
 
-<BaseLayout
-  title="A Clínica e Equipe | ODONTO SPACE em Bangu"
-  description="Conheça a ODONTO SPACE, clínica odontológica em Bangu, Rio de Janeiro: nossa forma de atender e a equipe responsável pelo seu cuidado."
-  path="/a-clinica-e-equipe"
-  breadcrumb="A clínica e equipe"
->
-  <PageHero
-    eyebrow="A clínica"
-    title="Conheça a ODONTO SPACE"
-    lead="Uma clínica odontológica em Bangu, com atendimento acolhedor e profissional em diferentes especialidades."
-  />
-
-  <section class="section">
-    <div class="container split">
+  <section class="sec">
+    <div class="wrap split">
       <div>
-        <p class="eyebrow">Nossa forma de cuidar</p>
-        <h2>Odontologia com clareza e acolhimento</h2>
-        <p>
-          A ODONTO SPACE atende em Bangu, no Rio de Janeiro, com foco em um atendimento humano e acessível.
-          Nossas áreas de atuação incluem ortodontia, implantodontia, endodontia, prótese e clínica geral.
-        </p>
-        <ul class="checklist">
-          <li><Icon name="check" size={20} /><span>Avaliação individual antes de qualquer indicação</span></li>
-          <li><Icon name="check" size={20} /><span>Explicação das opções e das etapas de cada tratamento</span></li>
-          <li><Icon name="check" size={20} /><span>Contato direto com a equipe pelo WhatsApp</span></li>
-        </ul>
+        <p class="label rv">Nossa forma de cuidar</p>
+        <p class="man" data-man style="font-size:clamp(1.5rem,3vw,2.4rem)">Cuidar do sorriso vai além da estética. É entender cada caso, planejar o tratamento e buscar saúde, função, harmonia e confiança de forma individualizada.</p>
+        <p class="lead rv">A ODONTO SPACE atende em Bangu, no Rio de Janeiro, com foco em um atendimento humano e acessível. Nossas áreas de atuação incluem ortodontia, implantodontia, endodontia e prótese.</p>
+        <ul class="checks rv"><li><Icon name="check" size={18} /><span>Avaliação individual antes de qualquer indicação</span></li><li><Icon name="check" size={18} /><span>Explicação das opções e das etapas de cada tratamento</span></li><li><Icon name="check" size={18} /><span>Contato direto com a equipe pelo WhatsApp</span></li></ul>
       </div>
-      <PhotoPlaceholder slot="clinica-1" ratio="4/3" caption="Foto real do espaço da clínica" />
+      <Photo class="rv" src={consultorioTablet} alt="Profissional mostrando informações em um tablet a uma paciente" ratio="4 / 5" pos="62% 40%" illustrative zoom sizes="(max-width: 860px) 100vw, 46vw" />
     </div>
   </section>
 
-  <section class="section section--tint">
-    <div class="container">
-      <div class="section__head">
-        <p class="eyebrow">Ambiente</p>
-        <h2>Conheça o espaço</h2>
-      </div>
-      <div class="grid grid--3">
-        <PhotoPlaceholder slot="clinica-recepcao" ratio="4/3" caption="Foto real da recepção" />
-        <PhotoPlaceholder slot="clinica-consultorio" ratio="4/3" caption="Foto real do consultório" />
-        <PhotoPlaceholder slot="clinica-fachada" ratio="4/3" caption="Foto real da fachada" />
-      </div>
+  <section class="sec sec--mist" id="equipe">
+    <div class="wrap">
+      <div class="sec-top"><div class="rv"><p class="label">Equipe</p><h2>Quem cuida do <em>seu sorriso</em></h2></div></div>
+      <article class="feature">
+        <figure class="pc rv"><Photo src={proprietario} alt={o.photoAlt} pos="50% 14%" eager widths={[480, 800, 1000]} sizes="(max-width: 860px) 90vw, 440px" /></figure>
+        <div>
+          <p class="label rv">{o.title} da ODONTO SPACE</p>
+          <h2 class="rv d1">{o.name}</h2>
+          <p class="role rv d1">{o.role}</p>
+          <p class="lead rv d2">Cirurgião-dentista clínico geral e proprietário da ODONTO SPACE, realiza diversos tipos de procedimentos odontológicos. Se você não sabe por onde começar, a avaliação com o clínico geral ajuda a entender o seu caso e a definir os próximos passos.</p>
+          {o.cro && <p class="small">{o.cro}</p>}
+          <div class="btn-row"><WhatsAppButton message={msgGeral} context="clinica-clinico-geral" label="Agendar consulta de clínica geral" /></div>
+        </div>
+      </article>
+      <article class="feature feature--rev">
+        <figure class="pc rv"><Photo src={ortodontista} alt={ort.photoAlt} pos="50% 14%" widths={[400, 520, 800]} sizes="(max-width: 860px) 80vw, 400px" /></figure>
+        <div>
+          <p class="label rv">Ortodontia</p>
+          <h2 class="rv d1">Ortodontista</h2>
+          <p class="role rv d1">da ODONTO SPACE</p>
+          <p class="lead rv d2">Responsável pelo atendimento de ortodontia na clínica. Na avaliação, analisa o seu caso e explica as opções de tratamento.</p>
+          {ort.cro && <p class="small">{ort.cro}</p>}
+          <div class="btn-row"><a class="link" href={href('/ortodontia-invisalign')}>Conheça a ortodontia <Icon name="arrow" size={16} /></a></div>
+        </div>
+      </article>
+      {SITE.technicalResponsible && <p class="small" style="margin-top:2rem">Responsável técnico: {SITE.technicalResponsible.name} – {SITE.technicalResponsible.cro}</p>}
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="section__head">
-        <p class="eyebrow">Equipe</p>
-        <h2>Quem cuida do seu sorriso</h2>
-        {team.length === 0 && (
-          <p class="lead">Em breve, apresentaremos aqui os profissionais da ODONTO SPACE.</p>
-        )}
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-top"><div class="rv"><p class="label">Atendimento</p><h2>Cuidado em <em>cada etapa</em></h2></div></div>
+      <div class="gal">
+        <Photo class="rv" src={explicandoModelo} alt="Profissional explicando um tratamento com modelo dentário" pos="56% 50%" illustrative zoom sizes="(max-width: 700px) 50vw, 33vw" />
+        <Photo class="rv d1" src={dentistaPaciente} alt="Profissional e paciente sorrindo no consultório" pos="50% 30%" illustrative zoom sizes="(max-width: 700px) 50vw, 33vw" />
+        <Photo class="rv d2" src={consultorioClaro} alt="Atendimento em consultório claro" pos="50% 40%" illustrative zoom sizes="(max-width: 700px) 100vw, 33vw" />
       </div>
-      <div class="grid grid--3">
-        {team.length > 0
-          ? team.map((m) => (
-              <div class="card">
-                {m.photo ? <img src={m.photo} alt={m.name} loading="lazy" /> : <PhotoPlaceholder slot={`equipe-${m.name}`} ratio="3/4" caption="Foto do profissional" />}
-                <h3>{m.name}</h3>
-                <p>{m.role} · {m.cro}</p>
-              </div>
-            ))
-          : [1, 2, 3].map((n) => <PhotoPlaceholder slot={`equipe-${n}`} ratio="3/4" caption="Espaço reservado para foto da equipe" />)}
-      </div>
-      {SITE.technicalResponsible && (
-        <p class="small" style="margin-top:1.5rem">Responsável técnico: {SITE.technicalResponsible.name} – {SITE.technicalResponsible.cro}</p>
-      )}
+      <p class="soon">As fotografias reais da recepção, do consultório e da fachada da ODONTO SPACE serão incluídas nesta seção. As imagens acima são de banco e ilustrativas.</p>
     </div>
   </section>
-
-  <CtaBand context="clinica-final" />
 </BaseLayout>

@@ -2,54 +2,29 @@
 import Icon from './Icon.astro';
 import WhatsAppButton from './WhatsAppButton.astro';
 import { NAV, SITE } from '../config/site';
-
-interface Props {
-  currentPath: string;
-}
+import { href } from '../utils/url';
+import { logoBranco } from '../assets';
+interface Props { currentPath: string }
 const { currentPath } = Astro.props;
-const isActive = (href: string) => (href === '/' ? currentPath === '/' : currentPath.startsWith(href));
+const isActive = (p: string) => (p === '/' ? currentPath === '/' : currentPath.startsWith(p));
 ---
-
-<header class="site-header">
-  <div class="container site-header__inner">
-    <a class="brand" href="/" aria-label={`${SITE.name} – página inicial`}>
-      {
-        SITE.logoPath ? (
-          <img src={SITE.logoPath} alt={SITE.name} height="40" />
-        ) : (
-          <>
-            <span class="brand__mark" aria-hidden="true"><Icon name="tooth" size={22} /></span>
-            <span class="brand__name">ODONTO <strong>SPACE</strong></span>
-          </>
-        )
-      }
+<header class="hdr dark">
+  <div class="wrap hdr__in">
+    <a class="brand" href={href('/')} aria-label={`${SITE.name} – página inicial`}>
+      <img src={logoBranco.src} alt={SITE.name} width="40" height="50" />
     </a>
-
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menu">
-      <Icon name="menu" size={26} />
-    </button>
-
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menu"><Icon name="menu" size={26} /></button>
     <nav id="menu-principal" class="nav" aria-label="Menu principal">
       <ul>
-        {
-          NAV.map((item) => (
-            <li>
-              <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a>
-            </li>
-          ))
-        }
+        {NAV.map((item) => <li><a href={href(item.href)} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a></li>)}
       </ul>
-      <div class="nav__cta">
-        <WhatsAppButton label="WhatsApp" context="cabecalho" size="md" />
-      </div>
+      <WhatsAppButton label="WhatsApp" context="cabecalho" variant="light" size="sm" />
     </nav>
   </div>
 </header>
-
 <script is:inline>
   (function () {
-    var btn = document.querySelector('.nav-toggle');
-    var nav = document.getElementById('menu-principal');
+    var btn = document.querySelector('.nav-toggle'), nav = document.getElementById('menu-principal');
     if (!btn || !nav) return;
     btn.addEventListener('click', function () {
       var open = nav.classList.toggle('is-open');

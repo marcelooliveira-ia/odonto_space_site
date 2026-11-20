@@ -1,46 +1,38 @@
 ---
+import WhatsAppButton from './WhatsAppButton.astro';
+import Em from './Em.astro';
 import { NAV, SITE, MAPS_URL } from '../config/site';
+import { href } from '../utils/url';
+import { logoBranco } from '../assets';
+interface Props { message?: string; hideCta?: boolean }
+const { message, hideCta = false } = Astro.props;
 const year = new Date().getFullYear();
 ---
-
-<footer class="site-footer">
-  <div class="container site-footer__grid">
-    <div>
-      <p class="site-footer__brand">ODONTO <strong>SPACE</strong></p>
-      <p class="muted-on-dark">{SITE.tagline}.</p>
-      {
-        SITE.technicalResponsible && (
-          <p class="muted-on-dark small">
-            Responsável técnico: {SITE.technicalResponsible.name} – {SITE.technicalResponsible.cro}
-          </p>
-        )
-      }
+<footer class="end dark">
+  {!hideCta && (
+    <div class="wrap top">
+      <div>
+        <p class="label rv">Agende sua avaliação</p>
+        <h2 class="rv d1"><Em text="Vamos conversar sobre *o seu sorriso?*" /></h2>
+      </div>
+      <div class="rv d2">
+        <p class="label" style="margin:0">WhatsApp</p>
+        <a class="ph-num" href={`https://wa.me/${SITE.whatsapp.e164}`} target="_blank" rel="noopener noreferrer" data-wa="rodape-numero">{SITE.whatsapp.display}</a>
+        <address><p class="label" style="margin:1.2rem 0 0.2rem">Endereço</p>{SITE.address.street}<br />{SITE.address.neighborhood} – {SITE.address.city}/{SITE.address.state}</address>
+        <div class="btn-row" style="margin-top:0.4rem">
+          <WhatsAppButton variant="light" context="rodape" message={message} />
+          <a class="btn btn--line-light" href={MAPS_URL} target="_blank" rel="noopener noreferrer">Como chegar</a>
+        </div>
+      </div>
     </div>
-
-    <nav aria-label="Rodapé">
-      <h2 class="site-footer__title">Navegação</h2>
-      <ul class="list-plain">
-        {NAV.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
-      </ul>
-    </nav>
-
+  )}
+  <div class="wrap bot">
+    <a href={href('/')} aria-label="ODONTO SPACE – página inicial"><img src={logoBranco.src} alt="ODONTO SPACE" width="73" height="92" /></a>
     <div>
-      <h2 class="site-footer__title">Contato</h2>
-      <address class="list-plain">
-        <p>{SITE.address.street}<br />{SITE.address.neighborhood} – {SITE.address.city}/{SITE.address.state}</p>
-        <p>
-          WhatsApp:
-          <a href={`https://wa.me/${SITE.whatsapp.e164}`} target="_blank" rel="noopener noreferrer">{SITE.whatsapp.display}</a>
-        </p>
-        <p><a href={MAPS_URL} target="_blank" rel="noopener noreferrer">Ver no mapa</a></p>
-      </address>
+      <nav aria-label="Rodapé"><ul>{NAV.map((item) => <li><a href={href(item.href)}>{item.label}</a></li>)}</ul></nav>
+      {SITE.technicalResponsible && <p>Responsável técnico: {SITE.technicalResponsible.name} – {SITE.technicalResponsible.cro}</p>}
+      <p>© {year} ODONTO SPACE · {SITE.address.street}, {SITE.address.neighborhood} – {SITE.address.city}/{SITE.address.state}</p>
+      <p>As informações deste site têm caráter educativo e não substituem a avaliação de um cirurgião-dentista. Os resultados e a indicação de cada tratamento variam de acordo com cada paciente. Imagens de banco são ilustrativas.</p>
     </div>
-  </div>
-  <div class="container site-footer__legal">
-    <p>© {year} ODONTO SPACE. Todos os direitos reservados.</p>
-    <p class="small">
-      As informações deste site têm caráter educativo e não substituem a avaliação de um cirurgião-dentista.
-      Os resultados e a indicação de cada tratamento variam de acordo com cada paciente.
-    </p>
   </div>
 </footer>

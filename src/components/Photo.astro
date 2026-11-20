@@ -1,0 +1,22 @@
+---
+import { Image } from 'astro:assets';
+/** Foto otimizada (WebP responsivo, lazy). `illustrative` = imagem de banco, marcada como ilustrativa. */
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  sizes?: string;
+  widths?: number[];
+  ratio?: string;
+  pos?: string;
+  eager?: boolean;
+  illustrative?: boolean;
+  zoom?: boolean;
+  par?: boolean;
+  class?: string;
+}
+const { src, alt, sizes = '(max-width: 900px) 100vw, 50vw', widths = [480, 800, 1200, 1600], ratio, pos = '50% 50%', eager = false, illustrative = false, zoom = false, par = false, class: cls } = Astro.props;
+---
+<figure class:list={['ph', zoom && 'ph--zoom', par && 'par', cls]} style={ratio ? `--ar:${ratio}` : undefined} data-par={par ? '0.05' : undefined}>
+  <Image src={src} alt={alt} widths={widths.filter((w) => w <= src.width)} sizes={sizes} format="webp" quality={78} loading={eager ? 'eager' : 'lazy'} decoding="async" style={`object-position:${pos}`} />
+  {illustrative && <span class="ph__tag">Imagem ilustrativa</span>}
+</figure>

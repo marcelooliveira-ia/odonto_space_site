@@ -30,8 +30,24 @@ export const SITE = {
   technicalResponsible: null as { name: string; cro: string } | null, // responsável técnico + CRO
   geo: null as { lat: number; lng: number } | null,
   googleMapsUrl: null as string | null, // link do perfil no Google Maps, quando existir
-  logoPath: null as string | null, // ex.: '/images/logo.svg'
-  ogImagePath: null as string | null, // ex.: '/images/og-odonto-space.jpg' (1200x630)
+  // Proprietário (dados CONFIRMADOS: cirurgião-dentista clínico geral e proprietário; NÃO é implantodontista).
+  owner: {
+    title: 'Proprietário',
+    role: 'Cirurgião-dentista clínico geral',
+    name: 'Dr. Marcelo Souza' as string | null, // confirmado pelo responsável de marketing
+    cro: null as string | null, // PENDENTE: CRO
+    photoAlt: 'Proprietário da ODONTO SPACE, cirurgião-dentista clínico geral, sorrindo diante de uma parede clara',
+  },
+  // Ortodontista (nome e CRO ainda não confirmados — o nome bordado no jaleco não é legível na foto).
+  orthodontist: {
+    title: 'Ortodontista',
+    role: 'Ortodontia',
+    name: null as string | null, // PENDENTE
+    cro: null as string | null, // PENDENTE
+    photoAlt: 'Ortodontista da ODONTO SPACE, sorrindo diante de uma parede clara',
+  },
+  logoPath: null as string | null, // a logo é importada de src/assets/brand
+  ogImagePath: '/og-odonto-space.png' as string | null, // em public/
 } as const;
 
 export const ADDRESS_ONE_LINE = `${SITE.address.street}, ${SITE.address.neighborhood}, ${SITE.address.city}/${SITE.address.state}`;

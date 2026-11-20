@@ -2,10 +2,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
-import PhotoPlaceholder from '../components/PhotoPlaceholder.astro';
-import CtaBand from '../components/CtaBand.astro';
+import Photo from '../components/Photo.astro';
 import Icon from '../components/Icon.astro';
-import { SERVICES } from '../config/site';
+import { SERVICES, SITE } from '../config/site';
+import { ortodontista, modeloMaos, pacienteSorrindo } from '../assets';
 
 const msg = SERVICES.find((s) => s.slug === 'ortodontia-invisalign')!.whatsappMessage;
 const faqs = [
@@ -15,84 +15,50 @@ const faqs = [
   { q: 'Quanto tempo dura o tratamento?', a: 'O tempo varia conforme o caso e a colaboração do paciente. O dentista apresenta uma estimativa no planejamento.' },
 ];
 ---
-
-<BaseLayout
-  title="Ortodontia e Invisalign em Bangu | ODONTO SPACE"
-  description="Ortodontia e Invisalign em Bangu, Rio de Janeiro: avaliação para alinhar os dentes com aparelho ou alinhadores. Agende pelo WhatsApp."
-  path="/ortodontia-invisalign"
-  breadcrumb="Ortodontia e Invisalign"
-  whatsappMessage={msg}
->
-  <PageHero
-    eyebrow="Ortodontia e Invisalign"
-    title="Ortodontia e Invisalign em Bangu"
-    lead="Alinhe seus dentes com a abordagem indicada para o seu caso: aparelho ortodôntico ou alinhadores Invisalign."
-  >
-    <div class="btn-row"><WhatsAppButton message={msg} context="ortodontia-hero" size="lg" label="Agendar avaliação ortodôntica" /></div>
+<BaseLayout title="Ortodontia e Invisalign em Bangu | ODONTO SPACE" description="Ortodontia e Invisalign em Bangu, Rio de Janeiro: avaliação para alinhar os dentes com aparelho ou alinhadores. Agende pelo WhatsApp." path="/ortodontia-invisalign" breadcrumb="Ortodontia e Invisalign" whatsappMessage={msg}>
+  <PageHero crumb="Ortodontia e Invisalign" label="Ortodontia e Invisalign" title="Ortodontia e *Invisalign* em Bangu" lead="Alinhe seus dentes com a abordagem indicada para o seu caso: aparelho ortodôntico ou alinhadores Invisalign.">
+    <WhatsAppButton slot="actions" message={msg} context="ortodontia-hero" size="lg" variant="light" label="Agendar avaliação ortodôntica" />
+    <div slot="media" style="position:relative">
+      <Photo src={ortodontista} alt={SITE.orthodontist.photoAlt} ratio="4 / 5" pos="50% 14%" eager widths={[400, 520, 800]} sizes="(max-width: 900px) 80vw, 420px" />
+      <div class="cap" style="position:absolute;right:-4%;bottom:5%;background:#fff;color:var(--ink);padding:.8rem 1.1rem;border-radius:4px;font-size:.76rem"><b style="display:block;font-size:.96rem">Ortodontista</b>da ODONTO SPACE</div>
+    </div>
   </PageHero>
 
-  <section class="section">
-    <div class="container">
-      <div class="section__head">
-        <p class="eyebrow">Duas abordagens</p>
-        <h2>Encontre o caminho ideal para o seu sorriso</h2>
-        <p class="lead">Na avaliação, o dentista analisa o seu caso e explica qual opção faz mais sentido.</p>
-      </div>
-      <div class="grid grid--2">
-        <div class="card">
-          <span class="card__icon"><Icon name="tooth" size={24} /></span>
-          <h3>Ortodontia</h3>
-          <p>
-            Tratamento que corrige o alinhamento dos dentes e a forma como eles se encaixam,
-            contribuindo para a função e a estética do sorriso. É acompanhado por consultas periódicas
-            para ajustes.
-          </p>
-        </div>
-        <div class="card">
-          <span class="card__icon"><Icon name="tooth" size={24} /></span>
-          <h3>Invisalign</h3>
-          <p>
-            Sistema de alinhadores transparentes e removíveis, trocados em sequência para mover os dentes
-            gradualmente. A indicação depende da avaliação do seu caso.
-          </p>
-        </div>
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-top"><div class="rv"><p class="label">Duas abordagens</p><h2>O caminho ideal para <em>o seu sorriso</em></h2></div><p class="lead rv d1">Na avaliação, a ortodontista analisa o seu caso e explica qual opção faz mais sentido.</p></div>
+      <div class="versus rv">
+        <div class="versus__col"><p class="label">Abordagem 1</p><h3 class="versus__name">Ortodontia</h3><p>Tratamento que corrige o alinhamento dos dentes e a forma como eles se encaixam, contribuindo para a função e a estética do sorriso. É acompanhado por consultas periódicas para ajustes.</p></div>
+        <div class="versus__col"><p class="label">Abordagem 2</p><h3 class="versus__name"><em>Invisalign</em></h3><p>Sistema de alinhadores transparentes e removíveis, trocados em sequência para mover os dentes gradualmente. A indicação depende da avaliação do seu caso.</p></div>
       </div>
     </div>
   </section>
 
-  <section class="section section--tint">
-    <div class="container split">
+  <section class="sec sec--mist">
+    <div class="wrap split split--img-left">
+      <Photo class="split__img rv" src={modeloMaos} alt="Profissional segurando um modelo dentário" ratio="4 / 3" pos="50% 50%" illustrative zoom sizes="(max-width: 860px) 100vw, 46vw" />
       <div>
-        <p class="eyebrow">Primeiro passo</p>
-        <h2>Uma avaliação para planejar o seu tratamento</h2>
-        <ul class="checklist">
-          <li><Icon name="check" size={20} /><span>Análise do alinhamento e da mordida</span></li>
-          <li><Icon name="check" size={20} /><span>Apresentação das opções adequadas ao seu caso</span></li>
-          <li><Icon name="check" size={20} /><span>Esclarecimento de dúvidas sobre etapas e acompanhamento</span></li>
+        <p class="label rv">Primeiro passo</p>
+        <h2 class="rv d1">Uma avaliação para planejar <em>o seu tratamento</em></h2>
+        <ul class="checks rv d2">
+          <li><Icon name="check" size={18} /><span>Análise do alinhamento e da mordida</span></li>
+          <li><Icon name="check" size={18} /><span>Apresentação das opções adequadas ao seu caso</span></li>
+          <li><Icon name="check" size={18} /><span>Esclarecimento de dúvidas sobre etapas e acompanhamento</span></li>
         </ul>
         <div class="btn-row"><WhatsAppButton message={msg} context="ortodontia-meio" /></div>
       </div>
-      <PhotoPlaceholder slot="ortodontia-1" ratio="4/3" caption="Foto real do atendimento ou consultório" />
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="section__head">
-        <p class="eyebrow">Dúvidas frequentes</p>
-        <h2>Perguntas sobre ortodontia e Invisalign</h2>
-      </div>
-      <div class="faq">
-        {faqs.map((f) => (
-          <details><summary>{f.q}</summary><p>{f.a}</p></details>
-        ))}
-      </div>
-      <p class="notice" style="margin-top:2rem">
-        Conteúdo informativo. Somente um cirurgião-dentista pode indicar o tratamento adequado após avaliar você.
-        Invisalign é marca de seu respectivo titular.
-      </p>
-    </div>
+  <section class="banner dark">
+    <Photo src={pacienteSorrindo} alt="Paciente sorrindo ao se ver no espelho no consultório" pos="50% 40%" sizes="100vw" widths={[800, 1200, 1600, 2000]} illustrative />
+    <div class="wrap rv"><div><p class="label">Sorriso com confiança</p><h2>Alinhar os dentes é cuidar da função e da <em>estética</em>.</h2><p>Cada plano é individual e parte da avaliação feita pela ortodontista.</p><div class="btn-row" style="margin-top:1.2rem"><WhatsAppButton message={msg} context="ortodontia-banner" variant="light" label="Agendar avaliação" /></div></div></div>
   </section>
 
-  <CtaBand title="Pronto para dar o primeiro passo?" message={msg} context="ortodontia-final" />
+  <section class="sec">
+    <div class="wrap faqgrid">
+      <div><p class="label">Dúvidas frequentes</p><h2>Perguntas sobre <em>ortodontia</em></h2><p class="notice">Conteúdo informativo. Somente um cirurgião-dentista pode indicar o tratamento adequado após avaliar você. Invisalign é marca de seu respectivo titular.</p></div>
+      <div class="faq">{faqs.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}</div>
+    </div>
+  </section>
 </BaseLayout>

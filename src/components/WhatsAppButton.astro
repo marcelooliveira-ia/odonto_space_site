@@ -8,14 +8,14 @@ interface Props {
   /** Identifica o contexto do clique para medição (ex.: "implantes-hero"). */
   context?: string;
   variant?: 'primary' | 'light' | 'ghost';
-  size?: 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg';
 }
 const { message, label = 'Agendar avaliação pelo WhatsApp', context = 'geral', variant = 'primary', size = 'md' } =
   Astro.props;
 ---
 
 <a
-  class:list={['btn', `btn--wa-${variant}`, size === 'lg' && 'btn--lg']}
+  class:list={['btn', `btn--wa-${variant}`, size === 'lg' && 'btn--lg', size === 'sm' && 'btn--sm']}
   href={whatsappLink(message)}
   target="_blank"
   rel="noopener noreferrer"

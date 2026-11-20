@@ -2,61 +2,39 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
-import PhotoPlaceholder from '../components/PhotoPlaceholder.astro';
+import Photo from '../components/Photo.astro';
 import Icon from '../components/Icon.astro';
 import { SITE, MAPS_URL } from '../config/site';
+import { dentistaPaciente, sorrisoNatural } from '../assets';
 ---
+<BaseLayout title="Contato e Localização | ODONTO SPACE Bangu" description="Fale com a ODONTO SPACE pelo WhatsApp (21) 99613-9234 e veja como chegar: Rua Francisco Real, 1910, sala 201, Bangu, Rio de Janeiro." path="/contato-e-localizacao" breadcrumb="Contato e localização" includeBusinessSchema hideCta>
+  <PageHero crumb="Contato e localização" label="Contato" title="Fale com a *ODONTO SPACE*" lead="Agende sua avaliação ou tire dúvidas pelo WhatsApp. Estamos em Bangu, no Rio de Janeiro.">
+    <WhatsAppButton slot="actions" context="contato-hero" size="lg" variant="light" />
+    <Photo slot="media" src={dentistaPaciente} alt="Profissional e paciente sorrindo no consultório" ratio="4 / 5" pos="50% 30%" eager illustrative sizes="(max-width: 900px) 80vw, 420px" />
+  </PageHero>
 
-<BaseLayout
-  title="Contato e Localização | ODONTO SPACE Bangu"
-  description="Fale com a ODONTO SPACE pelo WhatsApp (21) 99613-9234 e veja como chegar: Rua Francisco Real, 1910, sala 201, Bangu, Rio de Janeiro."
-  path="/contato-e-localizacao"
-  breadcrumb="Contato e localização"
-  includeBusinessSchema
->
-  <PageHero
-    eyebrow="Contato"
-    title="Fale com a ODONTO SPACE"
-    lead="Agende sua avaliação ou tire dúvidas pelo WhatsApp. Estamos em Bangu, no Rio de Janeiro."
-  />
+  <section class="sec">
+    <div class="wrap">
+      <p class="label rv">WhatsApp</p>
+      <a class="bignum rv d1" href={`https://wa.me/${SITE.whatsapp.e164}`} target="_blank" rel="noopener noreferrer" data-wa="contato-numero">{SITE.whatsapp.display}</a>
+      <p class="lead rv d2">Fale direto com a equipe, tire dúvidas e combine o melhor momento para a sua avaliação.</p>
+      <div class="btn-row rv d3"><WhatsAppButton context="contato-principal" size="lg" /><a class="link" href={MAPS_URL} target="_blank" rel="noopener noreferrer">Como chegar <Icon name="arrow" size={16} /></a></div>
+      <dl class="facts-list rv">
+        <div><dt>Região atendida</dt><dd>Bangu e bairros próximos da Zona Oeste</dd></div>
+        <div><dt>Horários</dt><dd>{SITE.hours ?? 'Consulte os horários de atendimento pelo WhatsApp.'}</dd></div>
+        <div><dt>Agendamento</dt><dd>Avaliação marcada pelo WhatsApp</dd></div>
+        <div><dt>Endereço</dt><dd>{SITE.address.street}, {SITE.address.neighborhood}</dd></div>
+      </dl>
+    </div>
+  </section>
 
-  <section class="section">
-    <div class="container split split--top">
-      <div>
-        <ul class="contact-list">
-          <li>
-            <span class="card__icon"><Icon name="whatsapp" size={22} /></span>
-            <div>
-              <strong>WhatsApp</strong>
-              <a href={`https://wa.me/${SITE.whatsapp.e164}`} target="_blank" rel="noopener noreferrer" data-wa="contato-numero">{SITE.whatsapp.display}</a>
-            </div>
-          </li>
-          <li>
-            <span class="card__icon"><Icon name="pin" size={22} /></span>
-            <div>
-              <strong>Endereço</strong>
-              <address>
-                {SITE.address.street}<br />
-                {SITE.address.neighborhood} – {SITE.address.city}/{SITE.address.state}
-              </address>
-            </div>
-          </li>
-          {SITE.hours && (
-            <li>
-              <span class="card__icon"><Icon name="phone" size={22} /></span>
-              <div><strong>Horário de atendimento</strong>{SITE.hours}</div>
-            </li>
-          )}
-        </ul>
-        {!SITE.hours && (
-          <p class="notice" style="margin-top:1.5rem">Para saber os horários de atendimento e agendar, fale com a equipe pelo WhatsApp.</p>
-        )}
-        <div class="btn-row">
-          <WhatsAppButton context="contato-principal" size="lg" />
-          <a class="btn btn--ghost btn--lg" href={MAPS_URL} target="_blank" rel="noopener noreferrer">Como chegar</a>
-        </div>
+  <section class="sec sec--mist">
+    <div class="wrap loc">
+      <div class="panel dark rv">
+        <div><p class="label">Endereço</p><h2>Rua Francisco Real, <em>1910</em></h2><address>Sala 201<br />{SITE.address.neighborhood} – {SITE.address.city}/{SITE.address.state}</address></div>
+        <div class="btn-row" style="margin:0"><a class="btn btn--line-light" href={MAPS_URL} target="_blank" rel="noopener noreferrer">Abrir no mapa</a><WhatsAppButton variant="light" context="contato-endereco" label="Falar no WhatsApp" /></div>
       </div>
-      <PhotoPlaceholder slot="contato-fachada" ratio="4/3" caption="Foto real da fachada ou da entrada" />
+      <Photo class="rv d1" src={sorrisoNatural} alt="Paciente sorrindo, em retrato" pos="50% 30%" illustrative zoom sizes="(max-width: 860px) 100vw, 50vw" />
     </div>
   </section>
 </BaseLayout>

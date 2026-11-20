@@ -2,12 +2,19 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
-import PhotoPlaceholder from '../components/PhotoPlaceholder.astro';
-import CtaBand from '../components/CtaBand.astro';
+import Photo from '../components/Photo.astro';
 import Icon from '../components/Icon.astro';
+import Em from '../components/Em.astro';
 import { SERVICES } from '../config/site';
+import { implanteModelo, implanteModeloEscuro, radiografia } from '../assets';
 
 const msg = SERVICES.find((s) => s.slug === 'implantes-dentarios')!.whatsappMessage;
+const steps = [
+  { t: 'Avaliação inicial', d: 'Conversa sobre o seu histórico e exame clínico da região.' },
+  { t: 'Planejamento', d: 'O dentista define a indicação e solicita exames, quando necessário.' },
+  { t: 'Procedimento', d: 'Realização conforme o plano de tratamento aprovado por você.' },
+  { t: 'Acompanhamento', d: 'Retornos para acompanhar a evolução e a colocação da prótese.' },
+];
 const faqs = [
   { q: 'Todo mundo pode fazer implante?', a: 'Não necessariamente. A indicação depende de uma avaliação clínica, da saúde geral e bucal e, quando necessário, de exames de imagem solicitados pelo profissional.' },
   { q: 'O implante dói?', a: 'O procedimento é planejado para o seu conforto, mas a experiência varia de pessoa para pessoa. Na avaliação, o dentista explica como será o atendimento e tira suas dúvidas.' },
@@ -15,74 +22,43 @@ const faqs = [
   { q: 'Como saber o valor?', a: 'O investimento depende do plano de tratamento definido na avaliação. Fale com a equipe pelo WhatsApp para agendar.' },
 ];
 ---
-
-<BaseLayout
-  title="Implantes Dentários em Bangu | ODONTO SPACE"
-  description="Implantes dentários em Bangu, Rio de Janeiro: avaliação e planejamento individual na ODONTO SPACE. Tire dúvidas e agende pelo WhatsApp."
-  path="/implantes-dentarios"
-  breadcrumb="Implantes dentários"
-  whatsappMessage={msg}
->
-  <PageHero
-    eyebrow="Implantodontia"
-    title="Implantes dentários em Bangu"
-    lead="Substituir dentes ausentes com planejamento individual, para recuperar a função de mastigar e a confiança ao sorrir."
-  >
-    <div class="btn-row"><WhatsAppButton message={msg} context="implantes-hero" size="lg" label="Agendar avaliação de implante" /></div>
+<BaseLayout title="Implantes Dentários em Bangu | ODONTO SPACE" description="Implantes dentários em Bangu, Rio de Janeiro: avaliação e planejamento individual na ODONTO SPACE. Tire dúvidas e agende pelo WhatsApp." path="/implantes-dentarios" breadcrumb="Implantes dentários" whatsappMessage={msg}>
+  <PageHero crumb="Implantes dentários" label="Implantodontia" title="Implantes *dentários* em Bangu" lead="Substituir dentes ausentes com planejamento individual, para recuperar a função de mastigar e a confiança ao sorrir.">
+    <WhatsAppButton slot="actions" message={msg} context="implantes-hero" size="lg" variant="light" label="Agendar avaliação de implante" />
+    <Photo slot="media" src={implanteModelo} alt="Modelo anatômico mostrando um implante dentário entre dentes" ratio="4 / 3" eager illustrative sizes="(max-width: 900px) 100vw, 480px" />
   </PageHero>
 
-  <section class="section">
-    <div class="container split">
+  <section class="sec">
+    <div class="wrap split">
       <div>
-        <p class="eyebrow">O que é</p>
-        <h2>Uma solução para dentes ausentes</h2>
-        <p>
-          O implante dentário é uma estrutura colocada no osso da região onde falta o dente e que serve
-          de base para receber uma prótese. A indicação, o tipo de reabilitação e o número de implantes
-          são definidos pelo dentista após avaliar o seu caso.
-        </p>
-        <ul class="checklist">
-          <li><Icon name="check" size={20} /><span>Avaliação clínica e planejamento individual</span></li>
-          <li><Icon name="check" size={20} /><span>Explicação de cada etapa antes de começar</span></li>
-          <li><Icon name="check" size={20} /><span>Acompanhamento ao longo do tratamento</span></li>
+        <p class="label rv">O que é</p>
+        <h2 class="rv d1">Uma solução para <em>dentes ausentes</em></h2>
+        <p class="lead rv d2">O implante dentário é uma estrutura colocada no osso da região onde falta o dente e que serve de base para receber uma prótese. A indicação, o tipo de reabilitação e o número de implantes são definidos pelo dentista após avaliar o seu caso.</p>
+        <ul class="checks rv d3">
+          <li><Icon name="check" size={18} /><span>Avaliação clínica e planejamento individual</span></li>
+          <li><Icon name="check" size={18} /><span>Explicação de cada etapa antes de começar</span></li>
+          <li><Icon name="check" size={18} /><span>Acompanhamento ao longo do tratamento</span></li>
         </ul>
       </div>
-      <PhotoPlaceholder slot="implantes-1" ratio="4/3" caption="Foto real do atendimento ou consultório" />
+      <Photo class="rv" src={implanteModeloEscuro} alt="Modelo de implante dentário com coroa e raiz em corte" ratio="4 / 5" pos="38% 50%" illustrative zoom sizes="(max-width: 860px) 100vw, 46vw" />
     </div>
   </section>
 
-  <section class="section section--tint">
-    <div class="container">
-      <div class="section__head">
-        <p class="eyebrow">Como funciona</p>
-        <h2>Do primeiro contato ao sorriso restaurado</h2>
-        <p class="lead">As etapas exatas variam conforme cada paciente. De forma geral:</p>
-      </div>
-      <ol class="steps">
-        <li><h3>Avaliação inicial</h3><p>Conversa sobre o seu histórico e exame clínico da região.</p></li>
-        <li><h3>Planejamento</h3><p>O dentista define a indicação e solicita exames, quando necessário.</p></li>
-        <li><h3>Procedimento</h3><p>Realização conforme o plano de tratamento aprovado por você.</p></li>
-        <li><h3>Acompanhamento</h3><p>Retornos para acompanhar a evolução e a colocação da prótese.</p></li>
+  <section class="sec sec--mist sec--light">
+    <div class="wrap">
+      <div class="sec-top"><div class="rv"><p class="label">Como funciona</p><h2>Do primeiro contato ao <em>sorriso restaurado</em></h2></div><p class="lead rv d1">As etapas exatas variam conforme cada paciente. De forma geral:</p></div>
+      <Photo class="rv" src={radiografia} alt="Radiografia panorâmica dos dentes e exames de imagem" ratio="21 / 9" pos="50% 40%" illustrative sizes="100vw" widths={[800, 1200, 1600, 2000]} />
+      <ol class="stp" data-stp style="margin-top:2.6rem">
+        {steps.map((s, i) => <li class={`rv d${i}`}><span class="label">Etapa {i + 1}</span><h3>{s.t}</h3><p>{s.d}</p></li>)}
       </ol>
+      <p class="soon">Exames de imagem, como radiografias, podem ser solicitados pelo dentista conforme a necessidade de cada caso.</p>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="section__head">
-        <p class="eyebrow">Dúvidas frequentes</p>
-        <h2>Perguntas sobre implantes</h2>
-      </div>
-      <div class="faq">
-        {faqs.map((f) => (
-          <details><summary>{f.q}</summary><p>{f.a}</p></details>
-        ))}
-      </div>
-      <p class="notice" style="margin-top:2rem">
-        Conteúdo informativo. Somente um cirurgião-dentista pode indicar o tratamento adequado após avaliar você.
-      </p>
+  <section class="sec">
+    <div class="wrap faqgrid">
+      <div><p class="label">Dúvidas frequentes</p><h2>Perguntas sobre <em>implantes</em></h2><p class="notice">Conteúdo informativo. Somente um cirurgião-dentista pode indicar o tratamento adequado após avaliar você.</p></div>
+      <div class="faq">{faqs.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}</div>
     </div>
   </section>
-
-  <CtaBand title="Quer saber se o implante é indicado para você?" message={msg} context="implantes-final" />
 </BaseLayout>
