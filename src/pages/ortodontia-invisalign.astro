@@ -5,7 +5,7 @@ import WhatsAppButton from '../components/WhatsAppButton.astro';
 import Photo from '../components/Photo.astro';
 import Icon from '../components/Icon.astro';
 import { SERVICES, SITE } from '../config/site';
-import { ortodontista, modeloMaos, pacienteSorrindo } from '../assets';
+import { ortodontista, genOrtoMaos, genInvisalign } from '../assets';
 
 const msg = SERVICES.find((s) => s.slug === 'ortodontia-invisalign')!.whatsappMessage;
 const faqs = [
@@ -36,7 +36,7 @@ const faqs = [
 
   <section class="sec sec--mist">
     <div class="wrap split split--img-left">
-      <Photo class="split__img rv" src={modeloMaos} alt="Profissional segurando um modelo dentário" ratio="4 / 3" pos="50% 50%" illustrative zoom sizes="(max-width: 860px) 100vw, 46vw" />
+      <Photo class="split__img rv" src={genOrtoMaos} alt="Mãos enluvadas encaixando um alinhador transparente em um modelo dentário" ratio="4 / 3" pos="50% 50%" illustrative zoom sizes="(max-width: 860px) 100vw, 46vw" />
       <div>
         <p class="label rv">Primeiro passo</p>
         <h2 class="rv d1">Uma avaliação para planejar <em>o seu tratamento</em></h2>
@@ -51,7 +51,7 @@ const faqs = [
   </section>
 
   <section class="banner dark">
-    <Photo src={pacienteSorrindo} alt="Paciente sorrindo ao se ver no espelho no consultório" pos="50% 40%" sizes="100vw" widths={[800, 1200, 1600, 2000]} illustrative />
+    <Photo src={genInvisalign} alt="Alinhadores transparentes em um estojo branco sobre mármore" pos="50% 55%" sizes="100vw" widths={[800, 1200, 1600, 2000]} illustrative />
     <div class="wrap rv"><div><p class="label">Sorriso com confiança</p><h2>Alinhar os dentes é cuidar da função e da <em>estética</em>.</h2><p>Cada plano é individual e parte da avaliação feita pela ortodontista.</p><div class="btn-row" style="margin-top:1.2rem"><WhatsAppButton message={msg} context="ortodontia-banner" variant="light" label="Agendar avaliação" /></div></div></div>
   </section>
 

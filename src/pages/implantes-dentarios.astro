@@ -6,7 +6,7 @@ import Photo from '../components/Photo.astro';
 import Icon from '../components/Icon.astro';
 import Em from '../components/Em.astro';
 import { SERVICES } from '../config/site';
-import { implanteModelo, implanteModeloEscuro, radiografia } from '../assets';
+import { genImplanteMaos, genImplanteCoroa, genRadiografia } from '../assets';
 
 const msg = SERVICES.find((s) => s.slug === 'implantes-dentarios')!.whatsappMessage;
 const steps = [
@@ -25,7 +25,7 @@ const faqs = [
 <BaseLayout title="Implantes Dentários em Bangu | ODONTO SPACE" description="Implantes dentários em Bangu, Rio de Janeiro: avaliação e planejamento individual na ODONTO SPACE. Tire dúvidas e agende pelo WhatsApp." path="/implantes-dentarios" breadcrumb="Implantes dentários" whatsappMessage={msg}>
   <PageHero crumb="Implantes dentários" label="Implantodontia" title="Implantes *dentários* em Bangu" lead="Substituir dentes ausentes com planejamento individual, para recuperar a função de mastigar e a confiança ao sorrir.">
     <WhatsAppButton slot="actions" message={msg} context="implantes-hero" size="lg" variant="light" label="Agendar avaliação de implante" />
-    <Photo slot="media" src={implanteModelo} alt="Modelo anatômico mostrando um implante dentário entre dentes" ratio="4 / 3" eager illustrative sizes="(max-width: 900px) 100vw, 480px" />
+    <Photo slot="media" src={genImplanteMaos} alt="Mãos enluvadas segurando um modelo transparente de arcada com implante e coroa" ratio="4 / 3" eager illustrative sizes="(max-width: 900px) 100vw, 480px" />
   </PageHero>
 
   <section class="sec">
@@ -40,14 +40,14 @@ const faqs = [
           <li><Icon name="check" size={18} /><span>Acompanhamento ao longo do tratamento</span></li>
         </ul>
       </div>
-      <Photo class="rv" src={implanteModeloEscuro} alt="Modelo de implante dentário com coroa e raiz em corte" ratio="4 / 5" pos="38% 50%" illustrative zoom sizes="(max-width: 860px) 100vw, 46vw" />
+      <Photo class="rv" src={genImplanteCoroa} alt="Implante dentário de titânio ao lado de uma coroa de cerâmica" ratio="4 / 5" pos="50% 50%" illustrative zoom sizes="(max-width: 860px) 100vw, 46vw" />
     </div>
   </section>
 
   <section class="sec sec--mist sec--light">
     <div class="wrap">
       <div class="sec-top"><div class="rv"><p class="label">Como funciona</p><h2>Do primeiro contato ao <em>sorriso restaurado</em></h2></div><p class="lead rv d1">As etapas exatas variam conforme cada paciente. De forma geral:</p></div>
-      <Photo class="rv" src={radiografia} alt="Radiografia panorâmica dos dentes e exames de imagem" ratio="21 / 9" pos="50% 40%" illustrative sizes="100vw" widths={[800, 1200, 1600, 2000]} />
+      <Photo class="rv" src={genRadiografia} alt="Radiografia panorâmica exibida em um monitor no consultório" ratio="21 / 9" pos="55% 42%" illustrative sizes="100vw" widths={[800, 1200, 1600, 2000]} />
       <ol class="stp" data-stp style="margin-top:2.6rem">
         {steps.map((s, i) => <li class={`rv d${i}`}><span class="label">Etapa {i + 1}</span><h3>{s.t}</h3><p>{s.d}</p></li>)}
       </ol>

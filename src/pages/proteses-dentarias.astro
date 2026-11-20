@@ -5,7 +5,7 @@ import WhatsAppButton from '../components/WhatsAppButton.astro';
 import Photo from '../components/Photo.astro';
 import Icon from '../components/Icon.astro';
 import { SERVICES } from '../config/site';
-import { proteseLab, explicandoModelo, modeloMaos } from '../assets';
+import { genProteseCoroas, genProteseLab, genConsultorio } from '../assets';
 
 const msg = SERVICES.find((s) => s.slug === 'proteses-dentarias')!.whatsappMessage;
 const types = [
@@ -23,12 +23,12 @@ const faqs = [
 <BaseLayout title="Próteses Dentárias em Bangu | ODONTO SPACE" description="Próteses dentárias em Bangu, Rio de Janeiro: totais, parciais, fixas e sobre implante. Avaliação na ODONTO SPACE e agendamento pelo WhatsApp." path="/proteses-dentarias" breadcrumb="Próteses dentárias" whatsappMessage={msg}>
   <PageHero crumb="Próteses dentárias" label="Prótese dentária" title="Próteses *dentárias* em Bangu" lead="Recupere a função mastigatória e a estética do sorriso com uma solução indicada para o seu caso.">
     <WhatsAppButton slot="actions" message={msg} context="proteses-hero" size="lg" variant="light" label="Agendar avaliação de prótese" />
-    <Photo slot="media" src={proteseLab} alt="Prótese dentária sobre modelo de gesso em laboratório" ratio="5 / 4" pos="50% 58%" eager illustrative sizes="(max-width: 900px) 100vw, 480px" />
+    <Photo slot="media" src={genProteseCoroas} alt="Coroas e ponte de cerâmica ao lado de um modelo de gesso" ratio="5 / 4" pos="50% 60%" eager illustrative sizes="(max-width: 900px) 100vw, 480px" />
   </PageHero>
 
   <section class="sec">
     <div class="wrap split split--img-left">
-      <Photo class="split__img rv" src={modeloMaos} alt="Profissional segurando um modelo dentário de gesso" ratio="4 / 5" pos="50% 50%" illustrative zoom sizes="(max-width: 860px) 100vw, 46vw" />
+      <Photo class="split__img rv" src={genProteseLab} alt="Técnico finalizando uma prótese dentária em laboratório" ratio="4 / 5" pos="50% 45%" illustrative zoom sizes="(max-width: 860px) 100vw, 46vw" />
       <div>
         <p class="label rv">Tipos de prótese</p>
         <h2 class="rv d1" style="margin:0.8rem 0 1rem">Opções para <em>diferentes situações</em></h2>
@@ -39,7 +39,7 @@ const faqs = [
   </section>
 
   <section class="banner dark">
-    <Photo src={explicandoModelo} alt="Profissional explicando a uma paciente com um modelo dentário" pos="50% 45%" sizes="100vw" widths={[800, 1200, 1600, 2000]} illustrative />
+    <Photo src={genConsultorio} alt="Consultório odontológico claro e moderno" pos="50% 50%" sizes="100vw" widths={[800, 1200, 1600, 2000]} illustrative />
     <div class="wrap rv">
       <div>
         <p class="label">Como começar</p>
