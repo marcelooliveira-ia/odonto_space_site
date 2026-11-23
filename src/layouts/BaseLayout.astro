@@ -48,7 +48,7 @@ if (crumbs?.length) jsonld.push(breadcrumbSchema(siteUrl, [{ name: 'Início', pa
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large'} />
+    <meta name="robots" content={noindex || import.meta.env.PUBLIC_NOINDEX ? 'noindex, nofollow' : 'index, follow, max-image-preview:large'} />
     <meta name="theme-color" content="#2f4a54" />
     <link rel="icon" href={href('/favicon.ico')} sizes="any" />
     <link rel="icon" href={href('/favicon.png')} type="image/png" sizes="256x256" />
