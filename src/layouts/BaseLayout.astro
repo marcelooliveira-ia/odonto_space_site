@@ -9,6 +9,7 @@ import ConsentBanner from '../components/ConsentBanner.astro';
 import { SITE } from '../config/site';
 import { dentistSchema, breadcrumbSchema } from '../utils/schema';
 import { BASE, href } from '../utils/url';
+import { CSP, JS_CLASS_SCRIPT } from '../utils/csp';
 
 interface Props {
   title: string;
@@ -70,8 +71,9 @@ if (crumbs?.length) jsonld.push(breadcrumbSchema(siteUrl, [{ name: 'Início', pa
 
     {jsonld.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
 
+    {!import.meta.env.PUBLIC_GTM_ID && <meta http-equiv="Content-Security-Policy" content={CSP} />}
     <Analytics />
-    <script is:inline>document.documentElement.classList.add('js')</script>
+    <script is:inline set:html={JS_CLASS_SCRIPT} />
   </head>
   <body>
     <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>

@@ -13,7 +13,8 @@ export default defineConfig({
   base,
   output: 'static',
   trailingSlash: 'never',
-  build: { format: 'directory', assetsInlineLimit: 0 },
+  build: { format: 'directory' },
+  vite: { build: { assetsInlineLimit: 0 } },
   compressHTML: true,
   // Endereço antigo (versão anterior do site): Ortodontia e Invisalign agora são duas páginas.
   redirects: { '/ortodontia-invisalign': `${prefix}/invisalign` },

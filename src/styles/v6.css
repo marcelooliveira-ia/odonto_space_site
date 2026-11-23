@@ -384,7 +384,7 @@
 @media(max-width:700px){.v6 .tm{grid-template-columns:1fr;max-width:26rem}.v6 .tm__txt{min-height:0}}
 
 /* ===== Ajustes da v15 sobre o sistema v6 (Implantes, Próteses, Clínica, Contato) ===== */
-.v6 { --mute: #42646f; --h1: clamp(2.8rem, 5vw, 4.8rem); }
+.v6 { /* v15: --mute não resolvia no v6 (texto de apoio herda a cor escura); mantido idêntico */ --mute: inherit; --h1: clamp(2.8rem, 5vw, 4.8rem); }
 /* títulos principais: escala única entre as páginas */
 .v6 .im-title, .v6 .pr-title, .v6 .cl-title { font-size: var(--h1) !important; line-height: .95 !important; letter-spacing: -.055em !important; font-weight: 700 !important; }
 /* Contato: endereço em largura total (sem o bloco Atendimento) */
