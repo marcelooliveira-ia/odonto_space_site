@@ -10,6 +10,10 @@ import { SITE } from '../config/site';
 import { dentistSchema, breadcrumbSchema } from '../utils/schema';
 import { BASE, href } from '../utils/url';
 import { CSP, JS_CLASS_SCRIPT } from '../utils/csp';
+import fontRegular from '../assets/fonts/Montserrat-Regular.woff2?url';
+import fontMedium from '../assets/fonts/Montserrat-Medium.woff2?url';
+import fontSemi from '../assets/fonts/Montserrat-SemiBold.woff2?url';
+import fontBold from '../assets/fonts/Montserrat-Bold.woff2?url';
 
 interface Props {
   title: string;
@@ -72,6 +76,7 @@ if (crumbs?.length) jsonld.push(breadcrumbSchema(siteUrl, [{ name: 'Início', pa
     {jsonld.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
 
     {!import.meta.env.PUBLIC_GTM_ID && <meta http-equiv="Content-Security-Policy" content={CSP} />}
+    {[fontRegular, fontMedium, fontSemi, fontBold].map((f) => <link rel="preload" href={f} as="font" type="font/woff2" crossorigin />)}
     <Analytics />
     <script is:inline set:html={JS_CLASS_SCRIPT} />
   </head>

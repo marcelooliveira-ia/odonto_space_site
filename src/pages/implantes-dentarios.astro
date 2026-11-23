@@ -25,7 +25,7 @@ import { genImplanteCoroa, genImplanteMaos, genRadiografia } from '../assets';
 >
 <section class="im-open"> 
 <div class="wrap g12"> 
-<figure class="fg im-open__photo"> <div class="ph"> <Image src={genImplanteMaos} alt="Mãos enluvadas segurando um modelo transparente de arcada com implante e coroa" widths={[800, 1200, 1600, 2000]} sizes="100vw" format="webp" quality={80} loading="eager" decoding="async" style="object-position:60% 50%" /></div>  </figure> <div class="im-open__txt"> 
+<figure class="fg im-open__photo"> <div class="ph"> <Image src={genImplanteMaos} alt="Mãos enluvadas segurando um modelo transparente de arcada com implante e coroa" widths={[800, 1200, 1600, 2000]} sizes="100vw" format="webp" quality={80} loading="eager" fetchpriority="high" decoding="async" style="object-position:60% 50%" /></div>  </figure> <div class="im-open__txt"> 
 <nav class="crumb label fx-in" aria-label="Você está em"><a href={href('/')}>Início</a><span aria-hidden="true">/</span><span aria-current="page">Implantes dentários</span></nav> <p class="label fx-in">Implantodontia</p> <h1 class="im-title"><span class="ln"><span>Implantes</span></span></h1> <span class="im-sub fx-in">dentários em Bangu</span> <p class="lead fx-in">Substituir dentes ausentes com planejamento individual, para recuperar a função de mastigar e a confiança ao sorrir.</p> <div class="row fx-in"><a class="wa wa--link wa--md" href={whatsappLink('Olá! Gostaria de agendar uma avaliação para implante dentário na ODONTO SPACE.')} target="_blank" rel="noopener noreferrer" data-wa="implantes-hero"> <Icon name="whatsapp" size={24} /> <span>Agendar avaliação de implante</span> </a></div> </div> </div> </section>
  
 <section class="im-what on-mist"> 
