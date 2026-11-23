@@ -303,3 +303,4 @@ p{margin:0 0 1em;text-wrap:pretty}
 
 /* link da Política de Privacidade na linha de direitos (mesma altura da v15) */
 .end__legal p:not(.credit) a{color:var(--mute);font-weight:600}
+@media(max-width:340px){.end__legal .pv-long{display:none}}
