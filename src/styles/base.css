@@ -1,0 +1,14 @@
+/* Base global do site: fontes, rolagem e acessibilidade. Os sistemas visuais ficam em dm.css e v6.css (escopos). */
+@font-face { font-family: 'Montserrat'; font-weight: 400; font-style: normal; font-display: swap; src: url('../assets/fonts/Montserrat-Regular.woff2') format('woff2'); }
+@font-face { font-family: 'Montserrat'; font-weight: 500; font-style: normal; font-display: swap; src: url('../assets/fonts/Montserrat-Medium.woff2') format('woff2'); }
+@font-face { font-family: 'Montserrat'; font-weight: 600; font-style: normal; font-display: swap; src: url('../assets/fonts/Montserrat-SemiBold.woff2') format('woff2'); }
+@font-face { font-family: 'Montserrat'; font-weight: 700; font-style: normal; font-display: swap; src: url('../assets/fonts/Montserrat-Bold.woff2') format('woff2'); }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: 80px; }
+body { margin: 0; background: #fff; }
+@media (width <= 860px) { body { padding-bottom: 72px; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* Atalho "Pular para o conteúdo": visível ao receber foco do teclado */
+.skip-link { position: absolute; left: -9999px; top: 0; z-index: 100; background: #2f4a54; color: #fff; padding: .8rem 1.2rem; font: 600 1rem Montserrat, system-ui, sans-serif; text-decoration: none; }
+.skip-link:focus { left: 0; outline: 3px solid #c4e0e8; outline-offset: 2px; }

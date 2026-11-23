@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Pic from '../components/Pic.astro';
+import { serviceMessage } from '../config/site';
+import { whatsappLink, whatsappPlain } from '../utils/whatsapp';
+import { href } from '../utils/url';
+import { genInvisalign } from '../assets';
+
+const msg = serviceMessage('Ortodontia');
+---
+
+<BaseLayout
+  title="Invisalign em Bangu: alinhadores transparentes | ODONTO SPACE"
+  description="Alinhadores transparentes Invisalign em Bangu, Rio de Janeiro: como funciona, características e quando é indicado. A indicação depende da avaliação com o dentista na ODONTO SPACE."
+  path="/invisalign"
+  crumbs={[{ name: 'Ortodontia', path: '/ortodontia' }, { name: 'Invisalign', path: '/invisalign' }]}
+>
+ <section class="ihero">
+  <div class="ohero__txt">
+    <nav class="crumb fx" aria-label="Você está em"><a href={href('/')}>Início</a><span aria-hidden="true">/</span><a href={href('/ortodontia')}>Ortodontia</a><span aria-hidden="true">/</span><span aria-current="page">Invisalign</span></nav>
+    <p class="label fx">Invisalign · Bangu, Rio de Janeiro</p>
+    <h1><span class="ln"><span>Alinhadores</span></span><span class="ln"><span><em>transparentes</em></span></span><span class="ln"><span>Invisalign.</span></span></h1>
+    <p class="lead fx">Um sistema de alinhadores transparentes e removíveis, trocados em sequência para mover os dentes gradualmente. A indicação depende da avaliação do seu caso.</p>
+    <div class="row fx"><a class="btn btn--lg" href={whatsappPlain()} target="_blank" rel="noopener noreferrer" data-wa="invisalign-hero"><span>Perguntar sobre o Invisalign</span></a><a class="link" href={href('/ortodontia')}>← Voltar para Ortodontia</a></div>
+  </div>
+  <div class="ohero__photo"><div class="ph"><Pic src={genInvisalign} alt="Alinhadores transparentes em um estojo branco sobre mármore" pos="50% 55%" sizes="(max-width: 900px) 100vw, 50vw" widths={[480, 800, 1200, 1600]} eager priority /></div></div>
+ </section>
+
+ <section class="iv">
+  <div class="wrap g12">
+   <div class="a"><p class="label rv">Como funciona</p><h2 class="rv d1">Uma sequência de placas, uma etapa de cada vez.</h2></div>
+   <ol class="iv__l b rv d1">
+     <li><b>Avaliação</b><span>O dentista analisa o alinhamento e a mordida e diz se este é um caminho indicado para você.</span></li>
+     <li><b>Planejamento</b><span>Quando indicado, as etapas do tratamento são explicadas antes de começar.</span></li>
+     <li><b>Troca em sequência</b><span>Os alinhadores são trocados ao longo do tratamento, conforme a orientação do dentista, para mover os dentes gradualmente.</span></li>
+     <li><b>Acompanhamento</b><span>Consultas periódicas acompanham a evolução e esclarecem dúvidas.</span></li>
+   </ol>
+  </div>
+ </section>
+
+ <section class="iv" style="background:var(--ice-soft)">
+  <div class="wrap g12">
+   <div class="a"><p class="label rv">Características</p><h2 class="rv d1">O que vale saber antes de decidir.</h2></div>
+   <ol class="iv__l b rv d1">
+     <li><b>Transparentes</b><span>Placas de aparência discreta.</span></li>
+     <li><b>Removíveis</b><span>Podem ser retiradas conforme a orientação do dentista.</span></li>
+     <li><b>Nem todos os casos</b><span>A indicação depende da complexidade do alinhamento e das características de cada paciente.</span></li>
+     <li><b>Decisão após avaliação</b><span>Somente um cirurgião-dentista pode indicar o tratamento adequado.</span></li>
+   </ol>
+  </div>
+ </section>
+
+ <section class="back">
+  <div class="wrap">
+   <p class="label">Ortodontia</p><h2>O Invisalign é uma das possibilidades da ortodontia.</h2><p class="lead" style="color:var(--deep)">Conheça também o aparelho fixo, o aparelho estético, a contenção e o atendimento de crianças e adolescentes.</p>
+   <div class="row"><a class="btn btn--lg" href={href('/ortodontia')}>Voltar para Ortodontia</a><a class="btn btn--lg btn--ghost" href={whatsappLink(msg)} target="_blank" rel="noopener noreferrer" data-wa="invisalign-fim">Agendar avaliação</a></div>
+   <p class="small" style="font-size:.86rem;margin-top:1.4rem">Conteúdo informativo.</p>
+  </div>
+ </section>
+</BaseLayout>

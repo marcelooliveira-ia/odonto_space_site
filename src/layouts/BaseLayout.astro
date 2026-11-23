@@ -1,10 +1,11 @@
 ---
-import '../styles/global.css';
+import '../styles/base.css';
+import '../styles/dm.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import FloatingWhatsApp from '../components/FloatingWhatsApp.astro';
+import StickyBar from '../components/StickyBar.astro';
 import Analytics from '../components/Analytics.astro';
-import Motion from '../components/Motion.astro';
+import ConsentBanner from '../components/ConsentBanner.astro';
 import { SITE } from '../config/site';
 import { dentistSchema, breadcrumbSchema } from '../utils/schema';
 import { BASE, href } from '../utils/url';
@@ -12,44 +13,29 @@ import { BASE, href } from '../utils/url';
 interface Props {
   title: string;
   description: string;
-  /** Caminho da página, ex.: "/implantes-dentarios" ("/" para a home). */
+  /** Caminho da página, ex.: "/implantes-dentarios" ("/" para a início). */
   path: string;
-  /** Mensagem de WhatsApp contextual desta página (botão flutuante). */
-  whatsappMessage?: string;
-  /** Trilha de navegação para dados estruturados (páginas internas). */
-  breadcrumb?: string;
-  /** Emite o schema Dentist completo (home e contato). */
+  /** Sistema visual (escopo CSS) da página: "dm" (Início, Ortodontia, Invisalign…) ou "v6" (Implantes, Próteses, Clínica, Contato). */
+  system?: 'dm' | 'v6';
+  /** Trilha de navegação para dados estruturados (páginas internas), do pai para a página atual. */
+  crumbs?: { name: string; path: string }[];
+  /** Emite o schema Dentist completo (início e contato). */
   includeBusinessSchema?: boolean;
+  /** Outros dados estruturados (ex.: FAQPage). */
+  schemas?: object[];
   noindex?: boolean;
-  /** Oculta o bloco de chamada do rodapé. */
-  hideCta?: boolean;
+  /** Tipo Open Graph. */
+  ogType?: 'website' | 'article';
 }
-
-const {
-  title,
-  description,
-  path,
-  whatsappMessage,
-  breadcrumb,
-  includeBusinessSchema = false,
-  noindex = false,
-  hideCta = false,
-} = Astro.props;
+const { title, description, path, system = 'dm', crumbs, includeBusinessSchema = false, schemas = [], noindex = false } = Astro.props;
 
 const siteUrl = `${(Astro.site ?? new URL('https://marcelooliveira-ia.github.io')).origin}${BASE}`;
 const canonical = `${siteUrl}${path === '/' ? '/' : path}`;
 const ogImage = SITE.ogImagePath ? `${siteUrl}${SITE.ogImagePath}` : null;
 
-const schemas: object[] = [];
-if (includeBusinessSchema) schemas.push(dentistSchema(siteUrl));
-if (breadcrumb) {
-  schemas.push(
-    breadcrumbSchema(siteUrl, [
-      { name: 'Início', path: '/' },
-      { name: breadcrumb, path },
-    ]),
-  );
-}
+const jsonld: object[] = [...schemas];
+if (includeBusinessSchema) jsonld.unshift(dentistSchema(siteUrl));
+if (crumbs?.length) jsonld.push(breadcrumbSchema(siteUrl, [{ name: 'Início', path: '/' }, ...crumbs]));
 ---
 
 <!doctype html>
@@ -61,7 +47,7 @@ if (breadcrumb) {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large'} />
     <meta name="theme-color" content="#2f4a54" />
     <link rel="icon" href={href('/favicon.ico')} sizes="any" />
     <link rel="icon" href={href('/favicon.png')} type="image/png" sizes="256x256" />
@@ -74,23 +60,29 @@ if (breadcrumb) {
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     {ogImage && <meta property="og:image" content={ogImage} />}
+    {ogImage && <meta property="og:image:width" content="1200" />}
+    {ogImage && <meta property="og:image:height" content="630" />}
+    {ogImage && <meta property="og:image:alt" content={`${SITE.name} – clínica odontológica em Bangu, Rio de Janeiro`} />}
     <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
 
-    {schemas.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+    {jsonld.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
 
     <Analytics />
     <script is:inline>document.documentElement.classList.add('js')</script>
   </head>
   <body>
     <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
-    <Header currentPath={path} />
-    <main id="conteudo">
+    <div class="dm" style="display:contents"><Header currentPath={path} /></div>
+    <main id="conteudo" class={system}>
       <slot />
     </main>
-    <Footer />
-    <FloatingWhatsApp message={whatsappMessage} />
-    <Motion />
+    <div class="dm" style="display:contents"><Footer /><StickyBar /></div>
+    <ConsentBanner />
+    <script>
+      import '../scripts/site';
+    </script>
   </body>
 </html>

@@ -3,9 +3,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { href } from '../utils/url';
 ---
 <BaseLayout title="Página não encontrada | ODONTO SPACE" description="A página que você procura não foi encontrada." path="/404" noindex>
-  <section class="sec"><div class="wrap" style="text-align:center;max-width:640px">
-    <p class="label">Erro 404</p><h1 style="margin:1rem 0">Página não encontrada</h1>
-    <p class="lead" style="margin-inline:auto">O endereço pode ter mudado ou não existe mais.</p>
-    <div class="btn-row" style="justify-content:center"><a class="btn btn--primary" href={href('/')}>Voltar ao início</a></div>
-  </div></section>
+  <section class="back" style="text-align:center">
+    <div class="wrap">
+      <p class="label">Erro 404</p>
+      <h1 style="margin:1rem 0">Página não encontrada</h1>
+      <p class="lead" style="margin-inline:auto">O endereço pode ter mudado ou não existe mais.</p>
+      <div class="row" style="justify-content:center"><a class="btn btn--lg" href={href('/')}>Voltar ao início</a></div>
+    </div>
+  </section>
 </BaseLayout>

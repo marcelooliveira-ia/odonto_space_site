@@ -1,26 +1,14 @@
 ---
 import { Image } from 'astro:assets';
 /**
- * Fotografia com legenda editorial ("Fig. 01 · Imagem ilustrativa").
- * - `bg`: imagem de fundo de uma seção (sem legenda; a seção imprime a própria).
- * - `cap`: texto da legenda ('' omite). Imagens geradas por IA devem manter o aviso.
- * Slot padrão: texto editorial dentro da legenda (título + descrição).
+ * Fotografia das páginas do sistema .v6 (Implantes, Próteses, Clínica). Sem legendas técnicas
+ * ("Fig. NN · Imagem ilustrativa") — removidas na v15 aprovada.
+ * - `bg`: imagem de fundo de uma seção.
  */
 interface Props {
-  src: ImageMetadata;
-  alt: string;
-  sizes?: string;
-  widths?: number[];
-  ratio?: string;
-  pos?: string;
-  eager?: boolean;
-  bg?: boolean;
-  cap?: string;
-  n?: string;
-  class?: string;
+  src: ImageMetadata; alt: string; sizes?: string; widths?: number[]; ratio?: string; pos?: string; eager?: boolean; bg?: boolean; class?: string;
 }
-const { src, alt, sizes = '(max-width: 900px) 100vw, 50vw', widths = [480, 800, 1200, 1600], ratio, pos = '50% 50%', eager = false, bg = false, cap = 'Imagem ilustrativa', n, class: cls } = Astro.props;
-const hasSlot = Astro.slots.has('default');
+const { src, alt, sizes = '(max-width: 900px) 100vw, 50vw', widths = [480, 800, 1200, 1600], ratio, pos = '50% 50%', eager = false, bg = false, class: cls } = Astro.props;
 const imgProps = { widths: widths.filter((w) => w <= src.width), sizes, format: 'webp' as const, quality: 80, loading: (eager ? 'eager' : 'lazy') as 'eager' | 'lazy', decoding: 'async' as const, style: `object-position:${pos}` };
 ---
 {bg ? (
@@ -28,11 +16,5 @@ const imgProps = { widths: widths.filter((w) => w <= src.width), sizes, format: 
 ) : (
   <figure class:list={['fg', cls]}>
     <div class="ph" style={ratio ? `--ar:${ratio}` : undefined}><Image src={src} alt={alt} {...imgProps} /></div>
-    {(cap || hasSlot || n) && (
-      <figcaption class="fig">
-        {hasSlot && <span class="fig__body"><slot /></span>}
-        {(n || cap) && <span class="fig__tag">{n && <b>Fig. {n}</b>}{n && cap ? ' · ' : ''}{cap}</span>}
-      </figcaption>
-    )}
   </figure>
 )}
