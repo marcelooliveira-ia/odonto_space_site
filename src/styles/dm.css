@@ -301,3 +301,6 @@
   .dm .end__legal{order:7}
   .dm .end__acts .btn--ghost{width:100%}
 }
+
+/* link da Política de Privacidade na linha de direitos (mesma altura da v15) */
+.dm .end__legal p:not(.credit) a{color:var(--mute);font-weight:600}

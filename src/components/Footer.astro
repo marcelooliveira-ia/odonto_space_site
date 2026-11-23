@@ -20,8 +20,8 @@ const a = SITE.address;
   <div class="end__hours"><span class="label">Horários</span><dl>{HOURS.map((h) => <div><dt>{h.label}</dt><dd>{h.value}</dd></div>)}</dl></div>
   <div class="end__legal">
     {SITE.technicalResponsible && <p>Responsável técnico: {SITE.technicalResponsible.name} – {SITE.technicalResponsible.cro}</p>}
-    <p>© {year} {SITE.name}</p>
+    <p>© {year} {SITE.name} · <a href={href('/politica-de-privacidade')}>Política de Privacidade</a></p>
     <p>As informações deste site têm caráter educativo e não substituem a avaliação de um cirurgião-dentista. Os resultados e a indicação de cada tratamento variam de acordo com cada paciente.</p>
-    <p class="credit"><a href={href('/politica-de-privacidade')}>Política de Privacidade</a> · {SITE.credit.text} <a href={SITE.credit.url} target="_blank" rel="noopener">{SITE.credit.name}</a></p>
+    <p class="credit">{SITE.credit.text} <a href={SITE.credit.url} target="_blank" rel="noopener">{SITE.credit.name}</a></p>
   </div>
 </div></footer>
