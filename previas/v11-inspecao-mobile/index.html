@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>ODONTO SPACE — Inspeção mobile da v11</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:#263238;color:#eceff1}
+a{color:#c4e0e8}
+.bar{position:sticky;top:0;z-index:10;background:#2f4a54;padding:10px 16px;box-shadow:0 2px 8px rgb(0 0 0/.4)}
+.bar h1{font-size:1rem;margin:0 0 8px}
+.row{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;margin:4px 0}
+.grp{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.grp>span{font-size:.8rem;color:#b0bec5;margin-right:2px}
+button{font:inherit;cursor:pointer;border:1px solid #c4e0e8;background:#fff;color:#2f4a54;border-radius:99px;padding:5px 13px}
+button[aria-pressed=true]{background:#c4e0e8;color:#102027;font-weight:700;border-color:#fff}
+button:focus-visible,a:focus-visible{outline:3px solid #ffd54f;outline-offset:2px}
+.info{font-size:.86rem;color:#cfd8dc}.info b{color:#fff}
+.stage{padding:18px 8px 60px;overflow-x:auto}
+.ruler{margin:0 auto 6px;text-align:center;font-size:.8rem;color:#b0bec5;border-bottom:2px solid #78909c;line-height:1.6;position:relative}
+.ruler::before,.ruler::after{content:"";position:absolute;bottom:-6px;width:2px;height:10px;background:#78909c}.ruler::before{left:0}.ruler::after{right:0}
+.frame{margin:0 auto;box-shadow:0 0 0 1px #90a4ae,0 6px 28px rgb(0 0 0/.55);background:#fff}
+iframe{display:block;border:0;background:#fff}
+.note{max-width:760px;margin:22px auto 0;font-size:.85rem;color:#b0bec5}
+.note p{margin:.5em 0}
+section.estatica{max-width:900px;margin:0 auto;padding:0 16px 40px;font-size:.95rem}
+section.estatica h2{font-size:1rem}
+</style>
+</head>
+<body>
+<div class="bar">
+  <h1>Inspeção visual mobile — v11 do site ODONTO SPACE <small style="font-weight:400">(somente leitura: a v11 não é alterada)</small></h1>
+  <div class="row">
+    <div class="grp" role="group" aria-label="Página"><span>Página:</span><span id="paginas"></span></div>
+  </div>
+  <div class="row">
+    <div class="grp" role="group" aria-label="Largura da tela"><span>Largura:</span><span id="larguras"></span></div>
+    <div class="grp" role="group" aria-label="Modo de visualização"><span>Modo:</span>
+      <button type="button" data-modo="viewport" aria-pressed="true">Viewport mobile (rolagem interna)</button>
+      <button type="button" data-modo="pagina" aria-pressed="false">Página inteira</button>
+    </div>
+  </div>
+  <div class="row info" id="info" aria-live="polite"></div>
+  <div class="row info"><a id="lnkDireto" href="../v11/" target="_blank" rel="noopener">Abrir esta página da v11 diretamente</a><span>·</span><a id="lnkCapt" href="capturas/index.html">Capturas desta página e largura</a><span>·</span><a href="capturas/index.html">Índice de todas as capturas</a></div>
+</div>
+
+<div class="stage">
+  <div class="ruler" id="ruler">390 px</div>
+  <div class="frame" id="frame"><iframe id="v11" title="v11 do site ODONTO SPACE" src="../v11/#inicio"></iframe></div>
+  <div class="note">
+    <p><b>Renderização real:</b> a v11 abre dentro de um &lt;iframe&gt; cuja largura é exatamente a largura escolhida. Os estilos responsivos usam essa largura como viewport, sem zoom nem escala.</p>
+    <p><b>Barra de rolagem:</b> a única intervenção no quadro é ocultar a barra de rolagem (a rolagem continua funcionando), para reproduzir as barras sobrepostas dos celulares, que não ocupam largura. Nada mais é alterado na v11.</p>
+    <p><b>Viewport mobile:</b> a altura é a de um celular típico dessa largura e a página rola por dentro, então o cabeçalho fixo e a barra de WhatsApp se comportam como no aparelho.</p>
+    <p><b>Página inteira:</b> a altura do quadro passa a ser a altura total do conteúdo, e você percorre tudo rolando esta página. Nesse modo o cabeçalho fixo aparece só no topo e a barra de WhatsApp fica no fim, e medidas que dependem da altura da tela (como a primeira dobra) podem diferir do aparelho. Para esses casos, use as capturas em tamanho real.</p>
+  </div>
+</div>
+
+<section class="estatica"><h2>Capturas em tamanho real (links diretos, sem JavaScript)</h2><ul><li><strong>Início</strong>: <a href="capturas/inicio-320.html">320 px</a> · <a href="capturas/inicio-360.html">360 px</a> · <a href="capturas/inicio-375.html">375 px</a> · <a href="capturas/inicio-390.html">390 px</a> · <a href="capturas/inicio-430.html">430 px</a></li><li><strong>Implantes</strong>: <a href="capturas/implantes-dentarios-320.html">320 px</a> · <a href="capturas/implantes-dentarios-360.html">360 px</a> · <a href="capturas/implantes-dentarios-375.html">375 px</a> · <a href="capturas/implantes-dentarios-390.html">390 px</a> · <a href="capturas/implantes-dentarios-430.html">430 px</a></li><li><strong>Próteses</strong>: <a href="capturas/proteses-dentarias-320.html">320 px</a> · <a href="capturas/proteses-dentarias-360.html">360 px</a> · <a href="capturas/proteses-dentarias-375.html">375 px</a> · <a href="capturas/proteses-dentarias-390.html">390 px</a> · <a href="capturas/proteses-dentarias-430.html">430 px</a></li><li><strong>Ortodontia</strong>: <a href="capturas/ortodontia-320.html">320 px</a> · <a href="capturas/ortodontia-360.html">360 px</a> · <a href="capturas/ortodontia-375.html">375 px</a> · <a href="capturas/ortodontia-390.html">390 px</a> · <a href="capturas/ortodontia-430.html">430 px</a></li><li><strong>Invisalign</strong>: <a href="capturas/invisalign-320.html">320 px</a> · <a href="capturas/invisalign-360.html">360 px</a> · <a href="capturas/invisalign-375.html">375 px</a> · <a href="capturas/invisalign-390.html">390 px</a> · <a href="capturas/invisalign-430.html">430 px</a></li><li><strong>A clínica</strong>: <a href="capturas/a-clinica-e-equipe-320.html">320 px</a> · <a href="capturas/a-clinica-e-equipe-360.html">360 px</a> · <a href="capturas/a-clinica-e-equipe-375.html">375 px</a> · <a href="capturas/a-clinica-e-equipe-390.html">390 px</a> · <a href="capturas/a-clinica-e-equipe-430.html">430 px</a></li><li><strong>Contato</strong>: <a href="capturas/contato-e-localizacao-320.html">320 px</a> · <a href="capturas/contato-e-localizacao-360.html">360 px</a> · <a href="capturas/contato-e-localizacao-375.html">375 px</a> · <a href="capturas/contato-e-localizacao-390.html">390 px</a> · <a href="capturas/contato-e-localizacao-430.html">430 px</a></li></ul><p><a href="capturas/index.html">Índice completo das capturas e medições</a></p></section>
+
+<script>
+(function () {
+  var ROUTES = [["inicio", "Início"], ["implantes-dentarios", "Implantes"], ["proteses-dentarias", "Próteses"], ["ortodontia", "Ortodontia"], ["invisalign", "Invisalign"], ["a-clinica-e-equipe", "A clínica"], ["contato-e-localizacao", "Contato"]], SIZES = [[320, 568], [360, 740], [375, 812], [390, 844], [430, 932]];
+  var st = { r: 'inicio', w: 390, m: 'viewport' };
+  var $ = function (id) { return document.getElementById(id); };
+  var frame = $('v11'), box = $('frame'), ruler = $('ruler'), info = $('info');
+
+  function readHash() {
+    var h = location.hash.replace(/^#/, ''), p = new URLSearchParams(h);
+    if (p.get('p') && ROUTES.some(function (x) { return x[0] === p.get('p'); })) st.r = p.get('p');
+    if (p.get('w') && SIZES.some(function (x) { return String(x[0]) === p.get('w'); })) st.w = +p.get('w');
+    if (p.get('m') === 'pagina' || p.get('m') === 'viewport') st.m = p.get('m');
+  }
+  function writeHash() { history.replaceState(null, '', '#p=' + st.r + '&w=' + st.w + '&m=' + st.m); }
+  function sizeOf(w) { for (var i = 0; i < SIZES.length; i++) if (SIZES[i][0] === w) return SIZES[i]; return SIZES[3]; }
+
+  function build() {
+    var pg = $('paginas'), lg = $('larguras');
+    ROUTES.forEach(function (x) { var b = document.createElement('button'); b.type = 'button'; b.textContent = x[1]; b.setAttribute('data-r', x[0]); b.onclick = function () { st.r = x[0]; apply(true); }; pg.appendChild(b); });
+    SIZES.forEach(function (x) { var b = document.createElement('button'); b.type = 'button'; b.textContent = x[0] + ' px'; b.setAttribute('data-w', x[0]); b.onclick = function () { st.w = x[0]; apply(false); }; lg.appendChild(b); });
+    [].forEach.call(document.querySelectorAll('[data-modo]'), function (b) { b.onclick = function () { st.m = b.getAttribute('data-modo'); apply(false); }; });
+  }
+
+  function measure() {
+    // volta o quadro à altura de um celular antes de medir; senão a altura medida nunca diminui
+    try {
+      var d = frame.contentDocument; if (!d || !d.documentElement) return 0;
+      var prev = frame.style.height; frame.style.height = sizeOf(st.w)[1] + 'px';
+      var h = d.documentElement.scrollHeight; frame.style.height = prev; return h;
+    } catch (e) { return 0; }
+  }
+  function realWidth() { try { return frame.contentWindow.innerWidth; } catch (e) { return null; } }
+
+  function layout() {
+    var s = sizeOf(st.w), H = s[1];
+    box.style.width = st.w + 'px'; ruler.style.width = st.w + 'px'; frame.style.width = st.w + 'px';
+    var h = H;
+    if (st.m === 'pagina') { var c = measure(); h = c > 0 ? c : H; }
+    frame.style.height = h + 'px';
+    ruler.textContent = '◄ ' + st.w + ' px ►';
+    var rw = realWidth();
+    info.innerHTML = '<span>Largura selecionada: <b>' + st.w + ' px</b></span><span>·</span><span>Largura medida pelo navegador dentro do quadro: <b>' + (rw === null ? 'n/d' : rw + ' px') + '</b></span><span>·</span><span>Altura do quadro: <b>' + h + ' px</b>' + (st.m === 'viewport' ? ' (viewport ' + st.w + '×' + H + ')' : ' (página inteira)') + '</span><span>·</span><span>Escala: <b>1×, sem zoom</b></span>';
+    $('lnkCapt').href = 'capturas/' + st.r + '-' + st.w + '.html';
+    $('lnkDireto').href = '../v11/#' + st.r;
+  }
+
+  function apply(pageChanged) {
+    [].forEach.call(document.querySelectorAll('[data-r]'), function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-r') === st.r)); });
+    [].forEach.call(document.querySelectorAll('[data-w]'), function (b) { b.setAttribute('aria-pressed', String(+b.getAttribute('data-w') === st.w)); });
+    [].forEach.call(document.querySelectorAll('[data-modo]'), function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-modo') === st.m)); });
+    if (pageChanged) {
+      try { frame.contentWindow.location.hash = st.r; } catch (e) { frame.src = '../v11/#' + st.r; }
+      try { frame.contentWindow.scrollTo(0, 0); } catch (e) {}
+      window.scrollTo(0, 0);
+    }
+    writeHash(); layout();
+    setTimeout(layout, 400); setTimeout(layout, 1400);
+  }
+
+  build(); readHash();
+  frame.src = '../v11/#' + st.r;
+  frame.addEventListener('load', function () {
+    // celulares usam barra de rolagem sobreposta (não ocupa largura); aqui só ocultamos a barra do quadro para não tirar ~15 px do layout
+    try { var d = frame.contentDocument, e = d.createElement('style'); e.setAttribute('data-inspecao', 'barra-de-rolagem'); e.textContent = 'html{scrollbar-width:none}html::-webkit-scrollbar{display:none}'; d.head.appendChild(e); } catch (x) {}
+    layout(); setTimeout(layout, 600);
+  });
+  window.addEventListener('hashchange', function () { readHash(); apply(true); });
+  setInterval(function () { if (st.m === 'pagina') layout(); }, 900);
+  apply(false);
+})();
+</script>
+</body>
+</html>
