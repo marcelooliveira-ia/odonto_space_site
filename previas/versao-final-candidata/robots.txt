@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://marcelooliveira-ia.github.io/odonto_space_site/previas/versao-final-candidata/sitemap-index.xml
