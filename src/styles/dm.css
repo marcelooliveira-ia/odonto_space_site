@@ -309,3 +309,10 @@
 /* Instagram (rodapé e fechamento da Início): mesmo estilo dos botões/links existentes */
 .dm .btn--ig{gap:.55rem}.dm .btn--ig .icon{flex:none}
 .dm .close__links{display:flex;flex-wrap:wrap;gap:.6rem 1.6rem;align-items:center}.dm .close__links .link .icon{flex:none}
+
+/* Instagram no cabeçalho: ícone circular discreto (contorno, como o botão "Como chegar"); no celular fica ao lado do menu */
+.dm .ig-hdr{display:inline-grid;place-items:center;flex:none;width:44px;height:44px;border-radius:50%;border:1.5px solid var(--deep);color:var(--deep);background:transparent;text-decoration:none;transition:background .25s,color .25s}
+.dm .ig-hdr:hover{background:var(--deep);color:#fff}.dm .ig-hdr:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+@media(max-width:1080px){.dm .ig-hdr{order:2;margin-left:auto}.dm .nav-toggle{order:3;margin-left:-.5rem}.dm .hdr__in{gap:.9rem}}
+/* faixa estreita do menu horizontal (1081–1200 px): espaçamentos menores para caber o ícone do Instagram, inclusive com texto ampliado */
+@media(min-width:1081px) and (max-width:1200px){.dm .hdr__in{gap:.75rem}.dm .nav{gap:1rem}.dm .nav ul{gap:.85rem}}

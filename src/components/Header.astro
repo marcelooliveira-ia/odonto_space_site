@@ -15,4 +15,5 @@ const isActive = (p: string) => (p === '/' ? currentPath === '/' : currentPath =
     <ul>{NAV.map((item) => <li><a href={href(item.href)} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a></li>)}</ul>
     <a class="btn" href={whatsappLink()} target="_blank" rel="noopener noreferrer" data-wa="cabecalho"><Icon name="whatsapp" size={22} /><span>WhatsApp</span></a>
   </nav>
+  {SITE.instagram && <a class="ig-hdr" href={SITE.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram @clinicaodontospace (abre em nova aba)" data-social="instagram-topo"><Icon name="instagram" size={20} /></a>}
 </div></header>
