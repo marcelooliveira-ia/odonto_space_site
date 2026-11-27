@@ -12,7 +12,7 @@ Referência visual oficial: **v15** (`/previas/v15/` no `gh-pages`). O site Astr
 - **Resultados:** ver `docs/RELATORIO-CANDIDATA.md` (comparação com a v15, Lighthouse, funcional, segurança, comandos).
 
 ## Pendências para a publicação definitiva
-**Dependem exclusivamente do cliente:** CRO do Dr. Marcelo Souza e da Sayonara Dias; responsável técnico (nome + CRO); razão social, CNPJ e canal/encarregado de privacidade; revisão jurídica da Política de Privacidade e do texto clínico; validação CRO/CFO das imagens geradas por IA; permissão de uso da marca Invisalign; links de Instagram, Facebook e perfil do Google; fotografias reais; escolha/registro do domínio; decisão de manter duas páginas (`/ortodontia` e `/invisalign`).
+**Dependem exclusivamente do cliente:** CRO do Dr. Marcelo Souza e da Sayonara Dias; responsável técnico (nome + CRO); razão social, CNPJ e canal/encarregado de privacidade; revisão jurídica da Política de Privacidade e do texto clínico; validação CRO/CFO das imagens geradas por IA; permissão de uso da marca Invisalign; links de Facebook e perfil do Google (o Instagram oficial já está no site, no código; ainda **não publicado** na prévia); fotografias reais; escolha/registro do domínio; decisão de manter duas páginas (`/ortodontia` e `/invisalign`).
 **Dependem de nós, após a aprovação:** hospedagem com cabeçalhos HTTP (Vercel/Netlify/Cloudflare — `docs/DOMINIO.md`), variáveis `PUBLIC_SITE_URL` e `PUBLIC_BASE_PATH=/`, build **sem** `PUBLIC_NOINDEX`, merge do PR #2 e atualização da raiz do `gh-pages` (somente com autorização), `PUBLIC_GTM_ID` + ampliação da CSP se houver medição, envio do sitemap ao Search Console. Observação: a descrição do PR #2 está desatualizada em relação ao conteúdo atual.
 
 ## Arquitetura

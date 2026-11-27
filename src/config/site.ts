@@ -25,7 +25,7 @@ export const SITE = {
   },
 
   // PENDENTES — não preencher sem confirmação da clínica.
-  instagram: null as string | null, // URL do perfil
+  instagram: 'https://www.instagram.com/clinicaodontospace/' as string | null, // perfil oficial (confirmado pelo cliente)
   facebook: null as string | null,
   technicalResponsible: null as { name: string; cro: string } | null, // responsável técnico + CRO
   legalName: null as string | null, // razão social (política de privacidade)

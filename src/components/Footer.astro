@@ -15,6 +15,7 @@ const a = SITE.address;
     <div class="end__acts">
       <a class="wa-cta" href={whatsappLink(FOOTER_WHATSAPP_MESSAGE)} target="_blank" rel="noopener noreferrer" data-wa="rodape"><span class="wa-cta__ico" aria-hidden="true"><Icon name="whatsapp" size={24} /></span><span class="wa-cta__txt"><small>Chamar no WhatsApp</small><b>{SITE.whatsapp.display}</b></span><span class="wa-cta__arrow" aria-hidden="true">→</span></a>
       <a class="btn btn--ghost" href={MAPS_URL} target="_blank" rel="noopener noreferrer" data-wa="rodape-mapa"><span>Como chegar</span></a>
+      {SITE.instagram && <a class="btn btn--ghost btn--ig" href={SITE.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram @clinicaodontospace (abre em nova aba)" data-social="instagram-rodape"><Icon name="instagram" size={20} /><span>Instagram</span></a>}
     </div>
   </div>
   <div class="end__hours"><span class="label">Horários</span><dl>{HOURS.map((h) => <div><dt>{h.label}</dt><dd>{h.value}</dd></div>)}</dl></div>

@@ -9,7 +9,7 @@ Nada abaixo foi inventado no site: os campos ficam ocultos (`null` em `src/confi
 | 3 | Razão social e CNPJ | Clínica | `SITE.legalName`, `SITE.cnpj` (Política de Privacidade) |
 | 4 | Revisão da Política de Privacidade e do texto clínico por profissional/assessoria jurídica | Clínica + jurídico | `src/pages/politica-de-privacidade.astro` |
 | 5 | Domínio definitivo e hospedagem com cabeçalhos HTTP (ver `docs/DOMINIO.md`) | Clínica/Marcelo | Registro.br + Vercel/Netlify/Cloudflare |
-| 6 | Instagram, Facebook e perfil do Google (Maps) | Clínica | `SITE.instagram`, `SITE.facebook`, `SITE.googleMapsUrl` (melhora schema `sameAs` e o botão "Como chegar") |
+| 6 | Facebook e perfil do Google (Maps) — o Instagram já foi informado e está no site | Clínica | `SITE.facebook`, `SITE.googleMapsUrl` (melhora schema `sameAs` e o botão "Como chegar") |
 | 7 | Fotografias reais (fachada, recepção, consultório, equipe em alta resolução) | Clínica | substituir arquivos em `src/assets/gen` e `src/assets/team` mantendo o nome |
 | 8 | Imagens geradas por IA mostrando pessoas/ambientes: confirmar aceitação pelo CFO (publicidade) | Clínica/CRO-RJ | Home e Ortodontia |
 | 9 | Permissão de uso da marca Invisalign (Align Technology) | Clínica | Página `/invisalign` |

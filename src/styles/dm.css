@@ -305,3 +305,7 @@
 /* link da Política de Privacidade na linha de direitos (mesma altura da v15) */
 .dm .end__legal p:not(.credit) a{color:var(--mute);font-weight:600}
 @media(max-width:340px){.dm .end__legal .pv-long{display:none}}
+
+/* Instagram (rodapé e fechamento da Início): mesmo estilo dos botões/links existentes */
+.dm .btn--ig{gap:.55rem}.dm .btn--ig .icon{flex:none}
+.dm .close__links{display:flex;flex-wrap:wrap;gap:.6rem 1.6rem;align-items:center}.dm .close__links .link .icon{flex:none}

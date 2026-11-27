@@ -92,7 +92,7 @@ const chips = [['dentes', 'Faltam dentes'], ['alinhar', 'Quero alinhar os dentes
    <div class="close__l"><p class="label rv">Vamos conversar?</p><h2 class="rv d1">Seu primeiro passo cabe numa mensagem.</h2><p class="rv d2">A avaliação é marcada pelo WhatsApp. Conte o que você procura e a equipe orienta o melhor começo.</p>
      <div class="row rv d2"><a class="btn btn--lg" href={wa} target="_blank" rel="noopener noreferrer" data-wa="inicio-fechamento"><Icon name="whatsapp" size={26} /><span>Agendar avaliação pelo WhatsApp</span></a></div>
      <a class="num rv d2" href={`https://wa.me/${SITE.whatsapp.e164}`} target="_blank" rel="noopener noreferrer" data-wa="inicio-numero">{SITE.whatsapp.display}</a></div>
-   <div class="close__r rv d1"><p class="label">Onde estamos</p><address>{a.street} – {a.complement}<br />{a.neighborhood}, {a.city} – {a.state}, CEP {a.postalCode}</address><a class="link" href={MAPS_URL} target="_blank" rel="noopener noreferrer">Como chegar →</a></div>
+   <div class="close__r rv d1"><p class="label">Onde estamos</p><address>{a.street} – {a.complement}<br />{a.neighborhood}, {a.city} – {a.state}, CEP {a.postalCode}</address><div class="close__links"><a class="link" href={MAPS_URL} target="_blank" rel="noopener noreferrer">Como chegar →</a>{SITE.instagram && <a class="link" href={SITE.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram @clinicaodontospace (abre em nova aba)" data-social="instagram-inicio"><Icon name="instagram" size={18} /><span>Instagram</span></a>}</div></div>
   </div>
  </section>
 
