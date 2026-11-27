@@ -4,6 +4,8 @@
 # Uso: PUBLIC_SITE_URL=https://www.SEUDOMINIO.com.br scripts/gerar-branch-dist.sh
 set -euo pipefail
 : "${PUBLIC_SITE_URL:?Defina PUBLIC_SITE_URL com o domínio final (https://..., sem barra no fim)}"
+# Nunca gerar a branch de publicação com domínio provisório (a trava está em build-hostinger.mjs; aqui não há bypass).
+unset ALLOW_PROVISIONAL_DOMAIN
 BRANCH="${DIST_BRANCH:-hostinger-dist}"
 ROOT="$(git rev-parse --show-toplevel)"; cd "$ROOT"
 SRC="$(git rev-parse --short HEAD)"

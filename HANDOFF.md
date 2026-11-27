@@ -5,6 +5,12 @@ Referência visual oficial: **v15** (`/previas/v15/` no `gh-pages`). O site Astr
 - Repositório: https://github.com/marcelooliveira-ia/odonto_space_site · branch de trabalho `claude/practical-pasteur-rgbvwu` (PR #2 — **não fazer merge sem autorização**).
 - `gh-pages`: raiz = versão anterior; `previas/v10…v15` preservadas. Publicar só em pastas novas.
 
+## Produção (Hostinger) — atualização
+- **Base aprovada:** prévia `previas/versao-final-candidata-instagram/` (commit `24f36a5`). Não alterar a prévia, a `main`, o `gh-pages` nem a branch `claude/practical-pasteur-rgbvwu`.
+- **Branch de produção:** `producao-hostinger` (código + scripts + `.htaccess`). A branch `hostinger-dist` (só o `dist/`) **ainda não foi gerada**: depende do domínio definitivo, que aguarda registro no Registro.br (conta da clínica; domínios de clientes nunca ficam na conta pessoal do MARCELO).
+- Nada foi publicado na Hostinger nem foi configurado DNS. Retomar por `docs/CHECKLIST-PUBLICACAO.md`, `docs/DOMINIO.md` e `docs/PUBLICACAO-HOSTINGER.md`. Padrão para clientes: `docs/CLIENTES-INFRAESTRUTURA.md`.
+- O site receberá depois fotos reais, CROs e melhorias de conversão (novo build e novo commit na `hostinger-dist` a cada atualização).
+
 ## Estado atual — candidata oficial congelada (2026-11-23)
 - **URL pública (prévia, noindex):** https://marcelooliveira-ia.github.io/odonto_space_site/previas/versao-final-candidata/
 - **Build publicado:** `fc96275` (branch `claude/practical-pasteur-rgbvwu`); `gh-pages` `39b6a6a`. Commits do site: `6b6cf48` base Astro · `0b92ef1` CSP/docs · `fa43cad`/`4199b2c` rodapé · `950d726` foto da Clínica · `eda003f` noindex · `fc96275` fontes/a11y · `1009af0` relatório (só docs).

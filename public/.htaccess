@@ -14,6 +14,11 @@ Options -Indexes
   RewriteCond %{HTTP:X-Forwarded-Proto} !=https
   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
+  # (Opcional, ativar depois de definir o domínio) Padronizar apex -> www ou www -> apex.
+  # O canonical do site usa PUBLIC_SITE_URL; o redirecionamento deve apontar para o mesmo host.
+  # RewriteCond %{HTTP_HOST} ^SEUDOMINIO\.com\.br$ [NC]
+  # RewriteRule ^ https://www.SEUDOMINIO.com.br%{REQUEST_URI} [L,R=301]
+
   # 2) Endereço antigo (versão anterior do site)
   RewriteRule ^ortodontia-invisalign/?$ /invisalign [L,R=301]
 

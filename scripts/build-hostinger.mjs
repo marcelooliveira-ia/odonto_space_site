@@ -8,6 +8,12 @@ if (!site || !/^https:\/\/[a-z0-9.-]+$/i.test(site)) {
   process.exit(1);
 }
 
+const host = new URL(site).hostname;
+if (/(\.invalid|\.test|\.example|^example\.|localhost|github\.io|hostingersite\.com|vercel\.app|a-definir)/i.test(host) && process.env.ALLOW_PROVISIONAL_DOMAIN !== '1') {
+  console.error(`"${host}" parece provisório. Use o domínio definitivo (ex.: o .com.br do Registro.br).\nPara um teste local descartável: ALLOW_PROVISIONAL_DOMAIN=1.`);
+  process.exit(1);
+}
+
 let commit = 'local';
 try { commit = execSync('git rev-parse --short HEAD', { encoding: 'utf8' }).trim(); } catch {}
 
