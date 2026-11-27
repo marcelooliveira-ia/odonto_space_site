@@ -1,0 +1,45 @@
+# ODONTO SPACE — configuração para hospedagem Apache/LiteSpeed da Hostinger.
+# Equivale ao public/_headers (Netlify/Cloudflare) e ao vercel.json, que a Hostinger não lê.
+# Testado apenas por leitura; confira após o primeiro deploy (docs/PUBLICACAO-HOSTINGER.md).
+
+DirectorySlash Off
+ErrorDocument 404 /404.html
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # 1) HTTPS obrigatório
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # 2) Endereço antigo (versão anterior do site)
+  RewriteRule ^ortodontia-invisalign/?$ /invisalign [L,R=301]
+
+  # 3) URLs canônicas não têm barra final (trailingSlash: 'never')
+  RewriteRule ^(.+)/$ /$1 [L,R=301]
+
+  # 4) /pagina -> /pagina/index.html (sem redirecionar)
+  RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
+  RewriteRule ^(.+)$ /$1/index.html [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'sha256-Du+OJKJSbdUgz5nrHeWWINvez6XKDDU/tyj/5c2uvwo='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+
+  # HTML e XML sempre revalidados
+  <FilesMatch "\.(html|xml|txt)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml text/xml application/xml text/plain
+</IfModule>

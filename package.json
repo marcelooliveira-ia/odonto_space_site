@@ -14,7 +14,9 @@
     "preview": "astro preview",
     "check": "astro check",
     "astro": "astro",
-    "css": "node scripts/scope-css.mjs"
+    "css": "node scripts/scope-css.mjs",
+    "build:hostinger": "node scripts/build-hostinger.mjs",
+    "validar:dist": "node scripts/validar-dist.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.5",
