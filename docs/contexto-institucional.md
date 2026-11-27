@@ -22,7 +22,7 @@ Registro do que está **confirmado** e do que está **pendente** para o site. Fo
 Responsável técnico e CRO · nome e CRO da ortodontista · CRO do Dr. Marcelo Souza · horários · CEP · URL do Instagram/Facebook · link do perfil no Google · domínio final · fotos reais (fachada, recepção, consultórios, equipe) com autorização de uso de imagem · Política de Privacidade.
 
 ## Confirmado nesta versão
-- Dr. Marcelo Souza: proprietário e cirurgião-dentista clínico geral (confirmado pelo responsável de marketing). Não é implantodontista.
+- Dr. Marcelo Souza: cirurgião-dentista clínico geral (confirmado pelo responsável de marketing). Não é implantodontista.
 - Fotografia da ortodontista: confirmada pelo responsável de marketing (nome e CRO pendentes).
 
 ## Fora do escopo do site

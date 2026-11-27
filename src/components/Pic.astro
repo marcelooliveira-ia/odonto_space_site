@@ -1,0 +1,8 @@
+---
+import { Image } from 'astro:assets';
+/** Imagem otimizada (WebP responsivo) para as páginas do sistema .dm. O enquadramento (`pos`) vem da v15 aprovada. */
+interface Props { src: ImageMetadata; alt: string; sizes?: string; widths?: number[]; pos?: string; eager?: boolean; priority?: boolean; class?: string }
+const { src, alt, sizes = '100vw', widths = [480, 800, 1200, 1600], pos, eager = false, priority = false, class: cls } = Astro.props;
+const w = widths.filter((x) => x <= src.width);
+---
+<Image src={src} alt={alt} widths={w.length ? w : [src.width]} sizes={sizes} format="webp" quality={80} loading={eager ? 'eager' : 'lazy'} decoding="async" fetchpriority={priority ? 'high' : undefined} style={pos ? `object-position:${pos}` : undefined} class={cls} />

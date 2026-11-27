@@ -1,63 +1,39 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHero from '../components/PageHero.astro';
-import WhatsAppButton from '../components/WhatsAppButton.astro';
-import Photo from '../components/Photo.astro';
 import Icon from '../components/Icon.astro';
-import { SERVICES } from '../config/site';
-import { genProteseCoroas, genProteseLab, genConsultorio } from '../assets';
-
-const msg = SERVICES.find((s) => s.slug === 'proteses-dentarias')!.whatsappMessage;
-const types = [
-  { title: 'Prótese total', text: 'Substitui todos os dentes de uma arcada, quando não há mais dentes naturais na região.' },
-  { title: 'Prótese parcial', text: 'Repõe alguns dentes ausentes, aproveitando os dentes que permanecem na boca.' },
-  { title: 'Prótese fixa', text: 'Coroas e pontes fixadas sobre dentes ou estruturas preparadas pelo dentista.' },
-  { title: 'Prótese sobre implante', text: 'Prótese apoiada em implantes dentários, conforme a avaliação do caso.' },
-];
-const faqs = [
-  { q: 'Qual prótese é a melhor para mim?', a: 'Depende de quantos dentes faltam, da saúde da gengiva e do osso, das suas necessidades e do seu orçamento. O dentista indica as opções após a avaliação.' },
-  { q: 'A prótese precisa de manutenção?', a: 'Sim. Higiene adequada e consultas de revisão ajudam a conservar a prótese e a saúde da boca. O dentista orienta o cuidado para cada tipo.' },
-  { q: 'Posso fazer prótese e implante juntos?', a: 'Em muitos casos, a prótese pode ser apoiada em implantes. A viabilidade é definida na avaliação clínica.' },
-];
+import { Image } from 'astro:assets';
+import '../styles/v6.css';
+import { MAPS_URL } from '../config/site';
+import { whatsappLink, whatsappPlain } from '../utils/whatsapp';
+import { href } from '../utils/url';
+import { faqSchema } from '../utils/schema';
+import { genProteseCoroas, genProteseLab } from '../assets';
 ---
-<BaseLayout title="Próteses Dentárias em Bangu | ODONTO SPACE" description="Próteses dentárias em Bangu, Rio de Janeiro: totais, parciais, fixas e sobre implante. Avaliação na ODONTO SPACE e agendamento pelo WhatsApp." path="/proteses-dentarias" breadcrumb="Próteses dentárias" whatsappMessage={msg}>
-  <PageHero crumb="Próteses dentárias" label="Prótese dentária" title="Próteses *dentárias* em Bangu" lead="Recupere a função mastigatória e a estética do sorriso com uma solução indicada para o seu caso.">
-    <WhatsAppButton slot="actions" message={msg} context="proteses-hero" size="lg" variant="light" label="Agendar avaliação de prótese" />
-    <Photo slot="media" src={genProteseCoroas} alt="Coroas e ponte de cerâmica ao lado de um modelo de gesso" ratio="5 / 4" pos="50% 60%" eager illustrative sizes="(max-width: 900px) 100vw, 480px" />
-  </PageHero>
 
-  <section class="sec">
-    <div class="wrap split split--img-left">
-      <Photo class="split__img rv" src={genProteseLab} alt="Técnico finalizando uma prótese dentária em laboratório" ratio="4 / 5" pos="50% 45%" illustrative zoom sizes="(max-width: 860px) 100vw, 46vw" />
-      <div>
-        <p class="label rv">Tipos de prótese</p>
-        <h2 class="rv d1" style="margin:0.8rem 0 1rem">Opções para <em>diferentes situações</em></h2>
-        <p class="lead rv d2">A escolha do tipo ideal é feita pelo dentista, depois de avaliar a sua boca.</p>
-        <div class="spec rv d3" style="margin-top:1.6rem">{types.map((t) => <div class="spec__row"><h3>{t.title}</h3><p>{t.text}</p></div>)}</div>
-      </div>
-    </div>
-  </section>
-
-  <section class="banner dark">
-    <Photo src={genConsultorio} alt="Consultório odontológico claro e moderno" pos="50% 50%" sizes="100vw" widths={[800, 1200, 1600, 2000]} illustrative />
-    <div class="wrap rv">
-      <div>
-        <p class="label">Como começar</p>
-        <h2>Uma avaliação para entender <em>suas opções</em></h2>
-        <ul class="checks" style="border-color:rgb(255 255 255 / .4);max-width:30em">
-          <li style="border-color:rgb(255 255 255 / .2)"><Icon name="check" size={18} /><span>Exame clínico e conversa sobre suas necessidades</span></li>
-          <li style="border-color:rgb(255 255 255 / .2)"><Icon name="check" size={18} /><span>Alternativas possíveis para o seu caso</span></li>
-          <li style="border-color:rgb(255 255 255 / .2)"><Icon name="check" size={18} /><span>Plano de tratamento explicado antes de iniciar</span></li>
-        </ul>
-        <div class="btn-row" style="margin-top:1.4rem"><WhatsAppButton message={msg} context="proteses-meio" variant="light" /></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec">
-    <div class="wrap faqgrid">
-      <div><p class="label">Dúvidas frequentes</p><h2>Perguntas sobre <em>próteses</em></h2><p class="notice">Conteúdo informativo. Somente um cirurgião-dentista pode indicar o tratamento adequado após avaliar você.</p></div>
-      <div class="faq">{faqs.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}</div>
-    </div>
-  </section>
+<BaseLayout
+  system="v6"
+  title="Próteses Dentárias em Bangu | ODONTO SPACE"
+  description="Próteses dentárias em Bangu, Rio de Janeiro: totais, parciais, fixas e sobre implante. Avaliação na ODONTO SPACE e agendamento pelo WhatsApp."
+  path="/proteses-dentarias"
+  crumbs={[{ name: 'Próteses dentárias', path: '/proteses-dentarias' }]}
+  schemas={[faqSchema([
+    { q: 'Qual prótese é a melhor para mim?', a: 'Depende de quantos dentes faltam, da saúde da gengiva e do osso, das suas necessidades e do seu orçamento. O dentista indica as opções após a avaliação.' },
+    { q: 'A prótese precisa de manutenção?', a: 'Sim. Higiene adequada e consultas de revisão ajudam a conservar a prótese e a saúde da boca. O dentista orienta o cuidado para cada tipo.' },
+    { q: 'Posso fazer prótese e implante juntos?', a: 'Em muitos casos, a prótese pode ser apoiada em implantes. A viabilidade é definida na avaliação clínica.' }
+  ])]}
+>
+<div class="wrap pr-crumb">
+<nav class="crumb label" style="margin:0" aria-label="Você está em"><a href={href('/')}>Início</a><span aria-hidden="true">/</span><span aria-current="page">Próteses dentárias</span></nav></div> 
+<figure class="fg pr-pano"> <div class="ph" style="--ar:21 / 9"> <Image src={genProteseCoroas} alt="Coroas e ponte de cerâmica ao lado de um modelo de gesso" widths={[800, 1200, 1600, 2000]} sizes="100vw" format="webp" quality={80} loading="eager" fetchpriority="high" decoding="async" style="object-position:50% 58%" /></div>  </figure> 
+<div class="wrap g12 pr-head"> <h1 class="pr-title fx-in">Próteses <em>dentárias em Bangu</em></h1> <div class="pr-head__side fx-in"> <p class="label">Prótese dentária</p> <p class="lead">Recupere a função mastigatória e a estética do sorriso com uma solução indicada para o seu caso.</p> <div class="row" style="margin-top:1rem"><a class="wa wa--link wa--md" href={whatsappLink('Olá! Gostaria de informações sobre próteses dentárias na ODONTO SPACE.')} target="_blank" rel="noopener noreferrer" data-wa="proteses-hero"> <Icon name="whatsapp" size={24} /> <span>Agendar avaliação de prótese</span> </a></div> </div> </div> 
+<section class="pr-types">
+<h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Tipos de prótese dentária</h2> 
+<div class="wrap g12"> <div class="pr-types__list"> <span class="label pr-types__label rv">Tipos de prótese · indicação do melhor tratamento</span> <div class="pr-type rv"><span>01</span><div><h3>Prótese total</h3><p>Substitui todos os dentes de uma arcada, quando não há mais dentes naturais na região.</p></div></div><div class="pr-type rv"><span>02</span><div><h3>Prótese parcial</h3><p>Repõe alguns dentes ausentes, aproveitando os dentes que permanecem na boca.</p></div></div><div class="pr-type rv"><span>03</span><div><h3>Prótese fixa</h3><p>Coroas e pontes fixadas sobre dentes ou estruturas preparadas pelo dentista.</p></div></div><div class="pr-type rv"><span>04</span><div><h3>Prótese sobre implante</h3><p>Prótese apoiada em implantes dentários, conforme a avaliação do caso.</p></div></div> </div> 
+<figure class="fg pr-types__img rv d1"> <div class="ph" style="--ar:4 / 5"> <Image src={genProteseLab} alt="Técnico finalizando uma prótese dentária em laboratório" widths={[480, 800, 1200]} sizes="(max-width: 860px) 90vw, 40vw" format="webp" quality={80} loading="lazy" decoding="async" style="object-position:50% 45%" /></div>  </figure> </div> </section>
+ 
+<section class="pr-start on-ice"> 
+<div class="wrap g12"> <h2 class="rv">Uma avaliação para entender suas opções.</h2> <div class="pr-start__side rv d1"> <ul> <li>Exame clínico e conversa sobre suas necessidades</li> <li>Alternativas possíveis para o seu caso</li> <li>Plano de tratamento explicado antes de iniciar</li> </ul> <a class="wa wa--solid wa--md" href={whatsappLink('Olá! Gostaria de informações sobre próteses dentárias na ODONTO SPACE.')} target="_blank" rel="noopener noreferrer" data-wa="proteses-meio"> <Icon name="whatsapp" size={24} /> <span>Agendar avaliação pelo WhatsApp</span> </a> </div> </div> </section>
+ 
+<section class="pr-faq"> 
+<div class="wrap"> <p class="label rv">Dúvidas frequentes</p> <h2 class="rv d1">Perguntas sobre próteses.</h2> <div class="faq rv"><details><summary>Qual prótese é a melhor para mim?</summary><p>Depende de quantos dentes faltam, da saúde da gengiva e do osso, das suas necessidades e do seu orçamento. O dentista indica as opções após a avaliação.</p></details><details><summary>A prótese precisa de manutenção?</summary><p>Sim. Higiene adequada e consultas de revisão ajudam a conservar a prótese e a saúde da boca. O dentista orienta o cuidado para cada tipo.</p></details><details><summary>Posso fazer prótese e implante juntos?</summary><p>Em muitos casos, a prótese pode ser apoiada em implantes. A viabilidade é definida na avaliação clínica.</p></details></div> <p class="note">Conteúdo informativo. Somente um cirurgião-dentista pode indicar o tratamento adequado após avaliar você.</p> </div> </section>
 </BaseLayout>

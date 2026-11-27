@@ -1,5 +1,5 @@
 // Fotografias reais da equipe (tratadas; substituir os arquivos em src/assets/team/ mantendo o nome).
-export { default as proprietario } from './team/proprietario.jpg';
+export { default as fotoMarceloSouza } from './team/dr-marcelo-souza.jpg';
 export { default as ortodontista } from './team/ortodontista.jpg';
 // Marca oficial (extraída do PDF vetorial; não alterar).
 export { default as logoPreto } from './brand/logo-preto.svg';
@@ -16,3 +16,14 @@ export { default as genProteseCoroas } from './gen/protese-coroas-ponte.jpg';
 export { default as genProteseLab } from './gen/protese-laboratorio-maos.jpg';
 export { default as genInvisalign } from './gen/invisalign-alinhadores.jpg';
 export { default as genOrtoMaos } from './gen/ortodontia-maos-alinhador.jpg';
+// Imagens aprovadas na v15 (geradas no Magnific, Nano Banana 2.1). Rastreabilidade em docs/IMAGE-CREDITS.md.
+export { default as genOrtoHero } from './gen/ortodontia-sorriso-aparelho-metalico.jpg';
+export { default as genOrtoFixo } from './gen/ortodontia-aparelho-fixo-metalico.jpg';
+export { default as genOrtoEstetico } from './gen/ortodontia-aparelho-estetico.jpg';
+export { default as genOrtoContencao } from './gen/ortodontia-contencao.jpg';
+export { default as genOrtoJovem } from './gen/ortodontia-adolescente-aparelho.jpg';
+export { default as genHomeOrto } from './gen/home-ortodontia-jovem-aparelho.jpg';
+export { default as genHomeEstetica } from './gen/home-estetica-guia-cores.jpg';
+export { default as genHomeClinica } from './gen/home-clinica-prevencao.jpg';
+// Plano médio do Dr. Marcelo Souza: recorte da fotografia original (sem alteração do rosto).
+export { default as fotoMarceloPlanoMedio } from './team/dr-marcelo-souza-plano-medio.jpg';

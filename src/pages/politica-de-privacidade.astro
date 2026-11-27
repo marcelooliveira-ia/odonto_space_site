@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE, ADDRESS_FULL } from '../config/site';
+import { href } from '../utils/url';
+
+const controller = SITE.legalName ? `${SITE.legalName}${SITE.cnpj ? `, CNPJ ${SITE.cnpj}` : ''}` : SITE.name;
+const gtm = Boolean(import.meta.env.PUBLIC_GTM_ID);
+---
+
+<BaseLayout
+  title="Política de Privacidade | ODONTO SPACE"
+  description="Como o site da ODONTO SPACE trata dados pessoais, em conformidade com a Lei Geral de Proteção de Dados (LGPD): o que coletamos, para quê e como exercer seus direitos."
+  path="/politica-de-privacidade"
+  crumbs={[{ name: 'Política de Privacidade', path: '/politica-de-privacidade' }]}
+>
+  <section class="back prose">
+    <div class="wrap">
+      <nav class="crumb" aria-label="Você está em"><a href={href('/')}>Início</a><span aria-hidden="true">/</span><span aria-current="page">Política de Privacidade</span></nav>
+      <p class="label">Privacidade e LGPD</p>
+      <h1>Política de Privacidade</h1>
+      <p class="lead">Este site apresenta a clínica {SITE.name} e leva você ao atendimento pelo WhatsApp. Coletamos o mínimo possível de dados e não pedimos informações de saúde pelo site.</p>
+
+      <h2>1. Quem é o responsável</h2>
+      <p>O controlador dos dados é {controller}, com sede em {ADDRESS_FULL}. Contato para assuntos de privacidade: WhatsApp {SITE.whatsapp.display}.</p>
+
+      <h2>2. O que o site coleta</h2>
+      <ul>
+        <li><b>Formulários:</b> o site não possui formulários nem campos de cadastro.</li>
+        <li><b>Registros técnicos do servidor:</b> como em qualquer site, o provedor de hospedagem pode registrar endereço IP, data e hora, página acessada e navegador, por razões de segurança e funcionamento.</li>
+        <li><b>Cookies e medição:</b> {gtm ? 'o site usa medição de audiência e de anúncios somente após o seu consentimento, que pode ser recusado sem prejuízo da navegação.' : 'o site não usa cookies de medição nem de publicidade neste momento. Se isso mudar, pediremos o seu consentimento antes de ativar qualquer medição.'}</li>
+        <li><b>Mapa:</b> o botão "Como chegar" abre o Google Maps em outra aba; o site não incorpora mapas nem carrega recursos do Google na sua visita.</li>
+      </ul>
+
+      <h2>3. Atendimento pelo WhatsApp</h2>
+      <p>Os botões de WhatsApp abrem uma conversa com a clínica, com uma mensagem inicial que você pode alterar ou apagar antes de enviar. A mensagem identifica apenas a página de origem (por exemplo, "pelo site"). Nada é enviado sem a sua ação. Depois que você envia a mensagem, o tratamento passa a seguir os termos e a política de privacidade do WhatsApp (Meta). <b>Pedimos que você não envie exames, imagens ou detalhes clínicos antes de conversar com a equipe sobre como prefere fazer isso.</b></p>
+
+      <h2>4. Para que usamos os dados e em que base legal</h2>
+      <p>Usamos as mensagens que você nos envia para responder, orientar e agendar a sua avaliação (execução de procedimentos preliminares a pedido do titular, LGPD art. 7º, V) e os registros técnicos para segurança e funcionamento do site (legítimo interesse, art. 7º, IX). Dados de saúde, quando informados em atendimento, são tratados com a finalidade de tutela da saúde, por profissional de saúde (art. 11, II, "f").</p>
+
+      <h2>5. Compartilhamento e retenção</h2>
+      <p>Não vendemos dados. Podem ter acesso ao necessário o provedor de hospedagem e o WhatsApp (Meta), nos limites descritos acima. Mantemos as conversas pelo tempo necessário ao atendimento e às obrigações legais e do prontuário odontológico.</p>
+
+      <h2>6. Seus direitos</h2>
+      <p>Você pode solicitar confirmação de tratamento, acesso, correção, anonimização, portabilidade, eliminação de dados tratados com consentimento, informação sobre compartilhamento e revogação de consentimento (LGPD, art. 18). Basta pedir pelo WhatsApp {SITE.whatsapp.display}. Você também pode reclamar à Autoridade Nacional de Proteção de Dados (ANPD).</p>
+
+      <h2>7. Crianças e adolescentes</h2>
+      <p>O site é voltado a adultos e responsáveis. O atendimento de crianças e adolescentes é combinado com os responsáveis legais.</p>
+
+      <h2>8. Atualizações</h2>
+      <p>Esta política pode ser atualizada para refletir mudanças no site ou na lei. A versão em vigor é sempre a publicada nesta página.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style is:global>
+  .dm .prose h1 { font-size: clamp(2.2rem, 4.4vw, 3.6rem); letter-spacing: -.05em; line-height: 1; margin: .6rem 0 1.2rem; }
+  .dm .prose h2 { font-size: clamp(1.15rem, 2vw, 1.4rem); margin: 2.2rem 0 .5rem; letter-spacing: -.02em; }
+  .dm .prose p, .dm .prose li { max-width: 46rem; font-size: 1.02rem; line-height: 1.7; }
+  .dm .prose ul { padding-left: 1.2rem; }
+  .dm .prose .lead { max-width: 46rem; }
+</style>

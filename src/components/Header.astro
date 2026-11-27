@@ -1,35 +1,19 @@
 ---
 import Icon from './Icon.astro';
-import WhatsAppButton from './WhatsAppButton.astro';
 import { NAV, SITE } from '../config/site';
 import { href } from '../utils/url';
-import { logoBranco } from '../assets';
+import { whatsappLink } from '../utils/whatsapp';
+import { logoPreto } from '../assets';
 interface Props { currentPath: string }
 const { currentPath } = Astro.props;
-const isActive = (p: string) => (p === '/' ? currentPath === '/' : currentPath.startsWith(p));
+const isActive = (p: string) => (p === '/' ? currentPath === '/' : currentPath === p || (p === '/ortodontia' && currentPath === '/invisalign'));
 ---
-<header class="hdr dark">
-  <div class="wrap hdr__in">
-    <a class="brand" href={href('/')} aria-label={`${SITE.name} – página inicial`}>
-      <img src={logoBranco.src} alt={SITE.name} width="40" height="50" />
-    </a>
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menu"><Icon name="menu" size={26} /></button>
-    <nav id="menu-principal" class="nav" aria-label="Menu principal">
-      <ul>
-        {NAV.map((item) => <li><a href={href(item.href)} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a></li>)}
-      </ul>
-      <WhatsAppButton label="WhatsApp" context="cabecalho" variant="light" size="sm" />
-    </nav>
-  </div>
-</header>
-<script is:inline>
-  (function () {
-    var btn = document.querySelector('.nav-toggle'), nav = document.getElementById('menu-principal');
-    if (!btn || !nav) return;
-    btn.addEventListener('click', function () {
-      var open = nav.classList.toggle('is-open');
-      btn.setAttribute('aria-expanded', String(open));
-      btn.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
-    });
-  })();
-</script>
+<header class="hdr"><div class="wrap hdr__in">
+  <a class="brand" href={href('/')} aria-label={`${SITE.name} – página inicial`}><img src={logoPreto.src} alt={SITE.name} width="38" height="48" /></a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu"><Icon name="menu" size={26} /></button>
+  <nav id="menu" class="nav" aria-label="Menu principal">
+    <ul>{NAV.map((item) => <li><a href={href(item.href)} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a></li>)}</ul>
+    <a class="btn" href={whatsappLink()} target="_blank" rel="noopener noreferrer" data-wa="cabecalho"><Icon name="whatsapp" size={22} /><span>WhatsApp</span></a>
+  </nav>
+  {SITE.instagram && <a class="ig-hdr" href={SITE.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram @clinicaodontospace (abre em nova aba)" data-social="instagram-topo"><Icon name="instagram" size={20} /></a>}
+</div></header>

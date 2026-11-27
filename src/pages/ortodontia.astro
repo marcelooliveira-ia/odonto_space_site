@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import Pic from '../components/Pic.astro';
+import { SITE, serviceMessage } from '../config/site';
+import { whatsappLink, whatsappPlain } from '../utils/whatsapp';
+import { faqSchema } from '../utils/schema';
+import { href } from '../utils/url';
+import { genOrtoHero, genOrtoFixo, genOrtoEstetico, genInvisalign, genOrtoContencao, genOrtoJovem, ortodontista } from '../assets';
+
+const msg = serviceMessage('Ortodontia');
+const opts = [
+  { n: 'Aparelho fixo metálico', sub: 'Peças fixadas nos dentes, ajustadas pelo dentista em consultas periódicas.', img: genOrtoFixo, alt: 'Close dos braquetes metálicos e do fio de um aparelho ortodôntico fixo metálico', como: 'Peças fixadas aos dentes e ligadas por um fio, que o dentista ajusta ao longo do tratamento.', quando: 'Em diferentes situações de alinhamento e de mordida, conforme a avaliação do dentista.', esperar: 'Consultas de acompanhamento regulares e atenção redobrada à higiene.' },
+  { n: 'Aparelho estético', sub: 'Uma versão do aparelho fixo com aparência mais discreta.', img: genOrtoEstetico, alt: 'Close de braquetes estéticos, da cor do dente, com fio discreto', como: 'Funciona como o aparelho fixo, com peças de aparência mais discreta.', quando: 'Quando o dentista considerar adequado ao seu caso.', esperar: 'Acompanhamento regular, como no aparelho fixo.' },
+  { n: 'Alinhadores transparentes', sub: 'Placas transparentes e removíveis, trocadas em sequência para mover os dentes gradualmente.', img: genInvisalign, alt: 'Alinhadores transparentes em um estojo branco sobre mármore', como: 'Uma sequência de placas transparentes e removíveis, trocadas ao longo do tratamento.', quando: 'Nem todos os casos. Depende da complexidade do alinhamento e da avaliação.', esperar: 'Uso conforme a orientação do dentista e consultas de acompanhamento.', inv: true },
+  { n: 'Contenção ortodôntica', sub: 'Usada ao final do tratamento para ajudar a manter a posição dos dentes.', img: genOrtoContencao, alt: 'Contenção removível e modelo de arcada com contenção fixa de fio', como: 'Peça usada depois do tratamento para ajudar a manter a posição dos dentes.', quando: 'Ao final do tratamento ortodôntico, conforme a orientação do dentista.', esperar: 'Uso e revisões conforme o que o dentista indicar.' },
+  { n: 'Ortodontia para crianças e adolescentes', sub: 'A avaliação define se e quando tratar, em cada idade.', img: genOrtoJovem, alt: 'Adolescente sorrindo com aparelho ortodôntico em um consultório claro', como: 'A ortodontia pode começar em diferentes idades. O dentista avalia o desenvolvimento e define o momento.', quando: 'Quando a avaliação indicar. Adultos também podem ser avaliados.', esperar: 'Acompanhamento ao longo do crescimento, quando indicado.' },
+];
+const faqs = [
+  { q: 'Adultos podem usar aparelho?', a: 'Sim. A avaliação define se o tratamento ortodôntico é indicado e qual a melhor abordagem em cada idade.' },
+  { q: 'Qual a diferença entre aparelho ortodôntico e alinhadores transparentes?', a: 'O aparelho ortodôntico é fixado nos dentes e ajustado pelo dentista. Os alinhadores transparentes são removíveis e trocados em sequência. A melhor opção depende do seu caso.' },
+  { q: 'Os alinhadores transparentes servem para todos os casos?', a: 'Nem todos. A indicação depende da complexidade do alinhamento e das características de cada paciente, e é definida após a avaliação.' },
+  { q: 'Quanto tempo dura o tratamento?', a: 'O tempo varia conforme o caso e a colaboração do paciente. O dentista apresenta uma estimativa no planejamento.' },
+];
+---
+
+<BaseLayout
+  title="Ortodontia em Bangu: aparelho e alinhadores | ODONTO SPACE"
+  description="Ortodontia em Bangu, Rio de Janeiro: conheça as possibilidades para alinhar os dentes, como aparelho fixo, aparelho estético e alinhadores transparentes. Agende sua avaliação na ODONTO SPACE."
+  path="/ortodontia"
+  crumbs={[{ name: 'Ortodontia', path: '/ortodontia' }]}
+  schemas={[faqSchema(faqs)]}
+>
+ <section class="ohero">
+  <div class="ohero__txt">
+    <nav class="crumb fx" aria-label="Você está em"><a href={href('/')}>Início</a><span aria-hidden="true">/</span><span aria-current="page">Ortodontia</span></nav>
+    <p class="label fx">Ortodontia · Bangu, Rio de Janeiro</p>
+    <h1><span class="ln"><span>Alinhar os dentes</span></span><span class="ln"><span><em>tem mais de</em></span></span><span class="ln"><span>um caminho.</span></span></h1>
+    <p class="lead fx">A ortodontia reúne diferentes possibilidades de tratamento. A melhor opção depende do seu caso e é definida pelo dentista, depois da avaliação.</p>
+    <div class="row fx"><a class="btn btn--lg" href={whatsappLink(msg)} target="_blank" rel="noopener noreferrer" data-wa="ortodontia-hero"><Icon name="whatsapp" size={26} /><span>Agendar avaliação ortodôntica</span></a><a class="link" href="#possibilidades">Ver as possibilidades</a></div>
+  </div>
+  <div class="ohero__photo"><div class="ph"><Pic src={genOrtoHero} alt="Sorriso natural com aparelho ortodôntico metálico convencional" pos="52% 50%" sizes="(max-width: 900px) 100vw, 50vw" widths={[480, 800, 1200, 1600]} eager priority /></div></div>
+ </section>
+
+ <section class="poss" id="possibilidades">
+  <div class="wrap">
+   <div class="poss__head"><p class="label rv">As possibilidades</p><h2 class="rv d1">Cada caso pede um caminho. Conheça os principais.</h2><p class="lead rv d2">Veja como cada opção costuma funcionar e converse com a equipe sobre o que faz sentido para você.</p></div>
+   <div class="g12">
+    <div class="tabs"><div role="tablist" aria-label="Possibilidades de tratamento ortodôntico" aria-orientation="vertical" id="tablist">
+      {opts.map((o, i) => <button class="tab" role="tab" id={`tab${i}`} aria-controls={`tp${i}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} type="button"><span>{o.n}</span></button>)}
+    </div></div>
+    <div id="tpanels" class="tpanels">
+      {opts.map((o, i) => (
+        <div class="tpanel" id={`tp${i}`} role="tabpanel" aria-labelledby={`tab${i}`} hidden={i !== 0}>
+          <figure><div class="ph"><Pic src={o.img} alt={o.alt} sizes="(max-width: 860px) 92vw, 52vw" widths={[480, 800, 1200]} /></div></figure>
+          <h3>{o.n}</h3><p class="sub">{o.sub}</p>
+          <dl><div><dt>Como funciona</dt><dd>{o.como}</dd></div><div><dt>Quando pode ser indicado</dt><dd>{o.quando}</dd></div><div><dt>O que esperar</dt><dd>{o.esperar}</dd></div></dl>
+          <div class="row"><a class="btn ask" href={whatsappPlain()} target="_blank" rel="noopener noreferrer" data-wa={`ortodontia-tratamento-${i + 1}`}>Perguntar sobre este tratamento</a>{o.inv && <a class="link" href={href('/invisalign')}>Conhecer o Invisalign</a>}</div>
+        </div>
+      ))}
+    </div>
+   </div>
+  </div>
+ </section>
+
+ <section class="prof" id="profissional">
+  <div class="wrap">
+   <div class="ph1"><p class="label rv">Quem cuida da ortodontia</p><h2 class="rv d1">{SITE.orthodontist.name}</h2><p class="tm__role rv d1">Ortodontista · {SITE.name}</p></div>
+   <div class="tm rv d1"><article class="tm__m"><figure class="tm__fig"><div class="ph tm__ph"><Pic src={ortodontista} alt={SITE.orthodontist.photoAlt} pos="50% 14%" sizes="(max-width: 700px) 26rem, 30rem" widths={[400, 520, 800]} /></div></figure><p class="tm__txt">Especialista responsável pelos tratamentos ortodônticos da clínica, a Dra. Sayonara Dias realiza uma análise detalhada do seu sorriso para apresentar as melhores opções de tratamento de forma clara. Assim, você entende todo o processo com tranquilidade e recebe orientação para buscar o resultado desejado.</p><p class="tm__cta"><a class="btn" href={whatsappLink(msg)} target="_blank" rel="noopener noreferrer" data-wa="ortodontia-profissional">Agendar avaliação ortodôntica</a></p></article></div>
+  </div>
+ </section>
+
+ <section class="start">
+  <div class="wrap g12">
+   <div style="grid-column:1/7"><p class="label rv">Como começa</p><h2 class="rv d1">A avaliação mostra qual caminho faz sentido.</h2></div>
+   <ol class="steps rv d1">
+     <li><b>Análise do alinhamento e da mordida</b><span>O dentista examina o seu caso.</span></li>
+     <li><b>Opções adequadas ao seu caso</b><span>Apresentamos as possibilidades e explicamos cada uma.</span></li>
+     <li><b>Dúvidas esclarecidas</b><span>Sobre etapas e acompanhamento, antes de começar.</span></li>
+   </ol>
+   <div class="row rv d2"><a class="btn btn--lg" href={whatsappLink(msg)} target="_blank" rel="noopener noreferrer" data-wa="ortodontia-como-comeca"><span>Agendar avaliação ortodôntica</span></a></div>
+  </div>
+ </section>
+
+ <section class="faq">
+  <div class="wrap">
+   <p class="label rv">Dúvidas frequentes</p><h2 class="rv d1">Perguntas sobre ortodontia.</h2>
+   <div class="faqs rv">
+    {faqs.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
+   </div>
+   <p class="small"><a class="link" href={href('/invisalign')}>Conhecer o Invisalign</a></p><p class="small">Conteúdo informativo. Somente um cirurgião-dentista pode indicar o tratamento adequado após avaliar você.</p>
+  </div>
+ </section>
+
+ <script>
+   import '../scripts/ortodontia';
+ </script>
+</BaseLayout>

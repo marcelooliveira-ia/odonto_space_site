@@ -1,0 +1,6 @@
+---
+import Icon from './Icon.astro';
+import { SITE } from '../config/site';
+import { whatsappLink } from '../utils/whatsapp';
+---
+<a class="bar" href={whatsappLink()} target="_blank" rel="noopener noreferrer" data-wa="barra-fixa"><Icon name="whatsapp" size={24} /><span>Falar no WhatsApp · <b>{SITE.whatsapp.display}</b></span></a>

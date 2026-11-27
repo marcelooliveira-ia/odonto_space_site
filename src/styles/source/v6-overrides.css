@@ -1,0 +1,23 @@
+/* equipe: apresentação padronizada (mesma proporção, mesma ordem, mesmo espaçamento) */
+.tm{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1.6rem,4vw,4rem);max-width:60rem;margin-top:clamp(1.6rem,3vw,2.6rem)}
+.tm__m{display:flex;flex-direction:column;margin:0}
+.tm__fig{margin:0 0 1.2rem}
+.tm .tm__ph,.tm__ph{position:relative;overflow:hidden;aspect-ratio:4/5;width:100%;background:var(--ice,#c4e0e8)}
+.tm__ph img{width:100%;height:100%;object-fit:cover;object-position:50% 14%;display:block}
+.tm__name{margin:0 0 .25rem;font-weight:700;font-size:clamp(1.5rem,2.4vw,2rem);letter-spacing:-.03em;line-height:1.1}
+.tm__role{margin:0 0 .9rem;font-weight:600;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mute,#42646f)}
+.tm__txt{margin:0 0 1rem;font-size:1rem;line-height:1.6;color:var(--mute,#42646f);max-width:30em;min-height:6.4em}
+.tm__cta{margin:auto 0 0}
+@media(max-width:700px){.tm{grid-template-columns:1fr;max-width:26rem}.tm__txt{min-height:0}}
+
+/* ===== Ajustes da v15 sobre o sistema v6 (Implantes, Próteses, Clínica, Contato) ===== */
+:root { /* v15: --mute não resolvia no v6 (texto de apoio herda a cor escura); mantido idêntico */ --mute: inherit; --h1: clamp(2.8rem, 5vw, 4.8rem); }
+/* títulos principais: escala única entre as páginas */
+.im-title, .pr-title, .cl-title { font-size: var(--h1) !important; line-height: .95 !important; letter-spacing: -.055em !important; font-weight: 700 !important; }
+/* Contato: endereço em largura total (sem o bloco Atendimento) */
+.ct-where { grid-template-columns: 1fr; }
+/* Próteses: imagem centralizada e inteira no quadro (celular) */
+@media (width <= 860px) { .pr-types__img { margin: 2.4rem auto 0; width: 100%; max-width: 26rem; } }
+/* Contato: número do WhatsApp em uma linha */
+.ct-num { white-space: nowrap; }
+@media (width <= 340px) { .ct-num { font-size: 12.4vw; } }

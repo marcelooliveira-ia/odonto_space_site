@@ -1,137 +1,102 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import WhatsAppButton from '../components/WhatsAppButton.astro';
-import Photo from '../components/Photo.astro';
 import Icon from '../components/Icon.astro';
-import Em from '../components/Em.astro';
-import { SERVICES, SITE, MAPS_URL } from '../config/site';
+import Pic from '../components/Pic.astro';
+import { SITE, MAPS_URL, ADDRESS_FULL, serviceMessage, GENERAL_WHATSAPP_MESSAGE } from '../config/site';
+import { whatsappLink } from '../utils/whatsapp';
 import { href } from '../utils/url';
-import { proprietario, ortodontista, genPacienteIA, genImplanteCoroa, genProteseCoroas, genOrtoMaos, genInstrumentos, genConsultorio, genRecepcao } from '../assets';
+import { genConsultorio, genRecepcao, genInstrumentos, genImplanteCoroa, genProteseCoroas, genHomeOrto, genHomeEstetica, genHomeClinica } from '../assets';
 
-const cardImg: Record<string, { src: ImageMetadata; pos: string; alt: string }> = {
-  'Implantes dentários': { src: genImplanteCoroa, pos: '50% 50%', alt: 'Implante dentário de titânio ao lado de uma coroa de cerâmica' },
-  'Próteses dentárias': { src: genProteseCoroas, pos: '50% 60%', alt: 'Coroas e ponte de cerâmica ao lado de um modelo de gesso' },
-  'Ortodontia e Invisalign': { src: genOrtoMaos, pos: '50% 50%', alt: 'Mãos enluvadas encaixando um alinhador transparente em um modelo dentário' },
-  'Endodontia': { src: genInstrumentos, pos: '50% 50%', alt: 'Instrumentos odontológicos esterilizados sobre uma bandeja' },
-  'Clínica geral': { src: genConsultorio, pos: '45% 50%', alt: 'Consultório odontológico claro e moderno' },
+const wa = whatsappLink();
+const a = SITE.address;
+/** Respostas do guia "Como podemos ajudar?" (o script apenas as exibe). */
+const replies = {
+  dentes: { t: 'Existem caminhos diferentes para repor dentes ausentes, como implantes e próteses. O dentista indica o melhor depois de avaliar o seu caso.', links: [['Ver sobre implantes', href('/implantes-dentarios')], ['Ver sobre próteses', href('/proteses-dentarias')]], m: 'Olá! Faltam dentes e gostaria de saber quais são as opções na ODONTO SPACE.' },
+  alinhar: { t: 'A ortodontia reúne diferentes possibilidades de tratamento. Vale conhecer cada uma e conversar sobre o seu caso.', links: [['Conhecer as possibilidades', href('/ortodontia')]], m: 'Olá! Gostaria de agendar uma avaliação de ortodontia na ODONTO SPACE.' },
+  estetica: { t: 'Podemos conversar sobre estética do sorriso, como o clareamento dental. A indicação e os limites de cada procedimento dependem da avaliação.', links: [], m: serviceMessage('Estética do Sorriso') },
+  check: { t: 'Uma consulta de avaliação ajuda a cuidar da saúde bucal e a identificar alterações cedo.', links: [], m: serviceMessage('Clínica geral') },
+  nao: { t: 'Sem problema. Conte o que você sente ou deseja e orientamos o melhor primeiro passo.', links: [], m: 'Olá! Não sei por onde começar e gostaria de uma orientação da ODONTO SPACE.' },
 };
-const pillars = [
-  { t: 'Tratamento individualizado', d: 'Cada paciente tem necessidades diferentes. O tratamento parte do seu caso.' },
-  { t: 'Planejamento antes do procedimento', d: 'Avaliamos, explicamos as opções e definimos as etapas com você.' },
-  { t: 'Prevenção e acompanhamento', d: 'Consultas periódicas ajudam a manter a saúde bucal e identificar alterações cedo.' },
-  { t: 'Atendimento humanizado', d: 'Acolhimento, segurança e atenção em cada etapa, sem pressa.' },
-];
+const chips = [['dentes', 'Faltam dentes'], ['alinhar', 'Quero alinhar os dentes'], ['estetica', 'Quero um sorriso mais harmônico'], ['check', 'Check-up e prevenção'], ['nao', 'Ainda não sei']];
 ---
+
 <BaseLayout
   title="ODONTO SPACE | Dentista em Bangu, Rio de Janeiro"
-  description="Clínica odontológica em Bangu, Rio de Janeiro: implantes, próteses, ortodontia e Invisalign, endodontia e acompanhamento. Agende sua avaliação pelo WhatsApp."
+  description="ODONTO SPACE, clínica odontológica em Bangu, Rio de Janeiro: implantes, próteses, ortodontia, Invisalign, estética do sorriso e clínica geral. Agende sua avaliação pelo WhatsApp."
   path="/"
   includeBusinessSchema
 >
-  <section class="hero hero--home dark">
-    <span class="arc a" aria-hidden="true"></span><span class="arc b" aria-hidden="true"></span>
-    <div class="wrap">
-      <div>
-        <p class="label">Clínica odontológica · Bangu, Rio de Janeiro</p>
-        <h1><span class="ln"><span>Cuidar do sorriso</span></span><span class="ln"><span><em>vai além</em> da</span></span><span class="ln"><span>estética.</span></span></h1>
-        <p class="lead">Na ODONTO SPACE, cada tratamento parte de uma avaliação: entendemos o seu caso, planejamos as etapas e buscamos saúde, função, harmonia e confiança de forma individualizada.</p>
-        <div class="btn-row">
-          <WhatsAppButton context="home-hero" size="lg" variant="light" />
-          <a class="link" href="#servicos">Conheça os serviços <Icon name="arrow" size={16} /></a>
-        </div>
+ <section class="hero">
+  <div class="hero__txt">
+    <p class="label fx">Clínica odontológica · Bangu, Rio de Janeiro</p>
+    <h1><span class="ln"><span>Seu sorriso,</span></span><span class="ln"><span><em>com calma</em></span></span><span class="ln"><span>e clareza.</span></span></h1>
+    <p class="lead fx">Na ODONTO SPACE, cada tratamento começa com uma conversa e uma avaliação. Explicamos as opções e as etapas, para você decidir com segurança.</p>
+    <div class="guide fx" id="guia" data-replies={JSON.stringify(replies)}>
+      <p class="guide__q" id="guia-q">Como podemos ajudar?</p>
+      <div class="chips" role="group" aria-labelledby="guia-q">
+        {chips.map(([k, t]) => <button class="chip" type="button" data-k={k} aria-pressed="false">{t}</button>)}
       </div>
-      <div class="stage">
-        <Photo class="ph1 ph--arch" src={proprietario} alt={SITE.owner.photoAlt} ratio="auto" pos="50% 14%" eager widths={[480, 800, 1000]} sizes="(max-width: 900px) 70vw, 380px" />
-        <Photo class="ph2" src={ortodontista} alt={SITE.orthodontist.photoAlt} pos="50% 14%" eager widths={[240, 400]} sizes="150px" />
-        <div class="cap"><b>{SITE.owner.name}</b>{SITE.owner.role}</div>
-      </div>
+      <div class="reply" id="reply" aria-live="polite"><p style="color:var(--mute)">Escolha uma opção e mostramos o melhor primeiro passo. Se preferir, é só chamar direto.</p></div>
+      <p class="hero__alt">Prefere conversar agora? <a href={wa} target="_blank" rel="noopener noreferrer" data-wa="inicio-hero">Chamar no WhatsApp · {SITE.whatsapp.display}</a></p>
     </div>
-    <div class="facts"><div class="wrap"><div><em>Endereço</em>{SITE.address.street} · {SITE.address.neighborhood}</div><div><em>WhatsApp</em>{SITE.whatsapp.display}</div><div><em>Agendamento</em>Avaliação marcada pelo WhatsApp</div></div></div>
-  </section>
+  </div>
+  <div class="hero__photo"><div class="ph"><Pic src={genConsultorio} alt="Consultório odontológico claro e moderno, com luz natural" pos="20% 50%" sizes="(max-width: 900px) 100vw, 50vw" widths={[480, 800, 1200, 1600]} eager priority /></div></div>
+ </section>
 
-  <section class="sec">
-    <div class="wrap split split--img-left">
-      <Photo class="split__img rv" src={genPacienteIA} alt="Mulher sorrindo em um consultório odontológico moderno (imagem gerada por IA)" ratio="4 / 5" pos="50% 30%" illustrative ai zoom sizes="(max-width: 860px) 100vw, 46vw" />
-      <div>
-        <p class="label rv">Nossa forma de cuidar</p>
-        <p class="man" data-man>É entender cada caso, planejar o tratamento e buscar saúde, função, harmonia e confiança de forma individualizada.</p>
-        <div class="pil">
-          {pillars.map((p, i) => <div class={`rv d${i % 3}`}><h3>{p.t}</h3><p>{p.d}</p></div>)}
-        </div>
-      </div>
-    </div>
-  </section>
+ <section class="visit">
+  <div class="wrap">
+   <div class="visit__head"><p class="label rv">Sua visita</p><h2 class="rv d1">Um lugar calmo, para você entender o que vai acontecer.</h2><p class="lead rv d2">Da recepção à preparação, cada ambiente existe para que você se sinta à vontade e bem informado.</p></div>
+   <div class="tri" tabindex="0" role="region" aria-label="Os três momentos da visita: recepção, avaliação e preparação">
+    <figure class="fg a rv"><div class="ph"><Pic src={genRecepcao} alt="Recepção clara e acolhedora de clínica odontológica" sizes="(max-width: 860px) 80vw, 40vw" widths={[480, 800, 1200]} /></div><figcaption class="fig"><b>1 · Recepção</b>O primeiro contato é calmo e sem pressa.</figcaption></figure>
+    <figure class="fg b rv d1"><div class="ph"><Pic src={genConsultorio} alt="Detalhe do consultório: bancada, equipamentos e banqueta" pos="100% 50%" sizes="(max-width: 860px) 80vw, 40vw" widths={[480, 800, 1200]} /></div><figcaption class="fig"><b>2 · Avaliação</b>Conversa e exame clínico no consultório.</figcaption></figure>
+    <figure class="fg c rv d2"><div class="ph"><Pic src={genInstrumentos} alt="Instrumentos odontológicos esterilizados sobre uma bandeja" sizes="(max-width: 860px) 70vw, 30vw" widths={[480, 800, 1200]} /></div><figcaption class="fig"><b>3 · Preparação</b>Instrumentais organizados para cada consulta.</figcaption></figure>
+   </div>
+   <p class="hint">Deslize para ver os três momentos →</p>
+  </div>
+ </section>
 
-  <section class="sec sec--mist" id="servicos">
-    <div class="wrap">
-      <div class="sec-top"><div class="rv"><p class="label">Serviços</p><h2>Tratamentos para <em>cada necessidade</em></h2></div><p class="lead rv d1">Toda indicação começa por uma avaliação profissional. Conheça as áreas em que atuamos.</p></div>
-      <div class="cards">
-        {SERVICES.map((s, i) => {
-          const im = cardImg[s.title];
-          const inner = (<>
-            <Photo src={im.src} alt={im.alt} pos={im.pos} illustrative={false} zoom sizes="(max-width: 900px) 100vw, 33vw" />
-            <div class="card__in">
-              <h3>{s.title}</h3>
-              <p>{s.short}</p>
-              {s.slug ? <span class="go">Saiba mais <Icon name="arrow" size={16} /></span> : <span class="tag">Consulte a equipe</span>}
-            </div>
-          </>);
-          const cls = ['card', 'rv', `d${i % 3}`, i === 0 ? 'first' : '', i > 2 ? 'wide' : ''].join(' ');
-          return s.slug ? <a class={cls} href={href(`/${s.slug}`)}>{inner}</a> : <div class={cls}>{inner}</div>;
-        })}
-      </div>
-      <p class="small rv" style="margin:1.4rem 0 0;color:var(--mute)">Imagens ilustrativas geradas por IA, usadas até a inclusão das fotografias reais da clínica.</p>
-    </div>
-  </section>
+ <section class="vows">
+  <div class="wrap g12">
+   <div style="grid-column:1/7"><p class="label rv">Nossos combinados</p><h2 class="rv d1" style="grid-column:auto">Antes de qualquer tratamento, uma conversa.</h2></div>
+   <ol class="vows__l rv d1">
+     <li>Avaliação individual antes de qualquer indicação.</li>
+     <li>Explicação das opções e das etapas de cada tratamento.</li>
+     <li>Contato direto com a equipe pelo WhatsApp.</li>
+     <li>Informação educativa: quem indica o tratamento é o dentista, depois de avaliar você.</li>
+   </ol>
+  </div>
+ </section>
 
-  <section class="banner dark">
-    <Photo src={genConsultorio} alt="Consultório odontológico moderno com luz natural" pos="50% 50%" sizes="100vw" widths={[800, 1200, 1600, 2000]} illustrative={false} />
-    <div class="wrap rv">
-      <div>
-        <p class="label">Planejamento antes do procedimento</p>
-        <h2>Entender o seu caso vem antes de qualquer tratamento.</h2>
-        <p>Na avaliação, explicamos as opções e as etapas com clareza, para você decidir com segurança.</p>
-        <div class="btn-row" style="margin-top:1.2rem"><WhatsAppButton context="home-banner" variant="light" label="Agendar avaliação" /></div>
-      </div>
-    </div>
-  </section>
+ <section class="need" id="servicos">
+  <div class="wrap">
+   <div class="need__head"><p class="label rv">Do que você precisa?</p><h2 class="rv d1">Comece pelo que você quer resolver.</h2></div>
+   <div class="g12">
+    <div class="panel" aria-hidden="true"><div class="panel__stage">
+      <div class="panel__item on duo" data-p="0"><div class="ph"><Pic src={genImplanteCoroa} alt="" pos="50% 58%" sizes="(max-width: 860px) 0px, 25vw" widths={[480, 800]} /></div><div class="ph"><Pic src={genProteseCoroas} alt="" pos="50% 60%" sizes="(max-width: 860px) 0px, 25vw" widths={[480, 800]} /></div></div>
+      <div class="panel__item" data-p="1"><div class="ph"><Pic src={genHomeOrto} alt="" pos="50% 35%" sizes="(max-width: 860px) 0px, 40vw" widths={[480, 800, 1200]} /></div></div>
+      <div class="panel__item" data-p="2"><div class="ph"><Pic src={genHomeEstetica} alt="" pos="50% 55%" sizes="(max-width: 860px) 0px, 40vw" widths={[480, 800, 1200]} /></div></div>
+      <div class="panel__item" data-p="3"><div class="ph"><Pic src={genHomeClinica} alt="" pos="50% 55%" sizes="(max-width: 860px) 0px, 40vw" widths={[480, 800, 1200]} /></div></div>
+     </div></div>
+    <ul class="needs" data-needs>
+     <li data-i="0"><span class="label">Implantes e próteses</span><h3>Faltam dentes?</h3><p>Existem caminhos diferentes para repor dentes ausentes. O dentista indica o melhor após avaliar o seu caso.</p><div class="acts"><a class="link" href={href('/implantes-dentarios')}>Implantes dentários</a><a class="link" href={href('/proteses-dentarias')}>Próteses dentárias</a></div><button class="tg" type="button" aria-expanded="false" aria-label="Mostrar imagem de implantes e próteses">+</button><div class="peek duo"><div class="ph" style="--ar:1/1"><Pic src={genImplanteCoroa} alt="Implante dentário de titânio ao lado de uma coroa de cerâmica" pos="50% 58%" sizes="(max-width: 860px) 45vw, 0px" widths={[320, 480, 800]} /></div><div class="ph" style="--ar:1/1"><Pic src={genProteseCoroas} alt="Coroas e ponte de cerâmica ao lado de um modelo dentário" pos="58% 60%" sizes="(max-width: 860px) 45vw, 0px" widths={[320, 480, 800]} /></div></div></li>
+     <li data-i="1"><span class="label">Ortodontia</span><h3>Quer alinhar os dentes?</h3><p>A ortodontia reúne diferentes possibilidades de tratamento, entre elas o aparelho e os alinhadores transparentes.</p><div class="acts"><a class="link" href={href('/ortodontia')}>Conhecer as possibilidades</a></div><button class="tg" type="button" aria-expanded="false" aria-label="Mostrar imagem de ortodontia">+</button><div class="peek"><div class="ph" style="--ar:4/3"><Pic src={genHomeOrto} alt="Jovem sorrindo com aparelho ortodôntico metálico" pos="50% 30%" sizes="(max-width: 860px) 92vw, 0px" widths={[480, 800]} /></div></div></li>
+     <li data-i="2"><span class="label">Estética do Sorriso</span><h3>Quer um sorriso mais harmônico?</h3><p>Podemos conversar sobre cuidados estéticos, como o clareamento dental, conforme a indicação do dentista após a avaliação.</p><div class="acts"><a class="link" href={whatsappLink(serviceMessage('Estética do Sorriso'))} target="_blank" rel="noopener noreferrer" data-wa="inicio-estetica">Conversar pelo WhatsApp</a></div><button class="tg" type="button" aria-expanded="false" aria-label="Mostrar imagem de estética do sorriso">+</button><div class="peek"><div class="ph" style="--ar:4/3"><Pic src={genHomeEstetica} alt="Guia de cores de dente e espelho de mão sobre uma bancada clara" pos="50% 58%" sizes="(max-width: 860px) 92vw, 0px" widths={[480, 800]} /></div></div></li>
+     <li data-i="3"><span class="label">Clínica geral</span><h3>Quer cuidar e prevenir?</h3><p>Avaliação, prevenção e cuidados com a saúde bucal para o dia a dia.</p><div class="acts"><a class="link" href={whatsappLink(serviceMessage('Clínica geral'))} target="_blank" rel="noopener noreferrer" data-wa="inicio-clinica-geral">Agendar uma consulta</a></div><button class="tg" type="button" aria-expanded="false" aria-label="Mostrar imagem de clínica geral">+</button><div class="peek"><div class="ph" style="--ar:4/3"><Pic src={genHomeClinica} alt="Espelho clínico, sonda, escova e fio dental sobre uma bancada clara" pos="50% 58%" sizes="(max-width: 860px) 92vw, 0px" widths={[480, 800]} /></div></div></li>
+    </ul>
+   </div>
+  </div>
+ </section>
 
-  <section class="sec">
-    <div class="wrap">
-      <div class="sec-top"><div class="rv"><p class="label">Equipe</p><h2>Quem cuida do <em>seu sorriso</em></h2></div><a class="link rv d1" href={href('/a-clinica-e-equipe')}>Conheça a clínica e a equipe <Icon name="arrow" size={16} /></a></div>
-      <div class="team">
-        <figure class="pc rv"><Photo src={proprietario} alt={SITE.owner.photoAlt} pos="50% 14%" widths={[480, 800, 1000]} sizes="(max-width: 700px) 100vw, 560px" zoom /><figcaption><b>{SITE.owner.name}</b><span>{SITE.owner.title} · {SITE.owner.role}</span></figcaption></figure>
-        <figure class="pc b rv d2"><Photo src={ortodontista} alt={SITE.orthodontist.photoAlt} pos="50% 14%" widths={[400, 520, 800]} sizes="(max-width: 700px) 80vw, 420px" zoom /><figcaption><b>Ortodontista</b><span>Ortodontia · ODONTO SPACE</span></figcaption></figure>
-      </div>
-    </div>
-  </section>
+ <section class="close on-deep">
+  <div class="wrap g12">
+   <div class="close__l"><p class="label rv">Vamos conversar?</p><h2 class="rv d1">Seu primeiro passo cabe numa mensagem.</h2><p class="rv d2">A avaliação é marcada pelo WhatsApp. Conte o que você procura e a equipe orienta o melhor começo.</p>
+     <div class="row rv d2"><a class="btn btn--lg" href={wa} target="_blank" rel="noopener noreferrer" data-wa="inicio-fechamento"><Icon name="whatsapp" size={26} /><span>Agendar avaliação pelo WhatsApp</span></a></div>
+     <a class="num rv d2" href={`https://wa.me/${SITE.whatsapp.e164}`} target="_blank" rel="noopener noreferrer" data-wa="inicio-numero">{SITE.whatsapp.display}</a></div>
+   <div class="close__r rv d1"><p class="label">Onde estamos</p><address>{a.street} – {a.complement}<br />{a.neighborhood}, {a.city} – {a.state}, CEP {a.postalCode}</address><div class="close__links"><a class="link" href={MAPS_URL} target="_blank" rel="noopener noreferrer">Como chegar →</a>{SITE.instagram && <a class="link" href={SITE.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram @clinicaodontospace (abre em nova aba)" data-social="instagram-inicio"><Icon name="instagram" size={18} /><span>Instagram</span></a>}</div></div>
+  </div>
+ </section>
 
-  <section class="sec sec--dark dark">
-    <div class="wrap">
-      <div class="sec-top"><div class="rv"><p class="label">Como é a avaliação</p><h2>Do primeiro contato ao <em>plano de tratamento</em></h2></div></div>
-      <ol class="stp" data-stp>
-        <li class="rv"><span class="label">Etapa 1</span><h3>Conversa</h3><p>Entendemos o seu histórico e o que você espera.</p></li>
-        <li class="rv d1"><span class="label">Etapa 2</span><h3>Exame clínico</h3><p>O dentista avalia a sua boca e solicita exames, se necessário.</p></li>
-        <li class="rv d2"><span class="label">Etapa 3</span><h3>Plano explicado</h3><p>Apresentamos as opções e as etapas antes de começar.</p></li>
-        <li class="rv d3"><span class="label">Etapa 4</span><h3>Acompanhamento</h3><p>Retornos para acompanhar a evolução do tratamento.</p></li>
-      </ol>
-    </div>
-  </section>
-
-  <section class="sec" id="localizacao">
-    <div class="wrap loc">
-      <div class="panel dark rv">
-        <div>
-          <p class="label">Localização</p>
-          <h2>Venha nos visitar em <em>Bangu</em></h2>
-          <address><strong>ODONTO SPACE</strong><br />{SITE.address.street}<br />{SITE.address.neighborhood} – {SITE.address.city}/{SITE.address.state}</address>
-        </div>
-        <div class="btn-row" style="margin:0">
-          <WhatsAppButton variant="light" context="home-localizacao" label="Falar no WhatsApp" />
-          <a class="btn btn--line-light" href={MAPS_URL} target="_blank" rel="noopener noreferrer">Abrir no mapa</a>
-        </div>
-      </div>
-      <Photo class="rv d1" src={genRecepcao} alt="Recepção clara e acolhedora de clínica odontológica" pos="50% 50%" illustrative zoom sizes="(max-width: 860px) 100vw, 50vw" />
-    </div>
-  </section>
+ <script>
+   import '../scripts/home';
+ </script>
 </BaseLayout>

@@ -1,38 +1,28 @@
 ---
-import WhatsAppButton from './WhatsAppButton.astro';
-import Em from './Em.astro';
-import { NAV, SITE, MAPS_URL } from '../config/site';
+import Icon from './Icon.astro';
+import { NAV, SITE, HOURS, MAPS_URL, FOOTER_WHATSAPP_MESSAGE } from '../config/site';
 import { href } from '../utils/url';
-import { logoBranco } from '../assets';
-interface Props { message?: string; hideCta?: boolean }
-const { message, hideCta = false } = Astro.props;
+import { whatsappLink } from '../utils/whatsapp';
+import { logoPreto } from '../assets';
 const year = new Date().getFullYear();
+const a = SITE.address;
 ---
-<footer class="end dark">
-  {!hideCta && (
-    <div class="wrap top">
-      <div>
-        <p class="label rv">Agende sua avaliação</p>
-        <h2 class="rv d1"><Em text="Vamos conversar sobre *o seu sorriso?*" /></h2>
-      </div>
-      <div class="rv d2">
-        <p class="label" style="margin:0">WhatsApp</p>
-        <a class="ph-num" href={`https://wa.me/${SITE.whatsapp.e164}`} target="_blank" rel="noopener noreferrer" data-wa="rodape-numero">{SITE.whatsapp.display}</a>
-        <address><p class="label" style="margin:1.2rem 0 0.2rem">Endereço</p>{SITE.address.street}<br />{SITE.address.neighborhood} – {SITE.address.city}/{SITE.address.state}</address>
-        <div class="btn-row" style="margin-top:0.4rem">
-          <WhatsAppButton variant="light" context="rodape" message={message} />
-          <a class="btn btn--line-light" href={MAPS_URL} target="_blank" rel="noopener noreferrer">Como chegar</a>
-        </div>
-      </div>
-    </div>
-  )}
-  <div class="wrap bot">
-    <a href={href('/')} aria-label="ODONTO SPACE – página inicial"><img src={logoBranco.src} alt="ODONTO SPACE" width="73" height="92" /></a>
-    <div>
-      <nav aria-label="Rodapé"><ul>{NAV.map((item) => <li><a href={href(item.href)}>{item.label}</a></li>)}</ul></nav>
-      {SITE.technicalResponsible && <p>Responsável técnico: {SITE.technicalResponsible.name} – {SITE.technicalResponsible.cro}</p>}
-      <p>© {year} ODONTO SPACE · {SITE.address.street}, {SITE.address.neighborhood} – {SITE.address.city}/{SITE.address.state}</p>
-      <p>As informações deste site têm caráter educativo e não substituem a avaliação de um cirurgião-dentista. Os resultados e a indicação de cada tratamento variam de acordo com cada paciente. As imagens são ilustrativas (geradas por IA) e não mostram a clínica.</p>
+<footer class="end"><div class="wrap end__in">
+  <a class="end__brand" href={href('/')} aria-label={`${SITE.name} – página inicial`}><img src={logoPreto.src} alt={SITE.name} width="73" height="92" /></a>
+  <nav aria-label="Rodapé"><ul>{NAV.map((item) => <li><a href={href(item.href)}>{item.label}</a></li>)}</ul></nav>
+  <div class="end__addr"><span class="label">Endereço</span>
+    <address>{a.street} – {a.complement.replace(/ /g, ' ')}<br />{a.neighborhood}, {a.city} – {a.state}<br />CEP {a.postalCode}</address>
+    <div class="end__acts">
+      <a class="wa-cta" href={whatsappLink(FOOTER_WHATSAPP_MESSAGE)} target="_blank" rel="noopener noreferrer" data-wa="rodape"><span class="wa-cta__ico" aria-hidden="true"><Icon name="whatsapp" size={24} /></span><span class="wa-cta__txt"><small>Chamar no WhatsApp</small><b>{SITE.whatsapp.display}</b></span><span class="wa-cta__arrow" aria-hidden="true">→</span></a>
+      <a class="btn btn--ghost" href={MAPS_URL} target="_blank" rel="noopener noreferrer" data-wa="rodape-mapa"><span>Como chegar</span></a>
+      {SITE.instagram && <a class="btn btn--ghost btn--ig" href={SITE.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram @clinicaodontospace (abre em nova aba)" data-social="instagram-rodape"><Icon name="instagram" size={20} /><span>Instagram</span></a>}
     </div>
   </div>
-</footer>
+  <div class="end__hours"><span class="label">Horários</span><dl>{HOURS.map((h) => <div><dt>{h.label}</dt><dd>{h.value}</dd></div>)}</dl></div>
+  <div class="end__legal">
+    {SITE.technicalResponsible && <p>Responsável técnico: {SITE.technicalResponsible.name} – {SITE.technicalResponsible.cro}</p>}
+    <p>© {year} {SITE.name} · <a href={href('/politica-de-privacidade')}><span class="pv-long">Política de </span>Privacidade</a></p>
+    <p>As informações deste site têm caráter educativo e não substituem a avaliação de um cirurgião-dentista. Os resultados e a indicação de cada tratamento variam de acordo com cada paciente.</p>
+    <p class="credit">{SITE.credit.text} <a href={SITE.credit.url} target="_blank" rel="noopener">{SITE.credit.name}</a></p>
+  </div>
+</div></footer>
